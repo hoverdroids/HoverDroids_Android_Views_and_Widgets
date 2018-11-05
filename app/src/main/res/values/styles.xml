@@ -1,0 +1,41 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@drawable/app_background</item>
+        <item name="actionOverflowButtonStyle">@style/HoverDroidsOverflowButtonStyle</item>
+    </style>
+
+    <style name="HoverDroidsToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorSecondary">@color/colorPrimary
+        </item><!--overflow icon...not working-->
+    </style>
+
+    <style name="HoverDroidsOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/colorPrimary</item>
+    </style>
+
+    <style name="HoverDroidsToolbarText" parent="android:Widget.TextView">
+        <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto</item><!--AppCompat-->
+    </style>
+
+    <style name="HoverDroidsToolbarPopup" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:typeface">sans</item>
+
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto</item><!--AppCompat-->
+    </style>
+</resources>
