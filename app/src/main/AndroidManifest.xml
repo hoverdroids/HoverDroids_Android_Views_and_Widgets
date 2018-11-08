@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hoverdroids.hoverdroids_material_android_widgets">
+    package="com.hoverdroids.hoverdroids_android_views_and_widgets">
 
     <application
         android:allowBackup="true"
