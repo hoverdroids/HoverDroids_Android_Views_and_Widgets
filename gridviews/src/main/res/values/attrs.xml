@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2012 - 2019. HoverDroids and Christopher Sprague
   ~
@@ -15,9 +16,4 @@
   -->
 
 <resources>
-    <string name="app_name">GridViews</string>
-    <string name="default_scroll_orientation_error"> Warning! Setting scrollDirectionPort and scrollDirectionLand to
-        the same direction will result in wrongly scaled images.  If you wish to do this, place one layout in values
-        and a duplicate in values-land. Then, set one orientation in each (e.g. in values set scrollDirectionPort="vertical"
-        and int values-land set scrollDirectionLand="vertical".</string>
 </resources>
