@@ -20,25 +20,40 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hoverdroids.gridviews.Model.GenericItem;
+import com.hoverdroids.gridviews.Model.ImageTextItem;
+import com.hoverdroids.gridviews.Model.ImageTextItemImp;
+import com.hoverdroids.gridviews.ViewGroup.GenericAdapter;
 import com.hoverdroids.gridviews.ViewGroup.TwoWayGridView;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class TwoWayGridViewsDemo extends AppCompatActivity
 {
 
-    @BindView(R.id.popup_twgv)
+    @BindView(R.id.gridView)
     TwoWayGridView gridView;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.twowaygridview_demo_main);
+        ButterKnife.bind(this);
 
+        final int[] layouts = {R.layout.image_text_item_view, R.layout.text_image_item_view};
 
+        ArrayList<GenericItem> items = new ArrayList<>();
+        for (int i = 0; i < 30; i++){
+            final int layout = layouts[i%2];
+            items.add((GenericItem)new ImageTextItemImp(layout, "My name is " + i,
+                    R.drawable.ic_launcher_background));
+        }
 
-
-
+        GenericAdapter adapter = new GenericAdapter(getApplicationContext(), items);
+        gridView.setAdapter(adapter);
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/

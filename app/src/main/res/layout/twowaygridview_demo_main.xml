@@ -22,7 +22,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/HoverDroidsToolbar">
@@ -36,10 +36,10 @@
             app:popupTheme="@style/HoverDroidsToolbarPopup"
             app:title="@string/ab_title_hoverdroids" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
 
     <com.hoverdroids.gridviews.ViewGroup.TwoWayGridView
-        android:id="@+id/popup_twgv"
+        android:id="@+id/gridView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"

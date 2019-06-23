@@ -16,8 +16,15 @@
 
 package com.hoverdroids.gridviews.Model;
 
-public abstract class ItemModel
+public interface GenericItem
 {
     /** The layout Id of the layout to inflate*/
-    public abstract int getResourceLayoutId();
+    int getLayoutResourceId();
+
+    void setLayoutResourceId(int resourceId);
+
+    /** Unique IDs based on project-specific requirements.*/
+    int getItemId();
+
+    void setItemId(int id);
 }
