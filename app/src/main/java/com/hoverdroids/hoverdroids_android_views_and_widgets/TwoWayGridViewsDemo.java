@@ -20,8 +20,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.Model.GenericItem;
-import com.hoverdroids.gridviews.Model.ImageTextItem;
+import com.hoverdroids.gridviews.Model.adapter.GenericItem;
 import com.hoverdroids.gridviews.Model.ImageTextItemImp;
 import com.hoverdroids.gridviews.ViewGroup.GenericAdapter;
 import com.hoverdroids.gridviews.ViewGroup.TwoWayGridView;

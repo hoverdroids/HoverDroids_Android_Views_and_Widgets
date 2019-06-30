@@ -16,6 +16,8 @@
 
 package com.hoverdroids.gridviews.Model;
 
+import com.hoverdroids.gridviews.Model.adapter.ImageTextItem;
+
 public class ImageTextItemImp implements ImageTextItem
 {
     private int layoutResourceId;

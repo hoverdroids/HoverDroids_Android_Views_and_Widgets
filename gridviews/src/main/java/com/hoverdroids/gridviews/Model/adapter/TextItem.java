@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model;
+package com.hoverdroids.gridviews.Model.adapter;
 
-public interface GenericItem
+public interface TextItem extends GenericItem
 {
-    /** The layout Id of the layout to inflate*/
-    int getLayoutResourceId();
-
-    void setLayoutResourceId(int resourceId);
-
-    /** Unique IDs based on project-specific requirements.*/
-    int getItemId();
-
-    void setItemId(int id);
+    String getText();
+    void setText(String text);
 }

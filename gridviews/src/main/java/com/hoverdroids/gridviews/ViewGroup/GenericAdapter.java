@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.hoverdroids.gridviews.Model.GenericItem;
+import com.hoverdroids.gridviews.Model.adapter.GenericItem;
 import com.hoverdroids.gridviews.Util.GenericViewHolder;
 
 import java.util.ArrayList;
@@ -33,10 +33,12 @@ public class GenericAdapter extends BaseAdapter
     private Context context;
     private List<GenericItem> items;
     private List<Integer> layouts = new ArrayList<Integer>();
+    private LayoutInflater inflater;
 
     public GenericAdapter(Context context, List<GenericItem> items){
         this.context = context;
         this.items = items;
+        inflater = LayoutInflater.from(context);
 
         resetLayouts();
     }
@@ -85,7 +87,7 @@ public class GenericAdapter extends BaseAdapter
         final GenericViewHolder viewHolder;
 
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(item.getLayoutResourceId(), parent, false);
+            convertView = inflater.inflate(item.getLayoutResourceId(), parent, false);
 
             viewHolder = getViewHolder(convertView, position);
             if (viewHolder != null){

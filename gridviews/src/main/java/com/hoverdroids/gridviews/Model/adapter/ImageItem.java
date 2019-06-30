@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model;
+package com.hoverdroids.gridviews.Model.adapter;
 
-/** Using an interface allows any view to be passed into the Generic Adapter and have its title and image shown.*/
-public interface ImageTextItem extends GenericItem
+public interface ImageItem extends GenericItem
 {
-    String getText();
-    void setText(String text);
     int getImageResourceId();
     void setImageResourceId(int resourceId);
 }

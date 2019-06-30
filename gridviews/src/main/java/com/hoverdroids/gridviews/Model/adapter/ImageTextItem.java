@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Util;
+package com.hoverdroids.gridviews.Model.adapter;
 
-import com.hoverdroids.gridviews.Model.adapter.GenericItem;
-
-public interface GenericViewHolder
+/** Using an interface allows any view to be passed into the Generic Adapter and have its title and image shown.*/
+public interface ImageTextItem extends GenericItem
 {
-    /**
-     * Regardless of whether or not convertView was just inflated, its views need to be updated
-     * with the current data. So, update the views with the provided data
-     */
-    void updateViews(int position, boolean isFirst, boolean isLast, GenericItem item);
+    String getText();
+    void setText(String text);
+    int getImageResourceId();
+    void setImageResourceId(int resourceId);
 }

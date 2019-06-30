@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hoverdroids.gridviews.Model.GenericItem;
-import com.hoverdroids.gridviews.Model.ImageTextItem;
+import com.hoverdroids.gridviews.Model.adapter.GenericItem;
+import com.hoverdroids.gridviews.Model.adapter.ImageTextItem;
 import com.hoverdroids.gridviews.R;
 import com.hoverdroids.gridviews.Util.GenericViewHolder;
 import com.hoverdroids.gridviews.Util.HierarchyTreeChangeListener;
@@ -63,6 +63,8 @@ public class ImageTextItemView extends LinearLayout implements GenericViewHolder
         //The child views don't exist when this is created. So, listen for when the children are added instead.
         setOnHierarchyChangeListener(HierarchyTreeChangeListener.wrap(this));
     }
+
+    //TODO just use butterknife in onAttachedToWindow-may not work since it's a module
 
     @Override
     public void updateViews(int position, boolean isFirst, boolean isLast, GenericItem item)
