@@ -18,11 +18,16 @@ package com.hoverdroids.gridviews.Util;
 
 import com.hoverdroids.gridviews.Model.adapter.GenericItem;
 
+/** View holder that handles view updates for the child view in the adapter.*/
 public interface GenericViewHolder
 {
     /**
      * Regardless of whether or not convertView was just inflated, its views need to be updated
      * with the current data. So, update the views with the provided data
+     * @param position The position being updated.
+     * @param isFirst Is it the first position.
+     * @param isLast Is it the last position.
+     * @param item The item for the given position.
      */
-    void updateViews(int position, boolean isFirst, boolean isLast, GenericItem item);
+    void updateViews(int position, boolean isFirst, boolean isLast, Object item);
 }

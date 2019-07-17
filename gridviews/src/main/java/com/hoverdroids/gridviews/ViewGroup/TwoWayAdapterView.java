@@ -42,11 +42,7 @@ import android.widget.Adapter;
  * See {@link TwoWayAbsListView} and {@link TwoWayGridView} for commonly used subclasses of TwoWayAdapterView.
  */
 public abstract class TwoWayAdapterView<T extends Adapter> extends ViewGroup {
-	
-	//Chris added
-	private static boolean CHRIS_DEBUG = false;
-	
-	
+
 	/**
 	 * The item view type returned by {@link Adapter#getItemViewType(int)} when
 	 * the adapter does not want the item's view recycled.
@@ -534,10 +530,8 @@ public abstract class TwoWayAdapterView<T extends Adapter> extends ViewGroup {
 
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		if(CHRIS_DEBUG)Log.d("TWAV","TWAV METHOD ENTER onLayout"); 
 		mLayoutHeight = getHeight();
 		mLayoutWidth = getWidth();
-		if(CHRIS_DEBUG)Log.d("TWAV","TWAV METHOD EXIT onLayout"); 
 	}
 
 	/**
@@ -798,7 +792,6 @@ public abstract class TwoWayAdapterView<T extends Adapter> extends ViewGroup {
 
 		@Override
 		public void onChanged() {
-			if(CHRIS_DEBUG)Log.d("TWAV","TWAV METHOD ENTER onChanged"); 
 			mDataChanged = true;
 			mOldItemCount = mItemCount;
 			mItemCount = getAdapter().getCount();
@@ -807,19 +800,14 @@ public abstract class TwoWayAdapterView<T extends Adapter> extends ViewGroup {
 			// been repopulated with new data.
 			if (TwoWayAdapterView.this.getAdapter().hasStableIds() && mInstanceState != null
 					&& mOldItemCount == 0 && mItemCount > 0) {
-				if(CHRIS_DEBUG)Log.d("TWAV","TWAV onChanged twav.this.onRestoreInstanceState");
 				TwoWayAdapterView.this.onRestoreInstanceState(mInstanceState);
 				mInstanceState = null;
 			} else {
-				if(CHRIS_DEBUG)Log.d("TWAV","TWAV onChanged rememberSyncState");
 				rememberSyncState();
 			}
 			checkFocus();
 			
-			if(CHRIS_DEBUG)Log.d("TWAV","TWAV onChanged requestLayout");
 			requestLayout();
-			
-			if(CHRIS_DEBUG)Log.d("TWAV","TWAV METHOD EXIT onChanged"); 
 		}
 
 		@Override

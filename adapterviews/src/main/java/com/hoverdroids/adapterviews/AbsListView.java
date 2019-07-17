@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019. Christopher Sprague
+ * Copyright (C) 2012 - 2019. HoverDroids and Christopher Sprague
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,4 +14,8 @@
  * limitations under the License.
  */
 
-include ':app', ':dialogs', ':imageviews', ':listviews', ':gridviews', ':viewpagers', ':textviews', ':adapterviews'
+package com.hoverdroids.adapterviews;
+
+public class AbsListView
+{
+}
