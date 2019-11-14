@@ -16,6 +16,7 @@
 
 package com.hoverdroids.gridviews.Model.adapter;
 
+/** Implementation of a GenericItem. */
 public class GenericItemImpl implements GenericItem
 {
     /** The item id used by adapters in getItemById (optional). */

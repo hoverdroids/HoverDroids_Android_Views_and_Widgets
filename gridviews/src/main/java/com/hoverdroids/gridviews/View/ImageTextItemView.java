@@ -28,7 +28,7 @@ import com.hoverdroids.gridviews.Model.adapter.GenericItem;
 import com.hoverdroids.gridviews.Model.adapter.ImageTextItem;
 import com.hoverdroids.gridviews.R;
 import com.hoverdroids.gridviews.Util.GenericViewHolder;
-import com.hoverdroids.gridviews.Util.HierarchyTreeChangeListener;
+import com.hoverdroids.gridviews.ViewGroup.HierarchyTreeChangeListener;
 
 /**
  * Use this as a wrapper in an xml layout that has an ImageView with ID=item_image and a TextView with ID=item_text.

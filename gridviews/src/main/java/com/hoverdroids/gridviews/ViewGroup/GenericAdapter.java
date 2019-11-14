@@ -54,18 +54,18 @@ public class GenericAdapter extends BaseAdapter
 
     @Override
     public int getCount() {
-        return items.size();
+        return items == null ? -1 : items.size();
     }
 
     @Override
     public GenericItem getItem(int position) {
-        return items.get(position);
+        return items == null ? null : items.get(position);
     }
 
     /** Get an item based on a UniqueId that is applied to each item and is project-specific.*/
     @Override
     public long getItemId(int position) {
-        return getItem(position).getItemId();
+        return getItem(position) == null ? 0 : getItem(position).getItemId();
     }
 
     /**
@@ -75,6 +75,11 @@ public class GenericAdapter extends BaseAdapter
      */
     @Override
     public int getItemViewType(int position) {
+        if (getItem(position) == null)
+        {
+            return 0;
+        }
+
         final int layoutResId = getItem(position).getLayoutResourceId();
         for(int i = 0; i < layouts.size(); i++){
             if(layoutResId == layouts.get(i)){
@@ -137,6 +142,11 @@ public class GenericAdapter extends BaseAdapter
     }
 
     private void resetLayouts(){
+        if (items == null)
+        {
+            return;
+        }
+
         layouts.clear();//TODO CHRIS-make sure this doesn't break things
 
         //Add unique layoutIds

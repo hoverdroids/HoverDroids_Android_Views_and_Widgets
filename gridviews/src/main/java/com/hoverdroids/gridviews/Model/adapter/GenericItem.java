@@ -18,13 +18,39 @@ package com.hoverdroids.gridviews.Model.adapter;
 
 public interface GenericItem
 {
-    /** The layout Id of the layout to inflate*/
+    /**
+     *  The layout Id of the layout to inflate.
+     * @return The layout resource id.
+     */
     int getLayoutResourceId();
 
+    /**
+     * The layout resourceId that is used to view the model.
+     * @param resourceId The layout resource id.
+     */
     void setLayoutResourceId(int resourceId);
 
-    /** Unique IDs based on project-specific requirements.*/
+    /**
+     * Unique IDs based on project-specific requirements.
+     * @return The item id.
+     */
     int getItemId();
 
+    /**
+     * Set a unique id that is based on project-specific requirements.
+     * @param id The unique Id.
+     */
     void setItemId(int id);
+
+    /**
+     * Set the item name.
+     * @param name The name;
+     */
+    void setItemName(final String name);
+
+    /**
+     * Get the item name.
+     * @return The item name.
+     */
+    String getItemName();
 }
