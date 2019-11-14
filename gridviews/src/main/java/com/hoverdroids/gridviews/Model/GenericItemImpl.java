@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model.adapter;
+package com.hoverdroids.gridviews.Model;
 
 /** Implementation of a GenericItem. */
 public class GenericItemImpl implements GenericItem
@@ -98,4 +98,3 @@ public class GenericItemImpl implements GenericItem
         return name;
     }
 }
-

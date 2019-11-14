@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model.adapter;
+package com.hoverdroids.gridviews.Model;
+
+import com.hoverdroids.gridviews.ViewGroup.TwoWayAbsListView.OnScrollListener;
 
 import java.util.List;
-import com.hoverdroids.gridviews.ViewGroup.TwoWayAbsListView.OnScrollListener;
 
 /** A generic model for for use in the GenericAdapter, with data for an TwoWayAdapterView.*/
 public class GenericAdapterItemImp implements GenericAdapterItem

@@ -22,14 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-
-import com.hoverdroids.gridviews.Model.adapter.GenericItem;
+import com.hoverdroids.gridviews.Model.GenericItem;
 import com.hoverdroids.gridviews.Util.GenericViewHolder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class GenericAdapter extends BaseAdapter

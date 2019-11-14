@@ -34,6 +34,8 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 
+import static com.hoverdroids.gridviews.ViewGroup.TwoWayAbsListView.CHRIS_DEBUG;
+
 
 /**
  * A TwoWayAdapterView is a view whose children are determined by an {@link Adapter}.

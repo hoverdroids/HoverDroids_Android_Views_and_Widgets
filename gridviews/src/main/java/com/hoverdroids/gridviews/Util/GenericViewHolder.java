@@ -16,8 +16,6 @@
 
 package com.hoverdroids.gridviews.Util;
 
-import com.hoverdroids.gridviews.Model.adapter.GenericItem;
-
 /** View holder that handles view updates for the child view in the adapter.*/
 public interface GenericViewHolder
 {

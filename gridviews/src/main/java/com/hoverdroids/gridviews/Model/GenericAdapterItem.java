@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model.adapter;
+package com.hoverdroids.gridviews.Model;
 
 import com.hoverdroids.gridviews.ViewGroup.TwoWayAbsListView.OnScrollListener;
 
@@ -107,5 +107,5 @@ public interface GenericAdapterItem extends GenericItem
      */
     void setCurrentScrollDistanceY(int distance);
 
-    disableScroll(boolean)
+    //TODO disableScroll(boolean)
 }

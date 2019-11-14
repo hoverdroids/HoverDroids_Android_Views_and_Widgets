@@ -18,17 +18,14 @@ package com.hoverdroids.gridviews.View;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hoverdroids.gridviews.Model.adapter.GenericItem;
-import com.hoverdroids.gridviews.Model.adapter.ImageTextItem;
+import com.hoverdroids.gridviews.Model.ImageViewItem;
+import com.hoverdroids.gridviews.Model.TextViewItem;
 import com.hoverdroids.gridviews.R;
 import com.hoverdroids.gridviews.Util.GenericViewHolder;
-import com.hoverdroids.gridviews.ViewGroup.HierarchyTreeChangeListener;
 
 /**
  * Use this as a wrapper in an xml layout that has an ImageView with ID=item_image and a TextView with ID=item_text.
@@ -39,7 +36,7 @@ import com.hoverdroids.gridviews.ViewGroup.HierarchyTreeChangeListener;
  * The added benefit is that this will work for both ListViews and GridViews since it's only purpose is to populate
  * the specified views with the specified model data.
  */
-public class ImageTextItemView extends LinearLayout implements GenericViewHolder, ViewGroup.OnHierarchyChangeListener
+public class ImageTextItemView extends LinearLayout implements GenericViewHolder
 {
     private ImageView imageView;
     private TextView textView;
@@ -47,6 +44,7 @@ public class ImageTextItemView extends LinearLayout implements GenericViewHolder
     public ImageTextItemView(Context context) {
         super(context);
         init();
+        initViews();
     }
 
     public ImageTextItemView(Context context, AttributeSet attrs) {
@@ -60,42 +58,31 @@ public class ImageTextItemView extends LinearLayout implements GenericViewHolder
     }
 
     private void init(){
-        //The child views don't exist when this is created. So, listen for when the children are added instead.
-        setOnHierarchyChangeListener(HierarchyTreeChangeListener.wrap(this));
+        //TODO Use Dagger to inject singletons we need - e.g. EventBus
     }
 
-    //TODO just use butterknife in onAttachedToWindow-may not work since it's a module
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        initViews();
+    }
+
+    private void initViews(){
+        imageView = findViewById(R.id.image_view_1);
+        textView = findViewById(R.id.text_view_1);
+    }
 
     @Override
-    public void updateViews(int position, boolean isFirst, boolean isLast, GenericItem item)
+    public void updateViews(int position, boolean isFirst, boolean isLast, Object item)
     {
-        if (item instanceof ImageTextItem)
-        {
-            final ImageTextItem imgTxt = (ImageTextItem) item;
-            imageView.setBackgroundResource(imgTxt.getImageResourceId());
-            textView.setText(imgTxt.getText());
+        if (item instanceof ImageViewItem){
+            final ImageViewItem img = (ImageViewItem) item;
+            imageView.setBackgroundResource(img.getImageResourceId());
         }
-    }
-
-    @Override
-    public void onChildViewAdded(View parent, View child)
-    {
-        //Could technically call findViewsById, but such a waste.
-        if (child instanceof ImageView && child.getId() == R.id.item_image) {
-            imageView = (ImageView) child;
-        } else if (child instanceof TextView && child.getId() == R.id.item_text){
-            textView = (TextView) child;
-        }
-    }
-
-    @Override
-    public void onChildViewRemoved(View parent, View child)
-    {
-        //Not necessary, but the method is here; might as well use it.
-        if (child instanceof ImageView && child.getId() == R.id.item_image) {
-            imageView = null;
-        } else if (child instanceof TextView && child.getId() == R.id.item_text){
-            textView = null;
+        if (item instanceof TextViewItem){
+            final TextViewItem txt = (TextViewItem) item;
+            textView.setText(txt.getText());
+            textView.setBackgroundColor(txt.getBackgroundColor());
         }
     }
 }

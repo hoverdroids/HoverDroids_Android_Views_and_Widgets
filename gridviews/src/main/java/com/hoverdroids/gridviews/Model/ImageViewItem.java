@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model.adapter;
+package com.hoverdroids.gridviews.Model;
 
-public interface TextItem extends GenericItem
+public interface ImageViewItem extends ViewItem
 {
-    String getText();
-    void setText(String text);
+    int getImageResourceId();
+    void setImageResourceId(int resourceId);
 }

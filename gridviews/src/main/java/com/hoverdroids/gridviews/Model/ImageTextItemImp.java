@@ -16,19 +16,29 @@
 
 package com.hoverdroids.gridviews.Model;
 
-import com.hoverdroids.gridviews.Model.adapter.ImageTextItem;
-
-public class ImageTextItemImp implements ImageTextItem
+public class ImageTextItemImp extends GenericItemImpl implements ImageViewItem, TextViewItem
 {
-    private int layoutResourceId;
     private String text;
     private int imageResourceId;
-    private int itemId;
+
+    public ImageTextItemImp(int layoutResourceId){
+        super(layoutResourceId);
+    }
 
     public ImageTextItemImp(int layoutResourceId, String text, int imageResourceId){
-        this.layoutResourceId = layoutResourceId;
+        super(layoutResourceId);
         this.text = text;
         this.imageResourceId = imageResourceId;
+    }
+
+    @Override
+    public int getBackgroundColor() {
+        return -1;
+    }
+
+    @Override
+    public void setBackgroundColor(int color) {
+
     }
 
     @Override
@@ -53,29 +63,5 @@ public class ImageTextItemImp implements ImageTextItem
     public int getImageResourceId()
     {
         return imageResourceId;
-    }
-
-    @Override
-    public void setLayoutResourceId(int resourceId)
-    {
-        layoutResourceId = resourceId;
-    }
-
-    @Override
-    public int getLayoutResourceId()
-    {
-        return layoutResourceId;
-    }
-
-    @Override
-    public void setItemId(int id)
-    {
-        itemId = id;
-    }
-
-    @Override
-    public int getItemId()
-    {
-        return itemId;
     }
 }

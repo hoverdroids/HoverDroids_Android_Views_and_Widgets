@@ -69,7 +69,7 @@ ViewTreeObserver.OnTouchModeChangeListener {
 	private static final String TAG = "TwoWayAbsListView";
 	private static final boolean DEBUG = false;
 	//Chris added
-	private static final boolean CHRIS_DEBUG = true;
+	public static final boolean CHRIS_DEBUG = true;
 
 	/**
 	 * Disables the transcript mode.
