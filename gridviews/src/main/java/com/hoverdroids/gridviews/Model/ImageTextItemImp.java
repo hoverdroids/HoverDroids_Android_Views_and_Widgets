@@ -16,52 +16,115 @@
 
 package com.hoverdroids.gridviews.Model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/** A generic item that holds values for updating any number of TextViews and ImageViews. */
 public class ImageTextItemImp extends GenericItemImpl implements ImageViewItem, TextViewItem
 {
-    private String text;
-    private int imageResourceId;
+    /** A list of view IDs. */
+    private List<Integer> viewIds = new ArrayList<>();
 
+    /** A list of texts for the different textViews. */
+    private Map<Integer, String> texts = new HashMap<Integer, String>();
+
+    /** A list of imageResourceIds for the different imageViews. */
+    private Map<Integer, Integer> imageResourceIds = new HashMap<Integer, Integer>();
+
+    /** A list of background colors. */
+    private Map<Integer, Integer> backgroundColors = new HashMap<Integer, Integer>();
+
+    /**
+     * Constructor with minimum arguments to create the view in the adapterView.
+     * @param layoutResourceId The layoutResourceId
+     */
     public ImageTextItemImp(int layoutResourceId){
         super(layoutResourceId);
     }
 
-    public ImageTextItemImp(int layoutResourceId, String text, int imageResourceId){
+    /**
+     * Constructor for quickly creating an item when only one ImageView and TextView are used in the layout.
+     * @param layoutResourceId The layoutResourceId
+     * @param textViewId The textViewId
+     * @param text The text
+     * @param imageViewId The imageViewId
+     * @param imageResourceId The imageResourceId
+     */
+    public ImageTextItemImp(int layoutResourceId, int textViewId, String text,
+                            int imageViewId, int imageResourceId){
         super(layoutResourceId);
-        this.text = text;
-        this.imageResourceId = imageResourceId;
+
+        addViewId(textViewId);
+        setText(textViewId, text);
+
+        addViewId(imageViewId);
+        setImageResourceId(imageViewId, imageResourceId);
+    }
+
+    /**
+     * Constructor for quickly creating an item when only one TextView is used in the layout.
+     * @param layoutResourceId The layoutResourceId
+     * @param textViewId The textViewId
+     * @param text The text
+     */
+    public ImageTextItemImp(int layoutResourceId, int textViewId, String text){
+        super(layoutResourceId);
+        addViewId(textViewId);
+        setText(textViewId, text);
+    }
+
+    /**
+     * Constructor for quickly creating an item when only one ImageView is used in the layout.
+     * @param layoutResourceId The layoutResourceId
+     * @param imageViewId The imageViewId
+     * @param imageResourceId The imageResourceId
+     */
+    public ImageTextItemImp(int layoutResourceId, int imageViewId, int imageResourceId){
+        super(layoutResourceId);
+        addViewId(imageViewId);
+        setImageResourceId(imageViewId, imageResourceId);
     }
 
     @Override
-    public int getBackgroundColor() {
-        return -1;
+    public List<Integer> getViewIds() {
+        return viewIds;
     }
 
     @Override
-    public void setBackgroundColor(int color) {
-
-    }
-
-    @Override
-    public void setText(String text)
+    public void setText(int viewId, String text)
     {
-        this.text = text;
+        texts.put(viewId, text);
     }
 
     @Override
-    public String getText()
+    public String getText(int viewId)
     {
-        return text;
+        return texts.get(viewId);
     }
 
     @Override
-    public void setImageResourceId(int resourceId)
+    public void setImageResourceId(int viewId, int resourceId)
     {
-        this.imageResourceId = resourceId;
+        imageResourceIds.put(viewId, resourceId);
     }
 
     @Override
-    public int getImageResourceId()
+    public int getImageResourceId(int viewId)
     {
-        return imageResourceId;
+        final Integer resId = imageResourceIds.get(viewId);
+        return resId == null ? Integer.MIN_VALUE : resId;
+    }
+
+    @Override
+    public int getBackgroundColor(int viewId) {
+        final Integer color = backgroundColors.get(viewId);
+        return color == null ? Integer.MIN_VALUE : color;
+    }
+
+    @Override
+    public void setBackgroundColor(int viewId, int color) {
+        backgroundColors.put(viewId, color);
     }
 }

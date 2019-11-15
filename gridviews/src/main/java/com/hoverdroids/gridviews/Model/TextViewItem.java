@@ -18,6 +18,13 @@ package com.hoverdroids.gridviews.Model;
 
 public interface TextViewItem extends ViewItem
 {
-    String getText();
-    void setText(String text);
+    String getText(int viewId);
+    void setText(int viewId, String text);
+
+    default int getTextColor(int viewId){
+        return Integer.MIN_VALUE;
+    }
+
+    default void setTextColor(int viewId, int color){
+    }
 }

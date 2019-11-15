@@ -18,6 +18,6 @@ package com.hoverdroids.gridviews.Model;
 
 public interface ImageViewItem extends ViewItem
 {
-    int getImageResourceId();
-    void setImageResourceId(int resourceId);
+    int getImageResourceId(int viewId);
+    void setImageResourceId(int viewId, int resourceId);
 }

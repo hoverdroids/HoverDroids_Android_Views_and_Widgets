@@ -16,6 +16,7 @@
 
 package com.hoverdroids.hoverdroids_android_views_and_widgets;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,8 +48,14 @@ public class TwoWayGridViewsDemo extends AppCompatActivity
         ArrayList<GenericItem> items = new ArrayList<>();
         for (int i = 0; i < 30; i++){
             final int layout = layouts[i%2];
-            items.add((GenericItem)new ImageTextItemImp(layout, "My name is " + i,
-                    R.drawable.ic_launcher_background));
+            final ImageTextItemImp item = new ImageTextItemImp(layout,
+                    R.id.text_view_1, "My name is " + i,
+                    R.id.image_view_1, R.drawable.ic_launcher_background);
+            item.addViewId(R.id.container);
+            item.setBackgroundColor(R.id.container, Color.BLUE);
+            item.setBackgroundColor(R.id.text_view_1, layout == R.layout.image_text_item_view ? Color.GREEN : Color.BLACK);
+            item.setBackgroundColor(R.id.image_view_1, Color.GRAY);
+            items.add(item);
         }
 
         GenericAdapter adapter = new GenericAdapter(getApplicationContext(), items);

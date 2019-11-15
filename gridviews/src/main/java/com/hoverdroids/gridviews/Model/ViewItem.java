@@ -16,9 +16,19 @@
 
 package com.hoverdroids.gridviews.Model;
 
+import java.util.List;
+
 public interface ViewItem {
 
-    int getBackgroundColor();
+    List<Integer> getViewIds();
 
-    void setBackgroundColor(int color);
+    default void addViewId(int id){
+        getViewIds().add(id);
+    }
+
+    default int getBackgroundColor(int viewId){
+        return Integer.MIN_VALUE;
+    }
+
+    void setBackgroundColor(int viewId, int color);
 }

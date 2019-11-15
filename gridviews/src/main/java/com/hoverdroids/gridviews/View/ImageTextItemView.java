@@ -18,14 +18,19 @@ package com.hoverdroids.gridviews.View;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hoverdroids.gridviews.Model.ImageViewItem;
 import com.hoverdroids.gridviews.Model.TextViewItem;
-import com.hoverdroids.gridviews.R;
+import com.hoverdroids.gridviews.Model.ViewItem;
 import com.hoverdroids.gridviews.Util.GenericViewHolder;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Use this as a wrapper in an xml layout that has an ImageView with ID=item_image and a TextView with ID=item_text.
@@ -38,8 +43,7 @@ import com.hoverdroids.gridviews.Util.GenericViewHolder;
  */
 public class ImageTextItemView extends LinearLayout implements GenericViewHolder
 {
-    private ImageView imageView;
-    private TextView textView;
+    private Map<Integer, View> views = new HashMap<Integer, View>();
 
     public ImageTextItemView(Context context) {
         super(context);
@@ -68,21 +72,61 @@ public class ImageTextItemView extends LinearLayout implements GenericViewHolder
     }
 
     private void initViews(){
-        imageView = findViewById(R.id.image_view_1);
-        textView = findViewById(R.id.text_view_1);
+        if (getId() != NO_ID){
+            views.put(getId(), this);
+        }
+
+        for (int i = 0; i < getChildCount(); i++){
+            final View view = getChildAt(i);
+            final int id = view.getId();
+            if (id != NO_ID) {
+                views.put(view.getId(), view);
+            }
+        }
     }
 
     @Override
     public void updateViews(int position, boolean isFirst, boolean isLast, Object item)
     {
-        if (item instanceof ImageViewItem){
-            final ImageViewItem img = (ImageViewItem) item;
-            imageView.setBackgroundResource(img.getImageResourceId());
+        if (item instanceof ViewItem){
+            final ViewItem viewItem = (ViewItem) item;
+            final List<Integer> ids = viewItem.getViewIds();
+            for (Integer id : ids){
+                updateView(views.get(id), id, viewItem);
+            }
         }
-        if (item instanceof TextViewItem){
-            final TextViewItem txt = (TextViewItem) item;
-            textView.setText(txt.getText());
-            textView.setBackgroundColor(txt.getBackgroundColor());
+    }
+
+    private void updateView(View view, int id, ViewItem item){
+        //It's always possible to map the generic view to the viewItem, so update without checking.
+        final int bgColor = item.getBackgroundColor(id);
+        if (bgColor != Integer.MIN_VALUE) {
+            view.setBackgroundColor(bgColor);
+        }
+
+        //There is no guarantee that the an item was setup correctly and hence we must match the
+        //view type and the item type
+        if (view instanceof ImageView && item instanceof ImageViewItem) {
+            updateView((ImageView)view, id, (ImageViewItem)item);
+        }
+
+        if (view instanceof TextView && item instanceof TextViewItem){
+            updateView((TextView)view, id, (TextViewItem)item);
+        }
+    }
+
+    private void updateView(TextView view, int id, TextViewItem item){
+        final String text = item.getText(id);
+        if (text != null) {
+            view.setText(text);
+        }
+    }
+
+    private void updateView(ImageView view, int id, ImageViewItem item){
+        //TODO The following is technically possible on a view. We need to update for imageView attrs
+        final int bgResId = item.getImageResourceId(id);
+        if (bgResId != Integer.MIN_VALUE) {
+            view.setBackgroundResource(bgResId);
         }
     }
 }
