@@ -16,47 +16,64 @@
 
 package com.hoverdroids.gridviews.viewitem;
 
-/** Implementation of TextViewItem. */
-public class ImageViewItemImpl extends ViewItemImpl implements ImageViewItem {
+/** Implementation of the ViewItem. */
+public class ViewItemImp extends GenericItemImp implements ViewItem {
 
-    private int imageResourceId = Integer.MIN_VALUE;
+    private int id;
+    private int color = Integer.MIN_VALUE;
 
     /**
      * Constructor. Use this when the item's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
      * @param id The view ID corresponding to this item
-     * @param imageResourceId The image resource ID
      */
-    public ImageViewItemImpl(final int layoutResourceId, final int id, final int imageResourceId) {
-        super(layoutResourceId, id);
-        this.imageResourceId = imageResourceId;
+    public ViewItemImp(final int layoutResourceId, final int id) {
+        super(layoutResourceId);
+        this.id = id;
     }
 
     /**
      * Constructor. Use this when the item's view is a child since only the top-level parent's layoutResId is used.
      * @param id The view ID corresponding to this item
-     * @param imageResourceId The image resource ID
      */
-    public ImageViewItemImpl(final int id, final int imageResourceId) {
-        super(id);
-        this.imageResourceId = imageResourceId;
+    public ViewItemImp(final int id) {
+        super(-1);
+        this.id = id;
     }
 
     /**
-     * Get the image resource ID.
+     * Get the view ID corresponding to this item.
      * @return The ID
      */
     @Override
-    public int getImageResourceId() {
-        return imageResourceId;
+    public int getViewId() {
+        return id;
     }
 
     /**
-     * Set the image resource ID.
-     * @param resourceId The ID
+     * Set the view ID corresponding to this item.
+     * @param id The ID
      */
     @Override
-    public void setImageResourceId(final int resourceId) {
-        this.imageResourceId = resourceId;
+    public void setViewId(final int id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the background color.
+     * @return The color
+     */
+    @Override
+    public int getBackgroundColor() {
+        return color;
+    }
+
+    /**
+     * Set the background color.
+     * @param color The color
+     */
+    @Override
+    public void setBackgroundColor(final int color) {
+        this.color = color;
     }
 }

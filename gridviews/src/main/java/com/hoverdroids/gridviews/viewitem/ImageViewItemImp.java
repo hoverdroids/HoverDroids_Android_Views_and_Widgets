@@ -16,64 +16,47 @@
 
 package com.hoverdroids.gridviews.viewitem;
 
-/** Implementation of the ViewItem. */
-public class ViewItemImpl extends GenericItemImpl implements ViewItem {
+/** Implementation of TextViewItem. */
+public class ImageViewItemImp extends ViewItemImp implements ImageViewItem {
 
-    private int id;
-    private int color = Integer.MIN_VALUE;
+    private int imageResourceId = Integer.MIN_VALUE;
 
     /**
      * Constructor. Use this when the item's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
      * @param id The view ID corresponding to this item
+     * @param imageResourceId The image resource ID
      */
-    public ViewItemImpl(final int layoutResourceId, final int id) {
-        super(layoutResourceId);
-        this.id = id;
+    public ImageViewItemImp(final int layoutResourceId, final int id, final int imageResourceId) {
+        super(layoutResourceId, id);
+        this.imageResourceId = imageResourceId;
     }
 
     /**
      * Constructor. Use this when the item's view is a child since only the top-level parent's layoutResId is used.
      * @param id The view ID corresponding to this item
+     * @param imageResourceId The image resource ID
      */
-    public ViewItemImpl(final int id) {
-        super(-1);
-        this.id = id;
+    public ImageViewItemImp(final int id, final int imageResourceId) {
+        super(id);
+        this.imageResourceId = imageResourceId;
     }
 
     /**
-     * Get the view ID corresponding to this item.
+     * Get the image resource ID.
      * @return The ID
      */
     @Override
-    public int getViewId() {
-        return id;
+    public int getImageResourceId() {
+        return imageResourceId;
     }
 
     /**
-     * Set the view ID corresponding to this item.
-     * @param id The ID
+     * Set the image resource ID.
+     * @param resourceId The ID
      */
     @Override
-    public void setViewId(final int id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the background color.
-     * @return The color
-     */
-    @Override
-    public int getBackgroundColor() {
-        return color;
-    }
-
-    /**
-     * Set the background color.
-     * @param color The color
-     */
-    @Override
-    public void setBackgroundColor(final int color) {
-        this.color = color;
+    public void setImageResourceId(final int resourceId) {
+        this.imageResourceId = resourceId;
     }
 }

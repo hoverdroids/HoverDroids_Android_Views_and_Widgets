@@ -21,17 +21,8 @@ import com.hoverdroids.gridviews.viewgroup.TwoWayAbsListView.OnScrollListener;
 import java.util.List;
 
 /** A generic model for for use in the GenericAdapter, with data for an TwoWayAdapterView.*/
-public class GenericAdapterItemImp implements GenericAdapterItem
+public class GenericAdapterItemImp extends GenericItemImp implements GenericAdapterItem
 {
-    /** The item id used by adapters in getItemById (optional). */
-    private int id;
-
-    /** The layout resource ID to inflate to visualize this model. */
-    private int layoutResourceId;
-
-    /** The item name. Can be anything. Not used by the adapter. */
-    private String name;
-
     /** The list of items to display. */
     private List<GenericItem> items;
 
@@ -70,70 +61,8 @@ public class GenericAdapterItemImp implements GenericAdapterItem
      */
     public GenericAdapterItemImp(final List<GenericItem> items, final int layoutResourceId)
     {
+        super(layoutResourceId);
         this.items = items;
-        this.layoutResourceId = layoutResourceId;
-    }
-
-    /**
-     * Get the item id.
-     * @return The item id.
-     */
-    @Override
-    public int getItemId()
-    {
-        return id;
-    }
-
-    /**
-     * Set the item id used by the adapter (optional). Be cautious when using this as
-     * it's used by the adapter.
-     * @param id The unique Id.
-     */
-    @Override
-    public void setItemId(final int id)
-    {
-        this.id = id;
-    }
-
-    /**
-     * Set the item id used by the adapter (optional). Be cautious when using this as
-     * it's used by the adapter.
-     * @return The resource id.
-     */
-    @Override
-    public int getLayoutResourceId()
-    {
-        return layoutResourceId;
-    }
-
-    /**
-     * Set the layout resource ID used to inflate the view.
-     * @param resourceId The resource id.
-     */
-    @Override
-    public void setLayoutResourceId(final int resourceId)
-    {
-        layoutResourceId = resourceId;
-    }
-
-    /**
-     * Set the item name.
-     * @param name The name;
-     */
-    @Override
-    public void setItemName(final String name)
-    {
-        this.name = name;
-    }
-
-    /**
-     * Get the item name.
-     * @return The name.
-     */
-    @Override
-    public String getItemName()
-    {
-        return name;
     }
 
     /**

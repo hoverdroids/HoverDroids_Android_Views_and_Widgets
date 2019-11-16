@@ -196,7 +196,7 @@ public class GenericAdapter<T> extends BaseAdapter
      *
      * emptyItem.getResourceId() != 0 indicates the developer wants to show "List Is Empty" in place of empty list.
      *//*
-    private GenericItem emptyItem = new GenericItemImpl(0);
+    private GenericItem emptyItem = new GenericItemImp(0);
 
     *//** The layout resource ids used by all of the views in the adapter view. *//*
     private List<Integer> layouts = new ArrayList<>();

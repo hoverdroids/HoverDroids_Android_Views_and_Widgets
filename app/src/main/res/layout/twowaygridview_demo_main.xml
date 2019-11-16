@@ -15,7 +15,8 @@
   ~ limitations under the License.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -38,18 +39,48 @@
 
     </com.google.android.material.appbar.AppBarLayout>-->
 
-    <com.hoverdroids.gridviews.viewgroup.TwoWayGridView
-        android:id="@+id/gridView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="#ff0000"
-        android:antialias="true"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        app:listSelector="#ff00ff"
-        app:numColumns="1"
-        app:scrollDirectionPortrait="vertical"
-        app:scrollDirectionLandscape="vertical"/>
+        <com.hoverdroids.gridviews.viewgroup.TwoWayGridView
+            android:id="@+id/leftListView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:antialias="true"
+            app:listSelector="#dddddd"
+            app:numColumns="1"
+            app:scrollDirectionPortrait="vertical"
+            app:scrollDirectionLandscape="vertical"/>
+
+        <com.hoverdroids.gridviews.viewgroup.TwoWayGridView
+            android:id="@+id/centerListView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:antialias="true"
+            app:listSelector="#dddddd"
+            app:numColumns="1"
+            app:scrollDirectionPortrait="vertical"
+            app:scrollDirectionLandscape="vertical"/>
+
+        <com.hoverdroids.gridviews.viewgroup.TwoWayGridView
+            android:id="@+id/rightListView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:antialias="true"
+            app:listSelector="#dddddd"
+            app:numColumns="1"
+            app:scrollDirectionPortrait="vertical"
+            app:scrollDirectionLandscape="vertical"/>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

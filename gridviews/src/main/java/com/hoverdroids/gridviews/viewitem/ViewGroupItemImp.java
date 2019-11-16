@@ -19,7 +19,7 @@ package com.hoverdroids.gridviews.viewitem;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ViewGroupItemImpl extends ViewItemImpl implements ViewGroupItem {
+public class ViewGroupItemImp extends ViewItemImp implements ViewGroupItem {
 
     private Map<Integer, ViewItem> viewItems = new HashMap<>();
 
@@ -28,7 +28,7 @@ public class ViewGroupItemImpl extends ViewItemImpl implements ViewGroupItem {
      * @param layoutResourceId The layout resource ID
      * @param id The view ID corresponding to this item
      */
-    public ViewGroupItemImpl(int layoutResourceId, int id) {
+    public ViewGroupItemImp(int layoutResourceId, int id) {
         super(layoutResourceId, id);
     }
 

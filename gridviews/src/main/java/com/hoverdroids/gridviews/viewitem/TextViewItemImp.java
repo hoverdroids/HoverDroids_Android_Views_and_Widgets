@@ -17,7 +17,7 @@
 package com.hoverdroids.gridviews.viewitem;
 
 /** Implementation of TextViewItem. */
-public class TextViewItemImp extends ViewItemImpl implements TextViewItem {
+public class TextViewItemImp extends ViewItemImp implements TextViewItem {
 
     private String text;
     private int textColor;

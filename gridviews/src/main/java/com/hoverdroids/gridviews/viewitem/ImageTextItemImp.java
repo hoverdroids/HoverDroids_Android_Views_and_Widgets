@@ -20,7 +20,7 @@ package com.hoverdroids.gridviews.viewitem;
  * A generic item that holds attrs for one TextView and one ImageView. This is useful given the number of situations where it is used
  * in almost every app - e.g. spinners, dropdowns, profiles, etc.
  */
-public class ImageTextItemImp extends ViewGroupItemImpl
+public class ImageTextItemImp extends ViewGroupItemImp
 {
     /**
      * Constructor - with minimum arguments.
@@ -44,7 +44,7 @@ public class ImageTextItemImp extends ViewGroupItemImpl
                             final int imageViewId, final int imageResourceId){
         super(layoutResourceId, id);
         setChildViewItem(new TextViewItemImp(textViewId, text));
-        setChildViewItem(new ImageViewItemImpl(imageViewId, imageResourceId));
+        setChildViewItem(new ImageViewItemImp(imageViewId, imageResourceId));
     }
 
     /**
@@ -68,6 +68,6 @@ public class ImageTextItemImp extends ViewGroupItemImpl
      */
     public ImageTextItemImp(final int layoutResourceId, final int id, final int imageViewId, final int imageResourceId){
         super(layoutResourceId, id);
-        setChildViewItem(new ImageViewItemImpl(imageViewId, imageResourceId));
+        setChildViewItem(new ImageViewItemImp(imageViewId, imageResourceId));
     }
 }

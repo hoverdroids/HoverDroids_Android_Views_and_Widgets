@@ -16,51 +16,52 @@
 
 package com.hoverdroids.hoverdroids_android_views_and_widgets;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.viewitem.GenericItem;
-import com.hoverdroids.gridviews.viewitem.ImageTextItemImp;
 import com.hoverdroids.gridviews.viewgroup.GenericAdapter;
 import com.hoverdroids.gridviews.viewgroup.TwoWayGridView;
+import com.hoverdroids.gridviews.viewitem.GenericItem;
+import com.hoverdroids.gridviews.viewitem.ImageTextItemImp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TwoWayGridViewsDemo extends AppCompatActivity
 {
+    @BindView(R.id.leftListView)
+    TwoWayGridView leftListView;
 
-    @BindView(R.id.gridView)
-    TwoWayGridView gridView;
+    @BindView(R.id.centerListView)
+    TwoWayGridView centerListView;
+
+    @BindView(R.id.rightListView)
+    TwoWayGridView rightListView;
+
+    private GenericAdapter leftAdapter;
+    private GenericAdapter centerAdapter;
+    private GenericAdapter rightAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.twowaygridview_demo_main);
+        
         ButterKnife.bind(this);
+        
+        leftAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
+        leftListView.setAdapter(leftAdapter);
 
-        final int[] layouts = {R.layout.image_text_item_view, R.layout.text_image_item_view};
+        centerAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
+        centerListView.setAdapter(centerAdapter);
 
-        ArrayList<GenericItem> items = new ArrayList<>();
-        for (int i = 0; i < 30; i++){
-            final int layout = layouts[i%2];
-            final ImageTextItemImp item
-                    = new ImageTextItemImp(layout, R.id.container,
-                    R.id.text_view_1, "My name is " + i,
-                    R.id.image_view_1, R.drawable.ic_launcher_background);
-            /*item.addViewId(R.id.container);
-            item.setBackgroundColor(R.id.container, Color.BLUE);
-            item.setBackgroundColor(R.id.text_view_1, layout == R.layout.image_text_item_view ? Color.GREEN : Color.BLACK);
-            item.setBackgroundColor(R.id.image_view_1, Color.GRAY);*/
-            items.add(item);
-        }
-
-        GenericAdapter adapter = new GenericAdapter(getApplicationContext(), items);
-        gridView.setAdapter(adapter);
+        rightAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
+        rightListView.setAdapter(rightAdapter);
+        
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
@@ -96,4 +97,24 @@ public class TwoWayGridViewsDemo extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }*/
+
+    /**
+     * Get an example list of items with ImageView and TextView data.
+     * @return The items
+     */
+    private List<GenericItem> getImageTextItems() {
+        final int[] layouts = {R.layout.image_text_item_view, R.layout.text_image_item_view};
+
+        final List<GenericItem> items = new ArrayList<>();
+        for (int i = 0; i < 30; i++){
+            final int layout = layouts[i%2];
+            final ImageTextItemImp item
+                    = new ImageTextItemImp(layout, R.id.container,
+                    R.id.text_view_1, "My name is " + i,
+                    R.id.image_view_1, R.drawable.ic_launcher_background);
+
+            items.add(item);
+        }
+        return items;
+    }
 }

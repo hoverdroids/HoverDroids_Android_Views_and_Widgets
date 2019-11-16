@@ -17,7 +17,7 @@
 package com.hoverdroids.gridviews.viewitem;
 
 /** Implementation of a GenericItem. */
-public class GenericItemImpl implements GenericItem
+public class GenericItemImp implements GenericItem
 {
     /** The item id used by adapters in getItemById (optional). */
     private int id = INVALID_RESOURCE_ID;
@@ -35,7 +35,7 @@ public class GenericItemImpl implements GenericItem
      * Constructor - use when inflating view from XML.
      * @param layoutResourceId the layout resource id
      */
-    public GenericItemImpl(final int layoutResourceId) {
+    public GenericItemImp(final int layoutResourceId) {
         this.layoutResourceId = layoutResourceId;
     }
 
@@ -43,7 +43,7 @@ public class GenericItemImpl implements GenericItem
      * Constructor - use when instantiating new View from class.
      * @param viewClass The view class
      */
-    public GenericItemImpl(final String viewClass) {
+    public GenericItemImp(final String viewClass) {
         this.viewClass = viewClass;
     }
 
