@@ -14,10 +14,19 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model;
+package com.hoverdroids.gridviews.viewitem;
 
 public interface ImageViewItem extends ViewItem
 {
-    int getImageResourceId(int viewId);
-    void setImageResourceId(int viewId, int resourceId);
+    /**
+     * Get the image resource ID. TODO this belongs in the viewItem
+     * @return The resource ID
+     */
+    int getImageResourceId();
+
+    /**
+     * Set the image resource ID. TODO this belongs in the viewItem
+     * @param resourceId
+     */
+    void setImageResourceId(int resourceId);
 }

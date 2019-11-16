@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model;
+package com.hoverdroids.gridviews.viewitem;
 
 /** Implementation of a GenericItem. */
 public class GenericItemImpl implements GenericItem

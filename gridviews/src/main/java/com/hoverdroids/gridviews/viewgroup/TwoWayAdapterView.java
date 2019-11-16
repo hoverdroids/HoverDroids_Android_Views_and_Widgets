@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.ViewGroup;
+package com.hoverdroids.gridviews.viewgroup;
 
 
 import android.annotation.SuppressLint;
@@ -34,7 +34,7 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 
-import static com.hoverdroids.gridviews.ViewGroup.TwoWayAbsListView.CHRIS_DEBUG;
+import static com.hoverdroids.gridviews.viewgroup.TwoWayAbsListView.CHRIS_DEBUG;
 
 
 /**

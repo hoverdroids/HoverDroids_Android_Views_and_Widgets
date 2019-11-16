@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model;
+package com.hoverdroids.gridviews.viewitem;
 
-import com.hoverdroids.gridviews.ViewGroup.TwoWayAbsListView.OnScrollListener;
+import com.hoverdroids.gridviews.viewgroup.TwoWayAbsListView.OnScrollListener;
 
 import java.util.List;
 

@@ -14,21 +14,11 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model;
+package com.hoverdroids.gridviews.itemview;
 
-import java.util.List;
+import com.hoverdroids.gridviews.viewitem.ViewItem;
 
-public interface ViewItem {
+public interface ItemView {
 
-    List<Integer> getViewIds();
-
-    default void addViewId(int id){
-        getViewIds().add(id);
-    }
-
-    default int getBackgroundColor(int viewId){
-        return Integer.MIN_VALUE;
-    }
-
-    void setBackgroundColor(int viewId, int color);
+    <E extends ViewItem> void setViewItem(E item);
 }

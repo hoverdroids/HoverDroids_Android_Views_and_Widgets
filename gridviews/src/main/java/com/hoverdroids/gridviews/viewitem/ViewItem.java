@@ -14,18 +14,33 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Util;
+package com.hoverdroids.gridviews.viewitem;
 
-/** View holder that handles view updates for the child view in the adapter.*/
-public interface GenericViewHolder
-{
+public interface ViewItem {
+
     /**
-     * Regardless of whether or not convertView was just inflated, its views need to be updated
-     * with the current data. So, update the views with the provided data
-     * @param position The position being updated.
-     * @param isFirst Is it the first position.
-     * @param isLast Is it the last position.
-     * @param item The item for the given position.
+     * Get the ID for the view that corresponds to this item.
+     * @return The ID
      */
-    void updateViews(int position, boolean isFirst, boolean isLast, Object item);
+    int getViewId();
+
+    /**
+     * Set the ID for the view that corresponds to this item.
+     * @param id The ID
+     */
+    void setViewId(int id);
+
+    /**
+     * Get the background color.
+     * @return The color
+     */
+    default int getBackgroundColor(){
+        return Integer.MIN_VALUE;
+    }
+
+    /**
+     * Set the background color.
+     * @param color The color
+     */
+    void setBackgroundColor(int color);
 }

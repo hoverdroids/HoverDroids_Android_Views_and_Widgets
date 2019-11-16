@@ -38,7 +38,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>-->
 
-    <com.hoverdroids.gridviews.ViewGroup.TwoWayGridView
+    <com.hoverdroids.gridviews.viewgroup.TwoWayGridView
         android:id="@+id/gridView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.ViewGroup;
+package com.hoverdroids.gridviews.viewgroup;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -29,7 +29,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.GridLayoutAnimationController;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 
 import com.hoverdroids.gridviews.R;
 

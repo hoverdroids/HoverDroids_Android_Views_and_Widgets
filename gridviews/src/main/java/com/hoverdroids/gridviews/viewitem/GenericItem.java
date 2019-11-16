@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Model;
+package com.hoverdroids.gridviews.viewitem;
 
 public interface GenericItem
 {

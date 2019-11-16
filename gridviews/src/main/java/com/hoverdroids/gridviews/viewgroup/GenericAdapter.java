@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.ViewGroup;
+package com.hoverdroids.gridviews.viewgroup;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,8 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.hoverdroids.gridviews.Model.GenericItem;
-import com.hoverdroids.gridviews.Util.GenericViewHolder;
+import com.hoverdroids.gridviews.itemview.AdapterItemView;
+import com.hoverdroids.gridviews.itemview.ItemView;
+import com.hoverdroids.gridviews.viewitem.GenericItem;
+import com.hoverdroids.gridviews.viewitem.ViewItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ public class GenericAdapter extends BaseAdapter
     private LayoutInflater inflater;
 
     public GenericAdapter(Context context, List<GenericItem> items){
+        super();
         this.context = context;
         this.items = items;
         inflater = LayoutInflater.from(context);
@@ -85,41 +88,29 @@ public class GenericAdapter extends BaseAdapter
         return 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final GenericItem item = getItem(position);
-        final GenericViewHolder viewHolder;
 
-        if (convertView == null){
+        if (convertView == null) {
             convertView = inflater.inflate(item.getLayoutResourceId(), parent, false);
-
-            viewHolder = getViewHolder(convertView, position);
-            if (viewHolder != null){
-                convertView.setTag(viewHolder);
-            }
-        } else {
-            viewHolder = convertView.getTag() != null ? (GenericViewHolder) convertView.getTag() : null;
         }
 
         final boolean isLast = position == items.size() - 1;
         final boolean isFirst = position == 0;
 
-        if (viewHolder != null) {
-            viewHolder.updateViews(position, isFirst, isLast, getItem(position));
+        if (convertView instanceof AdapterItemView && item instanceof ViewItem) {
+            ((AdapterItemView)convertView).updateViews(position, isFirst, isLast, (ViewItem)item);
+
+        } else if (convertView instanceof ItemView && item instanceof ViewItem) {
+            ((ItemView)convertView).setViewItem((ViewItem)item);
         }
 
         return convertView;
-    }
-
-    /** Override this to implement your own ViewHolder pattern. Otherwise, let's assume you're using one of the
-     * generic items from the library, all of which implement the GenericViewHolder themselves.
-     * @param convertView
-     * @param position
-     * @return
-     */
-    protected GenericViewHolder getViewHolder(View convertView, int position){
-        return convertView instanceof GenericViewHolder ? (GenericViewHolder) convertView : null;
     }
 
     @Override
@@ -360,7 +351,7 @@ public class GenericAdapter<T> extends BaseAdapter
 
         // resId is not specified but the resId is globally specified, use the global
         //One of the problems here is that the item resId count will be wrong if we don't account for it
-        final GenericViewHolder viewHolder;
+        final AdapterItemView viewHolder;
 
         if (convertView == null)
         {
@@ -374,7 +365,7 @@ public class GenericAdapter<T> extends BaseAdapter
         }
         else
         {
-            viewHolder = convertView.getTag() != null ? (GenericViewHolder) convertView.getTag() : null;
+            viewHolder = convertView.getTag() != null ? (AdapterItemView) convertView.getTag() : null;
         }
 
         final boolean isLast = position == items.size() - 1;
@@ -390,15 +381,15 @@ public class GenericAdapter<T> extends BaseAdapter
 
     *//**
      * Override this to implement your own ViewHolder pattern. Otherwise, let's assume you're using one of the
-     * generic items from the library, all of which implement the GenericViewHolder themselves.
+     * generic items from the library, all of which implement the AdapterItemView themselves.
      *
      * @param convertView The view.
      * @param position The position of the view.
      * @return The viewholder for the specified view.
      *//*
-    protected GenericViewHolder getViewHolder(final View convertView, final int position)
+    protected AdapterItemView getViewHolder(final View convertView, final int position)
     {
-        return convertView instanceof GenericViewHolder ? (GenericViewHolder) convertView : null;
+        return convertView instanceof AdapterItemView ? (AdapterItemView) convertView : null;
     }
 
     *//**

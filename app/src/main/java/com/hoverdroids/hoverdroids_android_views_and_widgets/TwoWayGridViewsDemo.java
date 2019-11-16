@@ -21,10 +21,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.Model.GenericItem;
-import com.hoverdroids.gridviews.Model.ImageTextItemImp;
-import com.hoverdroids.gridviews.ViewGroup.GenericAdapter;
-import com.hoverdroids.gridviews.ViewGroup.TwoWayGridView;
+import com.hoverdroids.gridviews.viewitem.GenericItem;
+import com.hoverdroids.gridviews.viewitem.ImageTextItemImp;
+import com.hoverdroids.gridviews.viewgroup.GenericAdapter;
+import com.hoverdroids.gridviews.viewgroup.TwoWayGridView;
 
 import java.util.ArrayList;
 
@@ -48,13 +48,14 @@ public class TwoWayGridViewsDemo extends AppCompatActivity
         ArrayList<GenericItem> items = new ArrayList<>();
         for (int i = 0; i < 30; i++){
             final int layout = layouts[i%2];
-            final ImageTextItemImp item = new ImageTextItemImp(layout,
+            final ImageTextItemImp item
+                    = new ImageTextItemImp(layout, R.id.container,
                     R.id.text_view_1, "My name is " + i,
                     R.id.image_view_1, R.drawable.ic_launcher_background);
-            item.addViewId(R.id.container);
+            /*item.addViewId(R.id.container);
             item.setBackgroundColor(R.id.container, Color.BLUE);
             item.setBackgroundColor(R.id.text_view_1, layout == R.layout.image_text_item_view ? Color.GREEN : Color.BLACK);
-            item.setBackgroundColor(R.id.image_view_1, Color.GRAY);
+            item.setBackgroundColor(R.id.image_view_1, Color.GRAY);*/
             items.add(item);
         }
 
