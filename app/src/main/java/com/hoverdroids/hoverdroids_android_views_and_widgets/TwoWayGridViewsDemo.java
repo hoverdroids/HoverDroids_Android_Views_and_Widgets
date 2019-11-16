@@ -16,31 +16,37 @@
 
 package com.hoverdroids.hoverdroids_android_views_and_widgets;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
 import com.hoverdroids.gridviews.viewgroup.GenericAdapter;
-import com.hoverdroids.gridviews.viewgroup.TwoWayGridView;
+import com.hoverdroids.gridviews.viewgroup.SyncListView;
 import com.hoverdroids.gridviews.viewitem.GenericItem;
 import com.hoverdroids.gridviews.viewitem.ImageTextItemImp;
+import com.hoverdroids.gridviews.viewitem.ViewItemImp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TwoWayGridViewsDemo extends AppCompatActivity
+public class TwoWayGridViewsDemo extends AppCompatActivity implements OnSyncTouchEventListener
 {
     @BindView(R.id.leftListView)
-    TwoWayGridView leftListView;
+    SyncListView leftListView;
 
     @BindView(R.id.centerListView)
-    TwoWayGridView centerListView;
+    SyncListView centerListView;
 
     @BindView(R.id.rightListView)
-    TwoWayGridView rightListView;
+    SyncListView rightListView;
 
     private GenericAdapter leftAdapter;
     private GenericAdapter centerAdapter;
@@ -55,12 +61,15 @@ public class TwoWayGridViewsDemo extends AppCompatActivity
         
         leftAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
         leftListView.setAdapter(leftAdapter);
+        leftListView.setOnSyncTouchEventListener(this);
 
         centerAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
         centerListView.setAdapter(centerAdapter);
+        centerListView.setOnSyncTouchEventListener(this);
 
         rightAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
         rightListView.setAdapter(rightAdapter);
+        rightListView.setOnSyncTouchEventListener(this);
         
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -98,6 +107,13 @@ public class TwoWayGridViewsDemo extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }*/
 
+    @Override
+    public void onSyncTouchEvent(View sourceView, MotionEvent ev) {
+        leftListView.onTouchEvent(sourceView, ev);
+        centerListView.onTouchEvent(sourceView, ev);
+        rightListView.onTouchEvent(sourceView, ev);
+    }
+
     /**
      * Get an example list of items with ImageView and TextView data.
      * @return The items
@@ -115,6 +131,22 @@ public class TwoWayGridViewsDemo extends AppCompatActivity
 
             items.add(item);
         }
+        return items;
+    }
+
+    private List<GenericItem> getColorItems() {
+        final Random rnd = new Random();
+
+        final List<GenericItem> items = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            final int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+
+            //ID does not have to be set for the top-most parent since it's assumed
+            final ViewItemImp item = new ViewItemImp("com.hoverdroids.gridviews.itemview.ImageView", -1);
+            item.setBackgroundColor(color);
+            items.add(item);
+        }
+
         return items;
     }
 }

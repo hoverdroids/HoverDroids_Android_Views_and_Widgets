@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2019. Christopher Sprague
+  ~ Copyright (C) 2012 - 2019. HoverDroids and Christopher Sprague
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,33 +14,16 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--<com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/HoverDroidsToolbar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@mipmap/ic_ab_hoverdroids"
-            app:popupTheme="@style/HoverDroidsToolbarPopup"
-            app:title="@string/ab_title_hoverdroids" />
-
-    </com.google.android.material.appbar.AppBarLayout>-->
-
     <LinearLayout
-        android:id="@+id/touch_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -65,11 +48,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/touch_sync"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/touch_source">
+        android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -93,56 +74,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_below="@+id/touch_sync">
-
-        <com.hoverdroids.gridviews.viewgroup.SyncListView
-            android:id="@+id/leftListView"
+        android:orientation="horizontal">
+        <com.hoverdroids.sync.listviews.SynchronizedListView
+            android:id="@+id/listview_left"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:antialias="true"
-            android:padding="10dp"
-            app:listSelector="#dddddd"
-            app:numColumns="1"
-            app:scrollDirectionLandscape="vertical"
-            app:scrollDirectionPortrait="vertical"
-            app:sourceMode="xy" />
+            app:sourceMode="xy"/>
 
-        <com.hoverdroids.gridviews.viewgroup.SyncListView
-            android:id="@+id/centerListView"
+        <com.hoverdroids.sync.listviews.SynchronizedListView
+            android:id="@+id/listview_center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:antialias="true"
-            app:listSelector="#dddddd"
-            app:numColumns="1"
-            app:scrollDirectionPortrait="vertical"
-            app:scrollDirectionLandscape="vertical"
             app:sourceMode="notSource"/>
 
-        <com.hoverdroids.gridviews.viewgroup.SyncListView
-            android:id="@+id/rightListView"
+        <com.hoverdroids.sync.listviews.SynchronizedListView
+            android:id="@+id/listview_right"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:antialias="true"
-            app:listSelector="#dddddd"
-            app:numColumns="1"
-            app:scrollDirectionPortrait="vertical"
-            app:scrollDirectionLandscape="vertical"
             app:syncMode="notSync"/>
-
     </LinearLayout>
-
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />-->
-
-</RelativeLayout>
+</LinearLayout>

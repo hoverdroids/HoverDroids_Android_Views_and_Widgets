@@ -139,6 +139,8 @@ public class GenericAdapter extends BaseAdapter
         {
             return;
         }
+        //TODO - sometimes we want to keep the initial layouts that were passed. This allows layouts
+        //to be used other than those used by the different items
 
         layouts.clear();//TODO CHRIS-make sure this doesn't break things
 

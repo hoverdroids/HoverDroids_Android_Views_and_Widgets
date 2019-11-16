@@ -25,7 +25,7 @@ import com.hoverdroids.gridviews.util.ViewUtils;
 import com.hoverdroids.gridviews.viewitem.ImageViewItem;
 import com.hoverdroids.gridviews.viewitem.ViewItem;
 
-public class ImageView extends AppCompatImageView implements ItemView{
+public class ImageView extends AppCompatImageView implements AdapterItemView, ItemView{
 
     public ImageView(final Context context) {
         super(context);
@@ -37,6 +37,19 @@ public class ImageView extends AppCompatImageView implements ItemView{
 
     public ImageView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    /**
+     * Set the view item from an AdapterView - e.g. when used in a ListView.
+     * @param position The items's position in the adapter.
+     * @param isFirst Is it the first position in the adapter.
+     * @param isLast Is it the last position in the adapter.
+     * @param item The item for the given position in the adapter.
+     */
+    @Override
+    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewItem item) {
+        //TODO handle case where isFirst, isLast. Typically, this allows the item to display as a header or footer.
+        setViewItem(item);
     }
 
     @Override

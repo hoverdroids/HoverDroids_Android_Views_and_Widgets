@@ -33,6 +33,16 @@ public class ViewItemImp extends GenericItemImp implements ViewItem {
     }
 
     /**
+     * Constructor. Use this when the item's view is the top-level parent.
+     * @param viewClass The view class
+     * @param id The view ID corresponding to this item
+     */
+    public ViewItemImp(final String viewClass, final int id) {
+        super(viewClass);
+        this.id = id;
+    }
+
+    /**
      * Constructor. Use this when the item's view is a child since only the top-level parent's layoutResId is used.
      * @param id The view ID corresponding to this item
      */

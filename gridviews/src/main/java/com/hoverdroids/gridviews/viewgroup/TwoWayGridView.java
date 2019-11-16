@@ -142,6 +142,12 @@ public class TwoWayGridView extends TwoWayAbsListView
 		setupGridType();
 	}
 
+	//TODO CHRIS
+	/*public SyncListView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
+
+	}*/
+
+
 	private void setupGridType() {
 		if (mScrollVertically) {
 			mGridBuilder = new VerticalGridBuilder();
