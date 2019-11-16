@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.util;
+package com.hoverdroids.gridviews.itemview;
+
+import com.hoverdroids.gridviews.viewitem.ViewItem;
 
 /** View holder that handles view updates for the child view in the adapter.*/
-public interface GenericViewHolder
+public interface AdapterItemView
 {
     /**
      * Set the view item from an AdapterView - e.g. when used in a ListView.
@@ -26,5 +28,5 @@ public interface GenericViewHolder
      * @param isLast Is it the last position in the adapter.
      * @param item The item for the given position in the adapter.
      */
-    void updateViews(int position, boolean isFirst, boolean isLast, Object item);
+    void updateViews(int position, boolean isFirst, boolean isLast, ViewItem item);
 }

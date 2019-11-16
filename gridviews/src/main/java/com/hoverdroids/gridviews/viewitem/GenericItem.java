@@ -18,6 +18,9 @@ package com.hoverdroids.gridviews.viewitem;
 
 public interface GenericItem
 {
+    /** The following is an invalid resource ID. Use it when the value is not set. */
+    public static int INVALID_RESOURCE_ID = 0;
+
     /**
      *  The layout Id of the layout to inflate.
      * @return The layout resource id.
@@ -29,6 +32,18 @@ public interface GenericItem
      * @param resourceId The layout resource id.
      */
     void setLayoutResourceId(int resourceId);
+
+    /**
+     * Get the view class. This can be used to create a new view instead of layoutResourceId.
+     * @return The view class
+     */
+    String getViewClass();
+
+    /**
+     * Set the view class. This can be used to create a new view instead of layoutResourceId.
+     * @param viewClass The view class (e.g. com.android.view.TextView)
+     */
+    void setViewClass(String viewClass);
 
     /**
      * Unique IDs based on project-specific requirements.

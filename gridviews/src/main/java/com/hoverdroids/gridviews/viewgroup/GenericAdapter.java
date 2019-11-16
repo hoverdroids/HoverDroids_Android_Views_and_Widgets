@@ -24,11 +24,14 @@ import android.widget.BaseAdapter;
 
 import com.hoverdroids.gridviews.itemview.AdapterItemView;
 import com.hoverdroids.gridviews.itemview.ItemView;
+import com.hoverdroids.gridviews.util.ViewUtils;
 import com.hoverdroids.gridviews.viewitem.GenericItem;
 import com.hoverdroids.gridviews.viewitem.ViewItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.hoverdroids.gridviews.viewitem.GenericItem.INVALID_RESOURCE_ID;
 
 public class GenericAdapter extends BaseAdapter
 {
@@ -96,8 +99,11 @@ public class GenericAdapter extends BaseAdapter
 
         final GenericItem item = getItem(position);
 
-        if (convertView == null) {
+        if (convertView == null && item.getLayoutResourceId() != INVALID_RESOURCE_ID) {
             convertView = inflater.inflate(item.getLayoutResourceId(), parent, false);
+
+        } else if (convertView == null && item.getViewClass() != null) {
+            convertView = ViewUtils.instantiateView(context, item.getViewClass());
         }
 
         final boolean isLast = position == items.size() - 1;

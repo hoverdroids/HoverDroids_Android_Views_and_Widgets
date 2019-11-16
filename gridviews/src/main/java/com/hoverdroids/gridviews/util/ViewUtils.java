@@ -16,10 +16,13 @@
 
 package com.hoverdroids.gridviews.util;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.hoverdroids.gridviews.itemview.ItemView;
 import com.hoverdroids.gridviews.viewitem.ImageViewItem;
@@ -27,6 +30,8 @@ import com.hoverdroids.gridviews.viewitem.TextViewItem;
 import com.hoverdroids.gridviews.viewitem.ViewGroupItem;
 import com.hoverdroids.gridviews.viewitem.ViewItem;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -34,6 +39,36 @@ import java.util.Map;
 import static android.view.View.NO_ID;
 
 public class ViewUtils {
+
+    /**
+     * Instantiate a new view using the class name.
+     * @param context The context
+     * @param viewClass The view class name (e.g. com.android.view.TextView)
+     * @return The view or null.
+     */
+    public static View instantiateView(final Context context, final String viewClass) {
+        try {
+            final Class<?> clazz = Class.forName(viewClass);
+            final Constructor<?> constructor = clazz.getConstructor(Context.class);
+            return (View) constructor.newInstance(context);
+
+        } catch (final ClassNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (final NoSuchMethodException e) {
+            e.printStackTrace();
+
+        } catch (final InstantiationException e) {
+            e.printStackTrace();
+
+        } catch (final IllegalAccessException e) {
+            e.printStackTrace();
+
+        } catch (final InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * Get a mapping of child IDs to child views. If a child does not have an ID, it is not added to the mapping.

@@ -20,22 +20,31 @@ package com.hoverdroids.gridviews.viewitem;
 public class GenericItemImpl implements GenericItem
 {
     /** The item id used by adapters in getItemById (optional). */
-    private int id;
+    private int id = INVALID_RESOURCE_ID;
 
     /** The layout resource ID to inflate to visualize this model. */
-    private int layoutResourceId;
+    private int layoutResourceId = INVALID_RESOURCE_ID;
+
+    /** The view class name can be used to instantiate a new view instead of layoutResourceId (e.g. com.android.view.TextView) */
+    private String viewClass;
 
     /** The item name. Can be anything. Not used by the adapter. */
     private String name;
 
     /**
-     * Instantiates a new generic item.
-     *
+     * Constructor - use when inflating view from XML.
      * @param layoutResourceId the layout resource id
      */
-    public GenericItemImpl(final int layoutResourceId)
-    {
+    public GenericItemImpl(final int layoutResourceId) {
         this.layoutResourceId = layoutResourceId;
+    }
+
+    /**
+     * Constructor - use when instantiating new View from class.
+     * @param viewClass The view class
+     */
+    public GenericItemImpl(final String viewClass) {
+        this.viewClass = viewClass;
     }
 
     /**
@@ -66,6 +75,24 @@ public class GenericItemImpl implements GenericItem
     public int getLayoutResourceId()
     {
         return layoutResourceId;
+    }
+
+    /**
+     * Get the view class.
+     * @return The view class
+     */
+    @Override
+    public String getViewClass() {
+        return viewClass;
+    }
+
+    /**
+     * Set the view class.
+     * @param viewClass The view class (e.g. com.android.view.TextView)
+     */
+    @Override
+    public void setViewClass(String viewClass) {
+        this.viewClass = viewClass;
     }
 
     /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.Util;
+package com.hoverdroids.gridviews.util;
 
 import android.view.View;
 import android.view.ViewGroup;

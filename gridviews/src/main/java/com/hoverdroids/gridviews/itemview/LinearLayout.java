@@ -19,9 +19,9 @@ package com.hoverdroids.gridviews.itemview;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
 
-import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.hoverdroids.gridviews.util.ViewUtils;
 import com.hoverdroids.gridviews.viewitem.ViewItem;
@@ -29,26 +29,38 @@ import com.hoverdroids.gridviews.viewitem.ViewItem;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ImageTextItemView extends LinearLayoutCompat implements AdapterItemView, ItemView
+public class LinearLayout extends android.widget.LinearLayout implements AdapterItemView, ItemView
 {
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
     private ViewItem item;
 
-    public ImageTextItemView(Context context) {
+    public LinearLayout(final @NonNull Context context) {
         super(context);
         init();
         initViews();
     }
 
-    public ImageTextItemView(Context context, AttributeSet attrs) {
+    public LinearLayout(final @NonNull Context context, final @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ImageTextItemView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public LinearLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         init();
+    }
+
+    public LinearLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+
+    /** Wait until inflation is finished or else the children are not ready and don't get included. */
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        initViews();
     }
 
     protected void init(){
