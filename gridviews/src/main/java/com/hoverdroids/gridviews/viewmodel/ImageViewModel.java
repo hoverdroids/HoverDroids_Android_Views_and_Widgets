@@ -20,13 +20,13 @@ package com.hoverdroids.gridviews.viewmodel;
 public interface ImageViewModel extends ViewModel
 {
     /**
-     * Get the image resource ID. TODO this belongs in the viewItem
+     * Get the image resource ID. TODO this belongs in ViewModel
      * @return The resource ID
      */
     int getImageResourceId();
 
     /**
-     * Set the image resource ID. TODO this belongs in the viewItem
+     * Set the image resource ID. TODO this belongs in ViewModel
      * @param resourceId
      */
     void setImageResourceId(int resourceId);

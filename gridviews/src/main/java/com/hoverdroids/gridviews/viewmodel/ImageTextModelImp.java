@@ -26,16 +26,16 @@ public class ImageTextModelImp extends ViewGroupModelImp
     /**
      * Constructor - with minimum arguments.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this viewModel
      */
     public ImageTextModelImp(final int layoutResourceId, final int id) {
         super(layoutResourceId, id);
     }
 
     /**
-     * Constructor for quickly creating an item when only one ImageView and TextView are used in the layout.
+     * Constructor for quickly creating a viewModel when only one ImageView and TextView are used in the layout.
      * @param layoutResourceId The layoutResourceId
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this viewModel
      * @param textViewId The textViewId
      * @param text The text
      * @param imageViewId The imageViewId
@@ -44,31 +44,31 @@ public class ImageTextModelImp extends ViewGroupModelImp
     public ImageTextModelImp(final int layoutResourceId, final int id, final int textViewId, final String text,
                              final int imageViewId, final int imageResourceId){
         super(layoutResourceId, id);
-        setChildViewItem(new TextViewModelImp(textViewId, text));
-        setChildViewItem(new ImageViewModelImp(imageViewId, imageResourceId));
+        setChildViewModel(new TextViewModelImp(textViewId, text));
+        setChildViewModel(new ImageViewModelImp(imageViewId, imageResourceId));
     }
 
     /**
-     * Constructor for quickly creating an item when only one TextView is used in the layout.
+     * Constructor for quickly creating a viewModel when only one TextView is used in the layout.
      * @param layoutResourceId The layoutResourceId
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this viewModel
      * @param textViewId The textViewId
      * @param text The text
      */
     public ImageTextModelImp(final int layoutResourceId, final int id, final int textViewId, final String text){
         super(layoutResourceId, id);
-        setChildViewItem(new TextViewModelImp(textViewId, text));
+        setChildViewModel(new TextViewModelImp(textViewId, text));
     }
 
     /**
-     * Constructor for quickly creating an item when only one ImageView is used in the layout.
+     * Constructor for quickly creating an viewModel when only one ImageView is used in the layout.
      * @param layoutResourceId The layoutResourceId
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this viewModel
      * @param imageViewId The imageViewId
      * @param imageResourceId The imageResourceId
      */
     public ImageTextModelImp(final int layoutResourceId, final int id, final int imageViewId, final int imageResourceId){
         super(layoutResourceId, id);
-        setChildViewItem(new ImageViewModelImp(imageViewId, imageResourceId));
+        setChildViewModel(new ImageViewModelImp(imageViewId, imageResourceId));
     }
 }

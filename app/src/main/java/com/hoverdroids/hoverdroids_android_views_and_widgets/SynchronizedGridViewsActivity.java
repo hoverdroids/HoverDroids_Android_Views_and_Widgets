@@ -24,8 +24,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
-import com.hoverdroids.gridviews.view.ViewModelAdapter;
 import com.hoverdroids.gridviews.view.SyncListView;
+import com.hoverdroids.gridviews.view.ViewModelAdapter;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
 import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
 import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
@@ -37,81 +37,49 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SynchronizedListViewsDemo extends AppCompatActivity implements OnSyncTouchEventListener
+public class SynchronizedGridViewsActivity extends AppCompatActivity implements OnSyncTouchEventListener
 {
-    @BindView(R.id.leftListView)
-    SyncListView leftListView;
+    @BindView(R.id.topGridView)
+    SyncListView topGridView;
 
-    @BindView(R.id.centerListView)
-    SyncListView centerListView;
+    @BindView(R.id.centerGridView)
+    SyncListView centerGridView;
 
-    @BindView(R.id.rightListView)
-    SyncListView rightListView;
+    @BindView(R.id.bottomGridView)
+    SyncListView bottomGridView;
 
-    private ViewModelAdapter leftAdapter;
+    private ViewModelAdapter topAdapter;
     private ViewModelAdapter centerAdapter;
-    private ViewModelAdapter rightAdapter;
+    private ViewModelAdapter bottomAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.synchronized_listviews);
+        setContentView(R.layout.synchronized_gridviews);
         
         ButterKnife.bind(this);
         
-        leftAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
-        leftListView.setAdapter(leftAdapter);
-        leftListView.setOnSyncTouchEventListener(this);
+        topAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
+        topGridView.setAdapter(topAdapter);
+        topGridView.setOnSyncTouchEventListener(this);
+        topGridView.setRelativePosition(5,-30);
 
         centerAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
-        centerListView.setAdapter(centerAdapter);
-        centerListView.setOnSyncTouchEventListener(this);
+        centerGridView.setAdapter(centerAdapter);
+        centerGridView.setOnSyncTouchEventListener(this);
+        centerGridView.setRelativePosition(5,-30);
 
-        rightAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
-        rightListView.setAdapter(rightAdapter);
-        rightListView.setOnSyncTouchEventListener(this);
-        
-
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        bottomAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
+        bottomGridView.setAdapter(bottomAdapter);
+        bottomGridView.setOnSyncTouchEventListener(this);
+        bottomGridView.setRelativePosition(5,-30);
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void onSyncTouchEvent(View sourceView, MotionEvent ev) {
-        leftListView.onTouchEvent(sourceView, ev);
-        centerListView.onTouchEvent(sourceView, ev);
-        rightListView.onTouchEvent(sourceView, ev);
+        topGridView.onTouchEvent(sourceView, ev);
+        centerGridView.onTouchEvent(sourceView, ev);
+        bottomGridView.onTouchEvent(sourceView, ev);
     }
 
     /**

@@ -25,7 +25,7 @@ import com.hoverdroids.gridviews.util.ViewUtils;
 import com.hoverdroids.gridviews.viewmodel.ImageViewModel;
 import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
-public class ImageView extends AppCompatImageView implements AdapterModelView, ModelView {
+public class ImageView extends AppCompatImageView implements ModelView {
 
     public ImageView(final Context context) {
         super(context);
@@ -40,26 +40,20 @@ public class ImageView extends AppCompatImageView implements AdapterModelView, M
     }
 
     /**
-     * Set the view item from an AdapterView - e.g. when used in a ListView.
-     * @param position The items's position in the adapter.
-     * @param isFirst Is it the first position in the adapter.
-     * @param isLast Is it the last position in the adapter.
-     * @param item The item for the given position in the adapter.
+     * Set viewModel.
+     * If the viewModel implements AdapterModel, and this view is being shown in an AdapterView, then this is a good place to modify
+     * views based on the model position, is isFirst, and isLast. For example, alternate row views so every other row looks different,
+     * display the first row as a header, and display last row as a footer.
+     * @param viewModel The viewModel
      */
     @Override
-    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewModel item) {
-        //TODO handle case where isFirst, isLast. Typically, this allows the item to display as a header or footer.
-        setViewItem(item);
-    }
-
-    @Override
-    public void setViewItem(final ViewModel item) {
+    public void setViewModel(final ViewModel viewModel) {
         //Set attrs specific to a View
-        ViewUtils.setBackgroundColor(this, item);
+        ViewUtils.setBackgroundColor(this, viewModel);
 
-        if (item instanceof ImageViewModel) {
+        if (viewModel instanceof ImageViewModel) {
             //Set the attrs specific to ImageView
-            ViewUtils.setImageResourceId(this, (ImageViewModel) item);
+            ViewUtils.setImageResourceId(this, (ImageViewModel) viewModel);
         }
     }
 }

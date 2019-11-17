@@ -20,5 +20,5 @@ import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
 public interface ModelView {
 
-    <E extends ViewModel> void setViewItem(E item);
+    <E extends ViewModel> void setViewModel(E viewModel);
 }

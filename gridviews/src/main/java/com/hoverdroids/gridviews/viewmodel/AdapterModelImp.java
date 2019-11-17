@@ -19,7 +19,7 @@ package com.hoverdroids.gridviews.viewmodel;
 /** Implementation of a AdapterModel. */
 public class AdapterModelImp implements AdapterModel
 {
-    /** The item id used by adapters in getItemById (optional). */
+    /** The model id used by adapters in getModelById (optional). */
     private int id = INVALID_RESOURCE_ID;
 
     /** The layout resource ID to inflate to visualize this model. */
@@ -28,8 +28,17 @@ public class AdapterModelImp implements AdapterModel
     /** The view class name can be used to instantiate a new view instead of layoutResourceId (e.g. com.android.view.TextView) */
     private String viewClass;
 
-    /** The item name. Can be anything. Not used by the adapter. */
+    /** The model name. Can be anything. Not used by the adapter. */
     private String name;
+
+    /** True if the model is the first model in the Adapter. */
+    private boolean isFirst;
+
+    /** True if the model is the last model in the Adapter. */
+    private boolean isLast;
+
+    /** The position of the model in the Adapter. */
+    private int position;
 
     /**
      * Constructor - use when inflating view from XML.
@@ -123,5 +132,59 @@ public class AdapterModelImp implements AdapterModel
     public String getItemName()
     {
         return name;
+    }
+
+    /**
+     * Determine if model the is first position in the Adapter.
+     * @return True if first. False otherwise
+     */
+    @Override
+    public boolean isFirst() {
+        return isFirst;
+    }
+
+    /**
+     * Set if model is the first position in the Adapter.
+     * @param isFirst True if first. False otherwise
+     */
+    @Override
+    public void setIsFirst(boolean isFirst) {
+        this.isFirst = isFirst;
+    }
+
+    /**
+     * Determine if model is the last position in the Adapter.
+     * @return True if last. False otherwise.
+     */
+    @Override
+    public boolean isLast() {
+        return isLast;
+    }
+
+    /**
+     * Set if model is the last position in the Adapter.
+     * @param isLast True if last. False otherwise.
+     */
+    @Override
+    public void setIsLast(boolean isLast) {
+        this.isLast = isLast;
+    }
+
+    /**
+     * Get the position of the model in the Adapter.
+     * @return The position
+     */
+    @Override
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * Set the position of the model in the Adapter.
+     * @param position The position
+     */
+    @Override
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

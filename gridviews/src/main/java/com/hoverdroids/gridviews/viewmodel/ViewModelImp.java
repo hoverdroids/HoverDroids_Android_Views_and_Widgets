@@ -23,9 +23,9 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
     private int color = Integer.MIN_VALUE;
 
     /**
-     * Constructor. Use this when the item's view is the top-level parent.
+     * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this viewModel
      */
     public ViewModelImp(final int layoutResourceId, final int id) {
         super(layoutResourceId);
@@ -33,9 +33,9 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
     }
 
     /**
-     * Constructor. Use this when the item's view is the top-level parent.
+     * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param viewClass The view class
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this viewModel
      */
     public ViewModelImp(final String viewClass, final int id) {
         super(viewClass);
@@ -43,8 +43,8 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
     }
 
     /**
-     * Constructor. Use this when the item's view is a child since only the top-level parent's layoutResId is used.
-     * @param id The view ID corresponding to this item
+     * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
+     * @param id The view ID corresponding to this viewModel
      */
     public ViewModelImp(final int id) {
         super(-1);
@@ -52,7 +52,7 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
     }
 
     /**
-     * Get the view ID corresponding to this item.
+     * Get the view ID corresponding to this viewModel.
      * @return The ID
      */
     @Override
@@ -61,7 +61,7 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
     }
 
     /**
-     * Set the view ID corresponding to this item.
+     * Set the view ID corresponding to this viewModel.
      * @param id The ID
      */
     @Override

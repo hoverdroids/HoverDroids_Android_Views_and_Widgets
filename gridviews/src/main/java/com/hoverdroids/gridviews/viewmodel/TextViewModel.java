@@ -29,7 +29,7 @@ public interface TextViewModel extends ViewModel
      * Set the text.
      * @param text The text
      */
-    void setText(String text);
+    void setText(final String text);
 
     /**
      * Get the text color.
@@ -43,5 +43,5 @@ public interface TextViewModel extends ViewModel
      * Set the text color.
      * @param color The color
      */
-    void setTextColor(int color);
+    void setTextColor(final int color);
 }

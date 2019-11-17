@@ -20,7 +20,7 @@ package com.hoverdroids.gridviews.viewmodel;
 public interface AdapterModel
 {
     /** The following is an invalid resource ID. Use it when the value is not set. */
-    public static int INVALID_RESOURCE_ID = 0;
+    int INVALID_RESOURCE_ID = 0;
 
     /**
      *  The layout Id of the layout to inflate.
@@ -69,4 +69,40 @@ public interface AdapterModel
      * @return The item name.
      */
     String getItemName();
+
+    /**
+     * Determine if model the is first position in the Adapter.
+     * @return True if first. False otherwise
+     */
+    boolean isFirst();
+
+    /**
+     * Set if model is the first position in the Adapter.
+     * @param isFirst True if first. False otherwise
+     */
+    void setIsFirst(final boolean isFirst);
+
+    /**
+     * Determine if model is the last position in the Adapter.
+     * @return True if last. False otherwise.
+     */
+    boolean isLast();
+
+    /**
+     * Set if model is the last position in the Adapter.
+     * @param isLast True if last. False otherwise.
+     */
+    void setIsLast(final boolean isLast);
+
+    /**
+     * Get the position of the model in the Adapter.
+     * @return The position
+     */
+    int getPosition();
+
+    /**
+     * Set the position of the model in the Adapter.
+     * @param position The position
+     */
+    void setPosition(final int position);
 }

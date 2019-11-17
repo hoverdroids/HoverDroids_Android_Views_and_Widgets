@@ -25,87 +25,75 @@ public interface AdapterViewModel extends AdapterModel
 {
     /**
      * Gets items.
-     *
      * @return the items
      */
     List<AdapterModel> getItems();
 
     /**
      * Sets items.
-     *
      * @param items the items
      */
-    void setItems(List<AdapterModel> items);
+    void setItems(final List<AdapterModel> items);
 
     /**
      * Gets on scroll listener.
-     *
      * @return the on scroll listener
      */
     OnScrollListener getOnScrollListener();
 
     /**
      * Sets on scroll listener.
-     *
      * @param onScrollListener the on scroll listener
      */
-    void setOnScrollListener(OnScrollListener onScrollListener);
+    void setOnScrollListener(final OnScrollListener onScrollListener);
 
     /**
      * Is fling enabled boolean.
-     *
      * @return the boolean
      */
     boolean isFlingEnabled();
 
     /**
      * Sets fling enabled.
-     *
      * @param enabled the enabled
      */
-    void setFlingEnabled(boolean enabled);
+    void setFlingEnabled(final boolean enabled);
 
     /**
      * Is enabled boolean.
-     *
      * @return the boolean
      */
     boolean isEnabled();
 
     /**
      * Sets enabled.
-     *
      * @param isEnabled the is enabled
      */
-    void setEnabled(boolean isEnabled);
+    void setEnabled(final boolean isEnabled);
 
     /**
      * Gets current scroll distance x.
-     *
      * @return the current scroll distance x
      */
     int getCurrentScrollDistanceX();
 
     /**
      * Sets current scroll distance x.
-     *
      * @param distance the distance
      */
-    void setCurrentScrollDistanceX(int distance);
+    void setCurrentScrollDistanceX(final int distance);
 
     /**
      * Gets current scroll distance y.
-     *
      * @return the current scroll distance y
      */
     int getCurrentScrollDistanceY();
 
     /**
      * Sets current scroll distance y.
-     *
      * @param distance the distance
      */
-    void setCurrentScrollDistanceY(int distance);
+    void setCurrentScrollDistanceY(final int distance);
 
     //TODO disableScroll(boolean)
 }

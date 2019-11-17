@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.hoverdroids.gridviews.modelview.AdapterModelView;
 import com.hoverdroids.gridviews.modelview.ModelView;
 import com.hoverdroids.gridviews.util.ViewUtils;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
@@ -40,7 +39,7 @@ public class ViewModelAdapter extends BaseAdapter
     private List<Integer> layouts = new ArrayList<Integer>();
     private LayoutInflater inflater;
 
-    public ViewModelAdapter(Context context, List<AdapterModel> items){
+    public ViewModelAdapter(final Context context, final List<AdapterModel> items){
         super();
         this.context = context;
         this.items = items;
@@ -97,7 +96,13 @@ public class ViewModelAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        final boolean isLast = position == items.size() - 1;
+        final boolean isFirst = position == 0;
+
         final AdapterModel item = getItem(position);
+        item.setPosition(position);
+        item.setIsFirst(isFirst);
+        item.setIsLast(isLast);
 
         if (convertView == null && item.getLayoutResourceId() != INVALID_RESOURCE_ID) {
             convertView = inflater.inflate(item.getLayoutResourceId(), parent, false);
@@ -106,14 +111,8 @@ public class ViewModelAdapter extends BaseAdapter
             convertView = ViewUtils.instantiateView(context, item.getViewClass());
         }
 
-        final boolean isLast = position == items.size() - 1;
-        final boolean isFirst = position == 0;
-
-        if (convertView instanceof AdapterModelView && item instanceof ViewModel) {
-            ((AdapterModelView)convertView).updateViews(position, isFirst, isLast, (ViewModel)item);
-
-        } else if (convertView instanceof ModelView && item instanceof ViewModel) {
-            ((ModelView)convertView).setViewItem((ViewModel)item);
+        if (convertView instanceof ModelView && item instanceof ViewModel) {
+            ((ModelView)convertView).setViewModel((ViewModel)item);
         }
 
         return convertView;
@@ -171,11 +170,11 @@ public class ViewModelAdapter extends BaseAdapter
  * This is a broadly usable adapter that expands the functionality of ArrayAdapter while simultaneously generalizing
  * getView so that developers can focus less on creating adapters and more on the models and views.
  *
- * To take advantage of the full functionality of this adapter, use items that implement AdapterModel. Items can be used
+ * To take advantage of the full functionality of this adapter, use models that implement AdapterModel. Models can be used
  * that do not implement AdapterModel; this limits the adapter to a single view type which is instantiated using the
  * resource layout ID passed into the constructor or via setLayoutResourceID.
  *
- * One caveat: Tags should not be set on the outer-most container view of each item. Setting tags for any
+ * One caveat: Tags should not be set on the outer-most container view of each model. Setting tags for any
  * child View or ViewGroup within the outer-most container view is fine.
  *
  * @param <T> the type parameter
@@ -183,7 +182,7 @@ public class ViewModelAdapter extends BaseAdapter
 @SuppressWarnings("PMD")
 public class ViewModelAdapter<T> extends BaseAdapter
 {
-    *//** Indicator for unknown item id - because item is not a AdapterModel. *//*
+    *//** Indicator for unknown model id - because item is not a AdapterModel. *//*
     public static final int UNKNOWN_ITEM_ID = 0;
 
     *//** The context. *//*

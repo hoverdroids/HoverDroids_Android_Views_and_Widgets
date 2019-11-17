@@ -27,7 +27,10 @@ import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
 import com.hoverdroids.gridviews.view.SyncListView;
 import com.hoverdroids.gridviews.view.ViewModelAdapter;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
+import com.hoverdroids.gridviews.viewmodel.AdapterViewModel;
+import com.hoverdroids.gridviews.viewmodel.AdapterViewModelImp;
 import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
+import com.hoverdroids.gridviews.viewmodel.ViewModel;
 import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
 
 import java.util.ArrayList;
@@ -37,46 +40,43 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SynchronizedGridViewsDemo extends AppCompatActivity implements OnSyncTouchEventListener
+public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity implements OnSyncTouchEventListener
 {
-    @BindView(R.id.topGridView)
-    SyncListView topGridView;
+    @BindView(R.id.listView)
+    SyncListView listView;
 
-    @BindView(R.id.centerGridView)
-    SyncListView centerGridView;
-
-    @BindView(R.id.bottomGridView)
-    SyncListView bottomGridView;
-
-    private ViewModelAdapter topAdapter;
-    private ViewModelAdapter centerAdapter;
-    private ViewModelAdapter bottomAdapter;
+    private ViewModelAdapter listViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.synchronized_gridviews);
-        
+        setContentView(R.layout.synchronized_gridviews_in_listview);
+
         ButterKnife.bind(this);
-        
-        topAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
-        topGridView.setAdapter(topAdapter);
-        topGridView.setOnSyncTouchEventListener(this);
 
-        centerAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
-        centerGridView.setAdapter(centerAdapter);
-        centerGridView.setOnSyncTouchEventListener(this);
-
-        bottomAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
-        bottomGridView.setAdapter(bottomAdapter);
-        bottomGridView.setOnSyncTouchEventListener(this);
+        listViewAdapter = new ViewModelAdapter(getApplicationContext(), getGridViewItems());
+        listView.setAdapter(listViewAdapter);
+        listView.setOnSyncTouchEventListener(this);
     }
 
     @Override
     public void onSyncTouchEvent(View sourceView, MotionEvent ev) {
-        topGridView.onTouchEvent(sourceView, ev);
-        centerGridView.onTouchEvent(sourceView, ev);
-        bottomGridView.onTouchEvent(sourceView, ev);
+        //TODO
+    }
+
+    private List<AdapterModel> getGridViewItems() {
+        final List<AdapterModel> gridViewItems = new ArrayList<>();
+
+        /*for (int i = 0; i < 30; i++) {
+            final List<AdapterModel> gridViewChildrenItems = new ArrayList<>();
+
+            final AdapterViewModel item = new AdapterViewModelImp(gridViewChildrenItems, );
+
+
+            gridViewItems.add(item);
+        }*/
+
+        return gridViewItems;
     }
 
     /**

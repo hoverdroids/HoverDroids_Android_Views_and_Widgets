@@ -29,11 +29,11 @@ import com.hoverdroids.gridviews.viewmodel.ViewModel;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LinearLayout extends android.widget.LinearLayout implements AdapterModelView, ModelView
+public class LinearLayout extends android.widget.LinearLayout implements ModelView
 {
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
-    private ViewModel item;
+    private ViewModel viewModel;
 
     public LinearLayout(final @NonNull Context context) {
         super(context);
@@ -68,35 +68,25 @@ public class LinearLayout extends android.widget.LinearLayout implements Adapter
     }
 
     protected void initViews() {
-        /** Map all views with IDs for quicker reference - especially in AdapterViews. */
+        //Map all views with IDs for quicker reference - especially in AdapterViews.
         viewIds = ViewUtils.getViewIdMapping(this);
     }
 
     /**
-     * Set the view item from an AdapterView - e.g. when used in a ListView.
-     * @param position The items's position in the adapter.
-     * @param isFirst Is it the first position in the adapter.
-     * @param isLast Is it the last position in the adapter.
-     * @param item The item for the given position in the adapter.
+     * Set viewModel.
+     * If the viewModel implements AdapterModel, and this view is being shown in an AdapterView, then this is a good place to modify
+     * views based on the model position, is isFirst, and isLast. For example, alternate row views so every other row looks different,
+     * display the first row as a header, and display last row as a footer.
+     * @param viewModel The viewModel
      */
     @Override
-    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewModel item) {
-        //TODO handle case where isFirst, isLast. Typically, this allows the item to display as a header or footer.
-        setViewItem(item);
-    }
-
-    /**
-     * Set viewItem.
-     * @param item The view item
-     */
-    @Override
-    public void setViewItem(ViewModel item) {
-        this.item = item;
+    public void setViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
 
         //Update own attrs
-        ViewUtils.setBackgroundColor(this, item);
+        ViewUtils.setBackgroundColor(this, viewModel);
 
         //Update child attrs
-        ViewUtils.setChildrenViewItems(viewIds, item);
+        ViewUtils.setChildrenViewModels(viewIds, viewModel);
     }
 }

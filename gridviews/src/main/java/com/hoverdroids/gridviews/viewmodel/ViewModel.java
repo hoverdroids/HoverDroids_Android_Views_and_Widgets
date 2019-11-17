@@ -20,13 +20,13 @@ package com.hoverdroids.gridviews.viewmodel;
 public interface ViewModel {
 
     /**
-     * Get the ID for the view that corresponds to this item.
+     * Get the ID for the view that corresponds to this viewModel.
      * @return The ID
      */
     int getViewId();
 
     /**
-     * Set the ID for the view that corresponds to this item.
+     * Set the ID for the view that corresponds to this viewModel.
      * @param id The ID
      */
     void setViewId(int id);

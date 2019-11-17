@@ -17,47 +17,90 @@
 package com.hoverdroids.gridviews.viewmodel;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /** Implementation of ViewGroupModel. */
 public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
 
-    private Map<Integer, ViewModel> viewItems = new HashMap<>();
+    private Map<Integer, ViewModel> viewModels = new HashMap<>();
 
     /**
      * Constructor.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this model
      */
-    public ViewGroupModelImp(int layoutResourceId, int id) {
+    public ViewGroupModelImp(final int layoutResourceId, final int id) {
         super(layoutResourceId, id);
     }
 
     /**
-     * Get the viewItem for the view with the given ID.
+     * Get the viewModel for the view with the given ID.
      * @param id The view's ID
-     * @return
+     * @return The viewModel
      */
     @Override
-    public ViewModel getChildViewItem(int id) {
-        return viewItems.get(id);
+    public ViewModel getChildViewModel(final int id) {
+        return viewModels.get(id);
     }
 
     /**
-     * Get all of the viewItems.
-     * @return The child viewItems
+     * Get all of the viewModels.
+     * @return The child viewModels
      */
     @Override
-    public Map<Integer, ViewModel> getChildViewItems() {
-        return viewItems;
+    public Map<Integer, ViewModel> getChildViewModels() {
+        return viewModels;
     }
 
     /**
-     * Set all of teh viewItems
-     * @param items The child view items.
+     * Set all of the viewModels
+     * @param viewModels The child view models.
      */
     @Override
-    public void setChildViewItems(Map<Integer, ViewModel> items) {
-        viewItems = items;
+    public void setChildViewModels(final Map<Integer, ViewModel> viewModels) {
+        this.viewModels = viewModels;
+    }
+
+    @Override
+    public void setIsFirst(boolean isFirst) {
+        super.setIsFirst(isFirst);
+
+        //The children views might also want to know their relative placement in an adapter. If so, they need to implement AdapterModel too.
+        final Iterator it = viewModels.keySet().iterator();
+        while (it.hasNext()) {
+            final ViewModel viewModel = viewModels.get(it.next());
+            if (viewModel instanceof AdapterModel) {
+                ((AdapterModel)viewModel).setIsFirst(isFirst);
+            }
+        }
+    }
+
+    @Override
+    public void setIsLast(boolean isLast) {
+        super.setIsLast(isLast);
+
+        //The children views might also want to know their relative placement in an adapter. If so, they need to implement AdapterModel too.
+        final Iterator it = viewModels.keySet().iterator();
+        while (it.hasNext()) {
+            final ViewModel viewModel = viewModels.get(it.next());
+            if (viewModel instanceof AdapterModel) {
+                ((AdapterModel)viewModel).setIsLast(isLast);
+            }
+        }
+    }
+
+    @Override
+    public void setPosition(int position) {
+        super.setPosition(position);
+
+        //The children views might also want to know their relative placement in an adapter. If so, they need to implement AdapterModel too.
+        final Iterator it = viewModels.keySet().iterator();
+        while (it.hasNext()) {
+            final ViewModel viewModel = viewModels.get(it.next());
+            if (viewModel instanceof AdapterModel) {
+                ((AdapterModel)viewModel).setPosition(position);
+            }
+        }
     }
 }

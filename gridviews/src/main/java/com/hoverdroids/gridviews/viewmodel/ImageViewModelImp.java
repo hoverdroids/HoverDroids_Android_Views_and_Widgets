@@ -22,9 +22,9 @@ public class ImageViewModelImp extends ViewModelImp implements ImageViewModel {
     private int imageResourceId = Integer.MIN_VALUE;
 
     /**
-     * Constructor. Use this when the item's view is the top-level parent.
+     * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this item
+     * @param id The view ID corresponding to this viewModel
      * @param imageResourceId The image resource ID
      */
     public ImageViewModelImp(final int layoutResourceId, final int id, final int imageResourceId) {
@@ -33,8 +33,8 @@ public class ImageViewModelImp extends ViewModelImp implements ImageViewModel {
     }
 
     /**
-     * Constructor. Use this when the item's view is a child since only the top-level parent's layoutResId is used.
-     * @param id The view ID corresponding to this item
+     * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
+     * @param id The view ID corresponding to this viewModel
      * @param imageResourceId The image resource ID
      */
     public ImageViewModelImp(final int id, final int imageResourceId) {

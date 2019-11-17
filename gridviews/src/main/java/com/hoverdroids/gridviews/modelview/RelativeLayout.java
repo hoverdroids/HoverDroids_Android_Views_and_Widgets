@@ -29,29 +29,29 @@ import com.hoverdroids.gridviews.viewmodel.ViewModel;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FrameLayout extends android.widget.FrameLayout implements ModelView {
+public class RelativeLayout extends android.widget.RelativeLayout implements ModelView {
 
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
     private ViewModel viewModel;
 
-    public FrameLayout(final @NonNull Context context) {
+    public RelativeLayout(final @NonNull Context context) {
         super(context);
         init();
         initViews();
     }
 
-    public FrameLayout(final @NonNull Context context, final @Nullable AttributeSet attrs) {
+    public RelativeLayout(final @NonNull Context context, final @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public FrameLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr) {
+    public RelativeLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    public FrameLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
+    public RelativeLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }

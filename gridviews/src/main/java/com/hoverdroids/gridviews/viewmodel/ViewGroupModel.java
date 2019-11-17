@@ -21,36 +21,36 @@ import java.util.Map;
 /**
  * Model for updating a ViewGroup.
  * View and ViewGroup are analogous to ViewModel and ViewGroupModel.
- * This is more straight forward since the group simply maps child IDs to the child view's ViewItem.
+ * This is more straight forward since the group simply maps child IDs to the child view's ViewModel.
  */
 public interface ViewGroupModel extends ViewModel {
 
     /**
-     * Get the child viewItem by its view ID.
+     * Get the child viewModel by its view ID.
      * @param id The view's ID
-     * @return The view's viewItem
+     * @return The view's viewModel
      */
-    default ViewModel getChildViewItem(int id) {
-        return getChildViewItems() == null ? null : getChildViewItems().get(id);
+    default ViewModel getChildViewModel(final int id) {
+        return getChildViewModels() == null ? null : getChildViewModels().get(id);
     }
 
     /**
-     * Set the child viewItem by its view ID. The viewId is not required as it's already included in the viewItem.
-     * @param item The view's viewItem
+     * Set the child viewModel by its view ID. The viewId is not required as it's already included in the viewModel.
+     * @param viewModel The view's viewModel
      */
-    default void setChildViewItem(ViewModel item) {
-        getChildViewItems().put(item.getViewId(), item);
+    default void setChildViewModel(final ViewModel viewModel) {
+        getChildViewModels().put(viewModel.getViewId(), viewModel);
     }
 
     /**
-     * Get all of the child view items.
-     * @return The child view items.
+     * Get all of the child view models.
+     * @return The child view models.
      */
-    Map<Integer, ViewModel> getChildViewItems();
+    Map<Integer, ViewModel> getChildViewModels();
 
     /**
-     * Set all of teh child view items.
-     * @param items The child view items.
+     * Set all of teh child view models.
+     * @param viewModels The child view models.
      */
-    void setChildViewItems(Map<Integer, ViewModel> items);
+    void setChildViewModels(final Map<Integer, ViewModel> viewModels);
 }

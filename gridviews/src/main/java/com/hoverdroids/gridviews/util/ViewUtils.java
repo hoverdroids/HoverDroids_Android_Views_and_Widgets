@@ -88,74 +88,74 @@ public class ViewUtils {
     }
 
     /**
-     * Set the viewItems for the children.
-     * @param viewIds The mapping of children IDs to the children views
-     * @param item The item containing the mapping of children IDs to the children ViewItems
+     * Set the children view models by extracting them from the parentViewModel using the child's viewId.
+     * @param childViewIds The mapping of children IDs to the children views
+     * @param parentViewModel The viewModel containing the mapping of children IDs to the children ViewModels
      */
-    public static void setChildrenViewItems(final Map<Integer, View> viewIds, final ViewModel item) {
+    public static void setChildrenViewModels(final Map<Integer, View> childViewIds, final ViewModel parentViewModel) {
         //Nothing to do since no child attr info is available
-        if (!(item instanceof ViewGroupModel)) {
+        if (!(parentViewModel instanceof ViewGroupModel)) {
             return;
         }
 
-        final ViewGroupModel vgItem = (ViewGroupModel) item;
-        final Iterator<Integer> it = viewIds.keySet().iterator();
+        final ViewGroupModel viewGroupModel = (ViewGroupModel) parentViewModel;
+        final Iterator<Integer> it = childViewIds.keySet().iterator();
         while (it.hasNext()) {
             final Integer id = it.next();
-            final View view = viewIds.get(id);
+            final View view = childViewIds.get(id);
 
-            final ViewModel childViewModel = vgItem.getChildViewItem(id);
+            final ViewModel childViewModel = viewGroupModel.getChildViewModel(id);
 
-            //There is no requirement for each child with an ID to have a corresponding viewItem. Indeed, it's more unlikely than likely.
+            //There is no requirement for each child with an ID to have a corresponding viewModel. Indeed, it's more unlikely than likely.
             if (view instanceof ModelView) {
-                ((ModelView)view).setViewItem(childViewModel);
+                ((ModelView)view).setViewModel(childViewModel);
             }
         }
     }
 
     /**
-     * Set the view's background color if it was specified in the viewItem. Otherwise, don't override.
+     * Set the view's background color if it was specified in the viewModel. Otherwise, don't override.
      * @param view The view
-     * @param item The viewItem
+     * @param viewModel The viewModel
      */
-    public static void setBackgroundColor(final View view, final ViewModel item) {
-        final int color = item.getBackgroundColor();
+    public static void setBackgroundColor(final View view, final ViewModel viewModel) {
+        final int color = viewModel.getBackgroundColor();
         if (color != Integer.MIN_VALUE) {
             view.setBackgroundColor(color);
         }
     }
 
     /**
-     * Set the TextView's text if it was specified in the tvItem. Otherwise, don't override.
+     * Set the TextView's text if it was specified in the textViewModel. Otherwise, don't override.
      * @param view The TextView
-     * @param item The TextViewModel
+     * @param textViewModel The TextViewModel
      */
-    public static void setText(final TextView view, final TextViewModel item) {
-        final String text = item.getText();
+    public static void setText(final TextView view, final TextViewModel textViewModel) {
+        final String text = textViewModel.getText();
         if (text != null) {
             view.setText(text);
         }
     }
 
     /**
-     * Set the TextView's text if it was specified in the tvItem. Otherwise, don't override.
+     * Set the TextView's text if it was specified in the textViewModel. Otherwise, don't override.
      * @param view The TextView
-     * @param item The TextViewModel
+     * @param textViewModel The TextViewModel
      */
-    public static void setTextColor(final TextView view, final TextViewModel item) {
-        final int color = item.getTextColor();
+    public static void setTextColor(final TextView view, final TextViewModel textViewModel) {
+        final int color = textViewModel.getTextColor();
         if (color != Integer.MIN_VALUE) {
             view.setTextColor(color);
         }
     }
 
     /**
-     * Set teh ImageView's image via a resource ID if it was specified in teh ivItem. Otherwise, don't override.
+     * Set teh ImageView's image via a resource ID if it was specified in teh imageViewModel. Otherwise, don't override.
      * @param view The ImageView
-     * @param item The ImageViewModel
+     * @param imageViewModel The ImageViewModel
      */
-    public static void setImageResourceId(final ImageView view, final ImageViewModel item) {
-        final int resId = item.getImageResourceId();
+    public static void setImageResourceId(final ImageView view, final ImageViewModel imageViewModel) {
+        final int resId = imageViewModel.getImageResourceId();
         if (resId != Integer.MIN_VALUE) {
             view.setImageResource(resId);
         }
