@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ViewGroupItemImp extends ViewItemImp implements ViewGroupItem {
+/** Implementation of ViewGroupModel. */
+public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
 
-    private Map<Integer, ViewItem> viewItems = new HashMap<>();
+    private Map<Integer, ViewModel> viewItems = new HashMap<>();
 
     /**
      * Constructor.
      * @param layoutResourceId The layout resource ID
      * @param id The view ID corresponding to this item
      */
-    public ViewGroupItemImp(int layoutResourceId, int id) {
+    public ViewGroupModelImp(int layoutResourceId, int id) {
         super(layoutResourceId, id);
     }
 
@@ -38,7 +39,7 @@ public class ViewGroupItemImp extends ViewItemImp implements ViewGroupItem {
      * @return
      */
     @Override
-    public ViewItem getChildViewItem(int id) {
+    public ViewModel getChildViewItem(int id) {
         return viewItems.get(id);
     }
 
@@ -47,7 +48,7 @@ public class ViewGroupItemImp extends ViewItemImp implements ViewGroupItem {
      * @return The child viewItems
      */
     @Override
-    public Map<Integer, ViewItem> getChildViewItems() {
+    public Map<Integer, ViewModel> getChildViewItems() {
         return viewItems;
     }
 
@@ -56,7 +57,7 @@ public class ViewGroupItemImp extends ViewItemImp implements ViewGroupItem {
      * @param items The child view items.
      */
     @Override
-    public void setChildViewItems(Map<Integer, ViewItem> items) {
+    public void setChildViewItems(Map<Integer, ViewModel> items) {
         viewItems = items;
     }
 }

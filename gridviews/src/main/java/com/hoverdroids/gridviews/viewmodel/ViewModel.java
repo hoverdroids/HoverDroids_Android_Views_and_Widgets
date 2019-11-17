@@ -14,33 +14,34 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
-public interface TextViewItem extends ViewItem
-{
-    /**
-     * Get the text.
-     * @return The text
-     */
-    String getText();
+/** Model for updating a View. */
+public interface ViewModel {
 
     /**
-     * Set the text.
-     * @param text The text
+     * Get the ID for the view that corresponds to this item.
+     * @return The ID
      */
-    void setText(String text);
+    int getViewId();
 
     /**
-     * Get the text color.
-     * @return The text color
+     * Set the ID for the view that corresponds to this item.
+     * @param id The ID
      */
-    default int getTextColor(){
+    void setViewId(int id);
+
+    /**
+     * Get the background color.
+     * @return The color
+     */
+    default int getBackgroundColor(){
         return Integer.MIN_VALUE;
     }
 
     /**
-     * Set the text color.
+     * Set the background color.
      * @param color The color
      */
-    void setTextColor(int color);
+    void setBackgroundColor(int color);
 }

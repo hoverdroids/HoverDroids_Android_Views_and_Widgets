@@ -14,7 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<com.hoverdroids.gridviews.itemview.LinearLayout
+<com.hoverdroids.gridviews.modelview.LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -22,12 +22,12 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <com.hoverdroids.gridviews.itemview.ImageView
+    <com.hoverdroids.gridviews.modelview.ImageView
         android:id="@+id/image_view_1"
         android:layout_width="50dp"
         android:layout_height="50dp" />
 
-    <com.hoverdroids.gridviews.itemview.TextView
+    <com.hoverdroids.gridviews.modelview.TextView
         android:id="@+id/text_view_1"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -35,4 +35,4 @@
         android:text="Mama"
         android:textColor="@color/cardview_light_background"/>
 
-</com.hoverdroids.gridviews.itemview.LinearLayout>
+</com.hoverdroids.gridviews.modelview.LinearLayout>

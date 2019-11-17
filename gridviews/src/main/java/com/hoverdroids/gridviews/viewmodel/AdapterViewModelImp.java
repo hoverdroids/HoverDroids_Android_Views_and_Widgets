@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
-import com.hoverdroids.gridviews.viewgroup.TwoWayAbsListView.OnScrollListener;
+import com.hoverdroids.gridviews.view.TwoWayAbsListView.OnScrollListener;
 
 import java.util.List;
 
-/** A generic model for for use in the GenericAdapter, with data for an TwoWayAdapterView.*/
-public class GenericAdapterItemImp extends GenericItemImp implements GenericAdapterItem
+/** Implementation of AdapterViewModel.*/
+public class AdapterViewModelImp extends ViewModelImp implements AdapterViewModel
 {
     /** The list of items to display. */
-    private List<GenericItem> items;
+    private List<AdapterModel> items;
 
     /** Handler for scroll events.*/
     private OnScrollListener onScrollListener;
@@ -47,8 +47,8 @@ public class GenericAdapterItemImp extends GenericItemImp implements GenericAdap
      * @param layoutResourceId The layout.xml used for inflating the TwoWayAdapterView.
      * @param onScrollListener A scroll listener for the TwoWayAdapterView.
      */
-    public GenericAdapterItemImp(final List<GenericItem> items, final int layoutResourceId,
-                                 final OnScrollListener onScrollListener)
+    public AdapterViewModelImp(final List<AdapterModel> items, final int layoutResourceId,
+                               final OnScrollListener onScrollListener)
     {
         this(items, layoutResourceId);
         this.onScrollListener = onScrollListener;
@@ -59,7 +59,7 @@ public class GenericAdapterItemImp extends GenericItemImp implements GenericAdap
      * @param items Items used to populate a TwoWayAdapterView.
      * @param layoutResourceId The layout.xml used for inflating the TwoWayAdapterView.
      */
-    public GenericAdapterItemImp(final List<GenericItem> items, final int layoutResourceId)
+    public AdapterViewModelImp(final List<AdapterModel> items, final int layoutResourceId)
     {
         super(layoutResourceId);
         this.items = items;
@@ -70,7 +70,7 @@ public class GenericAdapterItemImp extends GenericItemImp implements GenericAdap
      * @return The items.
      */
     @Override
-    public List<GenericItem> getItems()
+    public List<AdapterModel> getItems()
     {
         return items;
     }
@@ -80,7 +80,7 @@ public class GenericAdapterItemImp extends GenericItemImp implements GenericAdap
      * @param items A list of items.
      */
     @Override
-    public void setItems(final List<GenericItem> items)
+    public void setItems(final List<AdapterModel> items)
     {
         this.items = items;
     }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewgroup;
+package com.hoverdroids.gridviews.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,25 +22,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.hoverdroids.gridviews.itemview.AdapterItemView;
-import com.hoverdroids.gridviews.itemview.ItemView;
+import com.hoverdroids.gridviews.modelview.AdapterModelView;
+import com.hoverdroids.gridviews.modelview.ModelView;
 import com.hoverdroids.gridviews.util.ViewUtils;
-import com.hoverdroids.gridviews.viewitem.GenericItem;
-import com.hoverdroids.gridviews.viewitem.ViewItem;
+import com.hoverdroids.gridviews.viewmodel.AdapterModel;
+import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.hoverdroids.gridviews.viewitem.GenericItem.INVALID_RESOURCE_ID;
+import static com.hoverdroids.gridviews.viewmodel.AdapterModel.INVALID_RESOURCE_ID;
 
-public class GenericAdapter extends BaseAdapter
+public class ViewModelAdapter extends BaseAdapter
 {
     private Context context;
-    private List<GenericItem> items;
+    private List<AdapterModel> items;
     private List<Integer> layouts = new ArrayList<Integer>();
     private LayoutInflater inflater;
 
-    public GenericAdapter(Context context, List<GenericItem> items){
+    public ViewModelAdapter(Context context, List<AdapterModel> items){
         super();
         this.context = context;
         this.items = items;
@@ -60,7 +60,7 @@ public class GenericAdapter extends BaseAdapter
     }
 
     @Override
-    public GenericItem getItem(int position) {
+    public AdapterModel getItem(int position) {
         return items == null ? null : items.get(position);
     }
 
@@ -97,7 +97,7 @@ public class GenericAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final GenericItem item = getItem(position);
+        final AdapterModel item = getItem(position);
 
         if (convertView == null && item.getLayoutResourceId() != INVALID_RESOURCE_ID) {
             convertView = inflater.inflate(item.getLayoutResourceId(), parent, false);
@@ -109,11 +109,11 @@ public class GenericAdapter extends BaseAdapter
         final boolean isLast = position == items.size() - 1;
         final boolean isFirst = position == 0;
 
-        if (convertView instanceof AdapterItemView && item instanceof ViewItem) {
-            ((AdapterItemView)convertView).updateViews(position, isFirst, isLast, (ViewItem)item);
+        if (convertView instanceof AdapterModelView && item instanceof ViewModel) {
+            ((AdapterModelView)convertView).updateViews(position, isFirst, isLast, (ViewModel)item);
 
-        } else if (convertView instanceof ItemView && item instanceof ViewItem) {
-            ((ItemView)convertView).setViewItem((ViewItem)item);
+        } else if (convertView instanceof ModelView && item instanceof ViewModel) {
+            ((ModelView)convertView).setViewItem((ViewModel)item);
         }
 
         return convertView;
@@ -129,7 +129,7 @@ public class GenericAdapter extends BaseAdapter
         super.notifyDataSetChanged();
     }
 
-    public void setItems(List<GenericItem> items){
+    public void setItems(List<AdapterModel> items){
         this.items = items;
         notifyDataSetChanged();
     }
@@ -145,7 +145,7 @@ public class GenericAdapter extends BaseAdapter
         layouts.clear();//TODO CHRIS-make sure this doesn't break things
 
         //Add unique layoutIds
-        for (GenericItem item : items){
+        for (AdapterModel item : items){
             final int layoutId = item.getLayoutResourceId();
             if (!layouts.contains(layoutId)){
                 layouts.add(layoutId);
@@ -171,8 +171,8 @@ public class GenericAdapter extends BaseAdapter
  * This is a broadly usable adapter that expands the functionality of ArrayAdapter while simultaneously generalizing
  * getView so that developers can focus less on creating adapters and more on the models and views.
  *
- * To take advantage of the full functionality of this adapter, use items that implement GenericItem. Items can be used
- * that do not implement GenericItem; this limits the adapter to a single view type which is instantiated using the
+ * To take advantage of the full functionality of this adapter, use items that implement AdapterModel. Items can be used
+ * that do not implement AdapterModel; this limits the adapter to a single view type which is instantiated using the
  * resource layout ID passed into the constructor or via setLayoutResourceID.
  *
  * One caveat: Tags should not be set on the outer-most container view of each item. Setting tags for any
@@ -181,9 +181,9 @@ public class GenericAdapter extends BaseAdapter
  * @param <T> the type parameter
  *//*
 @SuppressWarnings("PMD")
-public class GenericAdapter<T> extends BaseAdapter
+public class ViewModelAdapter<T> extends BaseAdapter
 {
-    *//** Indicator for unknown item id - because item is not a GenericItem. *//*
+    *//** Indicator for unknown item id - because item is not a AdapterModel. *//*
     public static final int UNKNOWN_ITEM_ID = 0;
 
     *//** The context. *//*
@@ -198,7 +198,7 @@ public class GenericAdapter<T> extends BaseAdapter
      *
      * emptyItem.getResourceId() != 0 indicates the developer wants to show "List Is Empty" in place of empty list.
      *//*
-    private GenericItem emptyItem = new GenericItemImp(0);
+    private AdapterModel emptyItem = new AdapterModelImp(0);
 
     *//** The layout resource ids used by all of the views in the adapter view. *//*
     private List<Integer> layouts = new ArrayList<>();
@@ -222,28 +222,28 @@ public class GenericAdapter<T> extends BaseAdapter
     private final Object lock = new Object();
 
     *//**
-     * Constructor for a new GenericAdapter.
+     * Constructor for a new ViewModelAdapter.
      *
      * @param context The current context.
      * @param resource The resource ID for a layout file containing a TextView to use when
      *                 instantiating views.
      *//*
-    public GenericAdapter(@NonNull Context context, @LayoutRes int resource) {
+    public ViewModelAdapter(@NonNull Context context, @LayoutRes int resource) {
         this(context, new ArrayList<>(), resource, 0);
     }
 
-    public GenericAdapter(@NonNull Context context, @LayoutRes int resource, int emptyLayoutResourceId) {
+    public ViewModelAdapter(@NonNull Context context, @LayoutRes int resource, int emptyLayoutResourceId) {
         this(context, new ArrayList<>(), resource, emptyLayoutResourceId);
     }
 
     *//**
-     * Constructor for a new GenericAdapter.
+     * Constructor for a new ViewModelAdapter.
      *
      * @param context The context.
      * @param layoutResourceId The default layoutResourceId used to inflate child views.
      * @param items   The items.
      *//*
-    public GenericAdapter(@NonNull final Context context, @NonNull  final List<T> items, final int layoutResourceId,
+    public ViewModelAdapter(@NonNull final Context context, @NonNull  final List<T> items, final int layoutResourceId,
                           final int emptyLayoutResourceId)
     {
         this.context = context;
@@ -294,14 +294,14 @@ public class GenericAdapter<T> extends BaseAdapter
     }
 
     *//**
-     * Get the GenericItem at the given position.
+     * Get the AdapterModel at the given position.
      * @param position The position of the item.
-     * @return The item cast as GenericItem or null if not a GenericItem.
+     * @return The item cast as AdapterModel or null if not a AdapterModel.
      *//*
-    public GenericItem getGenericItem(final int position)
+    public AdapterModel getGenericItem(final int position)
     {
         final T item = getItem(position);
-        final GenericItem genItem = item instanceof GenericItem ? (GenericItem) item : null ;
+        final AdapterModel genItem = item instanceof AdapterModel ? (AdapterModel) item : null ;
         return items.isEmpty() && hasValidLayoutResourceId(emptyItem) ? emptyItem : genItem;
     }
 
@@ -313,7 +313,7 @@ public class GenericAdapter<T> extends BaseAdapter
     @Override
     public long getItemId(final int position)
     {
-        final GenericItem item = getGenericItem(position);
+        final AdapterModel item = getGenericItem(position);
         return item == null ? UNKNOWN_ITEM_ID : item.getItemId();
     }
 
@@ -327,8 +327,8 @@ public class GenericAdapter<T> extends BaseAdapter
     public int getItemViewType(final int position)
     {
         //Get the generic item. This accounts for the null item and empty item. It also accounts for the item not being
-        //a GenericItem - since in those cases the defaultLayoutResourceId is returned.
-        final GenericItem item = getGenericItem(position);
+        //a AdapterModel - since in those cases the defaultLayoutResourceId is returned.
+        final AdapterModel item = getGenericItem(position);
         final boolean useDefault = !hasValidLayoutResourceId(item);
         return useDefault ? 0 : layouts.indexOf(item.getLayoutResourceId());
     }
@@ -355,11 +355,11 @@ public class GenericAdapter<T> extends BaseAdapter
     public View getView(final int position, View convertView, final ViewGroup parent)
     {
 
-        //final GenericItem item = getItem(position);//TODO CHRIS - if not a genericItem, use resId; if genItem and the
+        //final AdapterModel item = getItem(position);//TODO CHRIS - if not a genericItem, use resId; if genItem and the
 
         // resId is not specified but the resId is globally specified, use the global
         //One of the problems here is that the item resId count will be wrong if we don't account for it
-        final AdapterItemView viewHolder;
+        final AdapterModelView viewHolder;
 
         if (convertView == null)
         {
@@ -373,7 +373,7 @@ public class GenericAdapter<T> extends BaseAdapter
         }
         else
         {
-            viewHolder = convertView.getTag() != null ? (AdapterItemView) convertView.getTag() : null;
+            viewHolder = convertView.getTag() != null ? (AdapterModelView) convertView.getTag() : null;
         }
 
         final boolean isLast = position == items.size() - 1;
@@ -389,15 +389,15 @@ public class GenericAdapter<T> extends BaseAdapter
 
     *//**
      * Override this to implement your own ViewHolder pattern. Otherwise, let's assume you're using one of the
-     * generic items from the library, all of which implement the AdapterItemView themselves.
+     * generic items from the library, all of which implement the AdapterModelView themselves.
      *
      * @param convertView The view.
      * @param position The position of the view.
      * @return The viewholder for the specified view.
      *//*
-    protected AdapterItemView getViewHolder(final View convertView, final int position)
+    protected AdapterModelView getViewHolder(final View convertView, final int position)
     {
-        return convertView instanceof AdapterItemView ? (AdapterItemView) convertView : null;
+        return convertView instanceof AdapterModelView ? (AdapterModelView) convertView : null;
     }
 
     *//**
@@ -457,9 +457,9 @@ public class GenericAdapter<T> extends BaseAdapter
         //Add unique layout IDs that are specified by the items.
         for (final T item : items)
         {
-            if (item instanceof GenericItem)
+            if (item instanceof AdapterModel)
             {
-                addLayoutResourceId(((GenericItem) item).getLayoutResourceId());
+                addLayoutResourceId(((AdapterModel) item).getLayoutResourceId());
             }
         }
 
@@ -535,7 +535,7 @@ public class GenericAdapter<T> extends BaseAdapter
         }
     }
 
-    private boolean hasValidLayoutResourceId(final GenericItem item)
+    private boolean hasValidLayoutResourceId(final AdapterModel item)
     {
         return item != null && item.getLayoutResourceId() < 0;
     }

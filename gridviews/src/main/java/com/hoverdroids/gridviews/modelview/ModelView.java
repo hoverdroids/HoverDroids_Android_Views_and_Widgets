@@ -14,33 +14,11 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.modelview;
 
-public interface ViewItem {
+import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
-    /**
-     * Get the ID for the view that corresponds to this item.
-     * @return The ID
-     */
-    int getViewId();
+public interface ModelView {
 
-    /**
-     * Set the ID for the view that corresponds to this item.
-     * @param id The ID
-     */
-    void setViewId(int id);
-
-    /**
-     * Get the background color.
-     * @return The color
-     */
-    default int getBackgroundColor(){
-        return Integer.MIN_VALUE;
-    }
-
-    /**
-     * Set the background color.
-     * @param color The color
-     */
-    void setBackgroundColor(int color);
+    <E extends ViewModel> void setViewItem(E item);
 }

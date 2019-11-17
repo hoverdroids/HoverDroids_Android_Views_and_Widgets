@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
-import com.hoverdroids.gridviews.viewgroup.TwoWayAbsListView.OnScrollListener;
+import com.hoverdroids.gridviews.view.TwoWayAbsListView.OnScrollListener;
 
 import java.util.List;
 
-/** Generic adapter item containing essential data for displaying an adapter view in an adapter view. */
-public interface GenericAdapterItem extends GenericItem
+/** Model for updating an AdapterView - e.g. TWGV, ListView, GridView, etc. */
+public interface AdapterViewModel extends AdapterModel
 {
     /**
      * Gets items.
      *
      * @return the items
      */
-    List<GenericItem> getItems();
+    List<AdapterModel> getItems();
 
     /**
      * Sets items.
      *
      * @param items the items
      */
-    void setItems(List<GenericItem> items);
+    void setItems(List<AdapterModel> items);
 
     /**
      * Gets on scroll listener.

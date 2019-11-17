@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.itemview;
+package com.hoverdroids.gridviews.modelview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -24,16 +24,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hoverdroids.gridviews.util.ViewUtils;
-import com.hoverdroids.gridviews.viewitem.ViewItem;
+import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FrameLayout extends android.widget.FrameLayout implements AdapterItemView, ItemView {
+public class FrameLayout extends android.widget.FrameLayout implements AdapterModelView, ModelView {
 
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
-    private ViewItem item;
+    private ViewModel item;
 
     public FrameLayout(final @NonNull Context context) {
         super(context);
@@ -80,7 +80,7 @@ public class FrameLayout extends android.widget.FrameLayout implements AdapterIt
      * @param item The item for the given position in the adapter.
      */
     @Override
-    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewItem item) {
+    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewModel item) {
         //TODO handle case where isFirst, isLast. Typically, this allows the item to display as a header or footer.
         setViewItem(item);
     }
@@ -90,7 +90,7 @@ public class FrameLayout extends android.widget.FrameLayout implements AdapterIt
      * @param item The view item
      */
     @Override
-    public void setViewItem(ViewItem item) {
+    public void setViewItem(ViewModel item) {
         this.item = item;
 
         //Update own attrs

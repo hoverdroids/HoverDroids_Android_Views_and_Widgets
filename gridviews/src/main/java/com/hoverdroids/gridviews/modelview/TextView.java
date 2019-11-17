@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.itemview;
+package com.hoverdroids.gridviews.modelview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -22,10 +22,10 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.hoverdroids.gridviews.util.ViewUtils;
-import com.hoverdroids.gridviews.viewitem.TextViewItem;
-import com.hoverdroids.gridviews.viewitem.ViewItem;
+import com.hoverdroids.gridviews.viewmodel.TextViewModel;
+import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
-public class TextView extends AppCompatTextView implements AdapterItemView, ItemView {
+public class TextView extends AppCompatTextView implements AdapterModelView, ModelView {
 
     public TextView(final Context context) {
         super(context);
@@ -47,19 +47,19 @@ public class TextView extends AppCompatTextView implements AdapterItemView, Item
      * @param item The item for the given position in the adapter.
      */
     @Override
-    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewItem item) {
+    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewModel item) {
         //TODO handle case where isFirst, isLast. Typically, this allows the item to display as a header or footer.
         setViewItem(item);
     }
 
     @Override
-    public void setViewItem(final ViewItem item) {
+    public void setViewItem(final ViewModel item) {
         //Set attrs specific to a View
         ViewUtils.setBackgroundColor(this, item);
 
-        if (item instanceof TextViewItem) {
+        if (item instanceof TextViewModel) {
             //Set the attrs specific to ImageView
-            final TextViewItem tvItem = (TextViewItem) item;
+            final TextViewModel tvItem = (TextViewModel) item;
             ViewUtils.setText(this, tvItem);
         }
     }

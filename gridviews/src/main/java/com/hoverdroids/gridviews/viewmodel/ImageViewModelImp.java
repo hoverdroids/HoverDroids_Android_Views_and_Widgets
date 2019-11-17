@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
-/** Implementation of TextViewItem. */
-public class ImageViewItemImp extends ViewItemImp implements ImageViewItem {
+/** Implementation of ImageViewModel. */
+public class ImageViewModelImp extends ViewModelImp implements ImageViewModel {
 
     private int imageResourceId = Integer.MIN_VALUE;
 
@@ -27,7 +27,7 @@ public class ImageViewItemImp extends ViewItemImp implements ImageViewItem {
      * @param id The view ID corresponding to this item
      * @param imageResourceId The image resource ID
      */
-    public ImageViewItemImp(final int layoutResourceId, final int id, final int imageResourceId) {
+    public ImageViewModelImp(final int layoutResourceId, final int id, final int imageResourceId) {
         super(layoutResourceId, id);
         this.imageResourceId = imageResourceId;
     }
@@ -37,7 +37,7 @@ public class ImageViewItemImp extends ViewItemImp implements ImageViewItem {
      * @param id The view ID corresponding to this item
      * @param imageResourceId The image resource ID
      */
-    public ImageViewItemImp(final int id, final int imageResourceId) {
+    public ImageViewModelImp(final int id, final int imageResourceId) {
         super(id);
         this.imageResourceId = imageResourceId;
     }

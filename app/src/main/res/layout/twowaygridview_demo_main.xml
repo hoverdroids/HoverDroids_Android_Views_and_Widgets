@@ -96,7 +96,7 @@
         android:orientation="horizontal"
         android:layout_below="@+id/touch_sync">
 
-        <com.hoverdroids.gridviews.viewgroup.SyncListView
+        <com.hoverdroids.gridviews.view.SyncListView
             android:id="@+id/leftListView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -109,7 +109,7 @@
             app:scrollDirectionPortrait="vertical"
             app:sourceMode="xy" />
 
-        <com.hoverdroids.gridviews.viewgroup.SyncListView
+        <com.hoverdroids.gridviews.view.SyncListView
             android:id="@+id/centerListView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -122,7 +122,7 @@
             app:scrollDirectionLandscape="vertical"
             app:sourceMode="notSource"/>
 
-        <com.hoverdroids.gridviews.viewgroup.SyncListView
+        <com.hoverdroids.gridviews.view.SyncListView
             android:id="@+id/rightListView"
             android:layout_width="0dp"
             android:layout_height="match_parent"

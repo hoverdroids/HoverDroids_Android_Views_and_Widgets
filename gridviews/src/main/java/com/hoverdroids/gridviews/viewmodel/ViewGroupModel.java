@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
 import java.util.Map;
 
 /**
- * An adapter item that holds a group of ViewItems as well as attributes for its own view.
- * Analagous to View vs ViewGroup.
+ * Model for updating a ViewGroup.
+ * View and ViewGroup are analogous to ViewModel and ViewGroupModel.
+ * This is more straight forward since the group simply maps child IDs to the child view's ViewItem.
  */
-public interface ViewGroupItem extends ViewItem{
+public interface ViewGroupModel extends ViewModel {
 
     /**
      * Get the child viewItem by its view ID.
      * @param id The view's ID
      * @return The view's viewItem
      */
-    default ViewItem getChildViewItem(int id) {
+    default ViewModel getChildViewItem(int id) {
         return getChildViewItems() == null ? null : getChildViewItems().get(id);
     }
 
@@ -37,7 +38,7 @@ public interface ViewGroupItem extends ViewItem{
      * Set the child viewItem by its view ID. The viewId is not required as it's already included in the viewItem.
      * @param item The view's viewItem
      */
-    default void setChildViewItem(ViewItem item) {
+    default void setChildViewItem(ViewModel item) {
         getChildViewItems().put(item.getViewId(), item);
     }
 
@@ -45,11 +46,11 @@ public interface ViewGroupItem extends ViewItem{
      * Get all of the child view items.
      * @return The child view items.
      */
-    Map<Integer, ViewItem> getChildViewItems();
+    Map<Integer, ViewModel> getChildViewItems();
 
     /**
      * Set all of teh child view items.
      * @param items The child view items.
      */
-    void setChildViewItems(Map<Integer, ViewItem> items);
+    void setChildViewItems(Map<Integer, ViewModel> items);
 }

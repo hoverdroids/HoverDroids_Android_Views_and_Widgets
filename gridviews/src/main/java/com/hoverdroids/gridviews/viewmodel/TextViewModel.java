@@ -14,19 +14,34 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
-public interface ImageViewItem extends ViewItem
+/** Model for updating a TextView. */
+public interface TextViewModel extends ViewModel
 {
     /**
-     * Get the image resource ID. TODO this belongs in the viewItem
-     * @return The resource ID
+     * Get the text.
+     * @return The text
      */
-    int getImageResourceId();
+    String getText();
 
     /**
-     * Set the image resource ID. TODO this belongs in the viewItem
-     * @param resourceId
+     * Set the text.
+     * @param text The text
      */
-    void setImageResourceId(int resourceId);
+    void setText(String text);
+
+    /**
+     * Get the text color.
+     * @return The text color
+     */
+    default int getTextColor(){
+        return Integer.MIN_VALUE;
+    }
+
+    /**
+     * Set the text color.
+     * @param color The color
+     */
+    void setTextColor(int color);
 }

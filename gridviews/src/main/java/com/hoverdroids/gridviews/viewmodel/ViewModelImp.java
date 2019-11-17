@@ -14,68 +14,76 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
-/** Implementation of TextViewItem. */
-public class TextViewItemImp extends ViewItemImp implements TextViewItem {
+/** Implementation of the ViewModel. */
+public class ViewModelImp extends AdapterModelImp implements ViewModel {
 
-    private String text;
-    private int textColor;
+    private int id;
+    private int color = Integer.MIN_VALUE;
 
     /**
      * Constructor. Use this when the item's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
      * @param id The view ID corresponding to this item
-     * @param text The text
      */
-    public TextViewItemImp(final int layoutResourceId, final int id, final String text) {
-        super(layoutResourceId, id);
-        this.text = text;
+    public ViewModelImp(final int layoutResourceId, final int id) {
+        super(layoutResourceId);
+        this.id = id;
+    }
+
+    /**
+     * Constructor. Use this when the item's view is the top-level parent.
+     * @param viewClass The view class
+     * @param id The view ID corresponding to this item
+     */
+    public ViewModelImp(final String viewClass, final int id) {
+        super(viewClass);
+        this.id = id;
     }
 
     /**
      * Constructor. Use this when the item's view is a child since only the top-level parent's layoutResId is used.
      * @param id The view ID corresponding to this item
-     * @param text The text
      */
-    public TextViewItemImp(final int id, final String text) {
-        super(id);
-        this.text = text;
+    public ViewModelImp(final int id) {
+        super(-1);
+        this.id = id;
     }
 
     /**
-     * Get the text.
-     * @return The text
-     */
-    @Override
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Set the text.
-     * @param text The text
+     * Get the view ID corresponding to this item.
+     * @return The ID
      */
     @Override
-    public void setText(final String text) {
-        this.text = text;
+    public int getViewId() {
+        return id;
     }
 
     /**
-     * Get the text color
+     * Set the view ID corresponding to this item.
+     * @param id The ID
+     */
+    @Override
+    public void setViewId(final int id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the background color.
      * @return The color
      */
     @Override
-    public int getTextColor() {
-        return textColor;
+    public int getBackgroundColor() {
+        return color;
     }
 
     /**
-     * Set the text color.
+     * Set the background color.
      * @param color The color
      */
     @Override
-    public void setTextColor(final int color) {
-        this.textColor = color;
+    public void setBackgroundColor(final int color) {
+        this.color = color;
     }
 }

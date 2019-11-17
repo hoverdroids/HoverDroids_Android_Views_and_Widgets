@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewgroup;
+package com.hoverdroids.gridviews.view;
 
 
 import java.util.ArrayList;

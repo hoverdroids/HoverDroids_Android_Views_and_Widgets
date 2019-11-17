@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
-public interface GenericItem
+/** The base model for instantiating or inflating views in an AdapterView with the ViewModelAdapter. */
+public interface AdapterModel
 {
     /** The following is an invalid resource ID. Use it when the value is not set. */
     public static int INVALID_RESOURCE_ID = 0;

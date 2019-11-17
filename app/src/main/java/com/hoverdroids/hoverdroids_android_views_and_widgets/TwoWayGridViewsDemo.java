@@ -24,11 +24,11 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
-import com.hoverdroids.gridviews.viewgroup.GenericAdapter;
-import com.hoverdroids.gridviews.viewgroup.SyncListView;
-import com.hoverdroids.gridviews.viewitem.GenericItem;
-import com.hoverdroids.gridviews.viewitem.ImageTextItemImp;
-import com.hoverdroids.gridviews.viewitem.ViewItemImp;
+import com.hoverdroids.gridviews.view.ViewModelAdapter;
+import com.hoverdroids.gridviews.view.SyncListView;
+import com.hoverdroids.gridviews.viewmodel.AdapterModel;
+import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
+import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +48,9 @@ public class TwoWayGridViewsDemo extends AppCompatActivity implements OnSyncTouc
     @BindView(R.id.rightListView)
     SyncListView rightListView;
 
-    private GenericAdapter leftAdapter;
-    private GenericAdapter centerAdapter;
-    private GenericAdapter rightAdapter;
+    private ViewModelAdapter leftAdapter;
+    private ViewModelAdapter centerAdapter;
+    private ViewModelAdapter rightAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +59,15 @@ public class TwoWayGridViewsDemo extends AppCompatActivity implements OnSyncTouc
         
         ButterKnife.bind(this);
         
-        leftAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
+        leftAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         leftListView.setAdapter(leftAdapter);
         leftListView.setOnSyncTouchEventListener(this);
 
-        centerAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
+        centerAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         centerListView.setAdapter(centerAdapter);
         centerListView.setOnSyncTouchEventListener(this);
 
-        rightAdapter = new GenericAdapter(getApplicationContext(), getImageTextItems());
+        rightAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         rightListView.setAdapter(rightAdapter);
         rightListView.setOnSyncTouchEventListener(this);
         
@@ -118,14 +118,14 @@ public class TwoWayGridViewsDemo extends AppCompatActivity implements OnSyncTouc
      * Get an example list of items with ImageView and TextView data.
      * @return The items
      */
-    private List<GenericItem> getImageTextItems() {
+    private List<AdapterModel> getImageTextItems() {
         final int[] layouts = {R.layout.image_text_item_view, R.layout.text_image_item_view};
 
-        final List<GenericItem> items = new ArrayList<>();
+        final List<AdapterModel> items = new ArrayList<>();
         for (int i = 0; i < 30; i++){
             final int layout = layouts[i%2];
-            final ImageTextItemImp item
-                    = new ImageTextItemImp(layout, R.id.container,
+            final ImageTextModelImp item
+                    = new ImageTextModelImp(layout, R.id.container,
                     R.id.text_view_1, "My name is " + i,
                     R.id.image_view_1, R.drawable.ic_launcher_background);
 
@@ -134,15 +134,15 @@ public class TwoWayGridViewsDemo extends AppCompatActivity implements OnSyncTouc
         return items;
     }
 
-    private List<GenericItem> getColorItems() {
+    private List<AdapterModel> getColorItems() {
         final Random rnd = new Random();
 
-        final List<GenericItem> items = new ArrayList<>();
+        final List<AdapterModel> items = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             final int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 
             //ID does not have to be set for the top-most parent since it's assumed
-            final ViewItemImp item = new ViewItemImp("com.hoverdroids.gridviews.itemview.ImageView", -1);
+            final ViewModelImp item = new ViewModelImp("com.hoverdroids.gridviews.itemview.ImageView", -1);
             item.setBackgroundColor(color);
             items.add(item);
         }

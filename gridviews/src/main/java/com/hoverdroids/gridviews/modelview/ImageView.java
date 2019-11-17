@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.itemview;
+package com.hoverdroids.gridviews.modelview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -22,10 +22,10 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.hoverdroids.gridviews.util.ViewUtils;
-import com.hoverdroids.gridviews.viewitem.ImageViewItem;
-import com.hoverdroids.gridviews.viewitem.ViewItem;
+import com.hoverdroids.gridviews.viewmodel.ImageViewModel;
+import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
-public class ImageView extends AppCompatImageView implements AdapterItemView, ItemView{
+public class ImageView extends AppCompatImageView implements AdapterModelView, ModelView {
 
     public ImageView(final Context context) {
         super(context);
@@ -47,19 +47,19 @@ public class ImageView extends AppCompatImageView implements AdapterItemView, It
      * @param item The item for the given position in the adapter.
      */
     @Override
-    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewItem item) {
+    public void updateViews(final int position, final boolean isFirst, final boolean isLast, final ViewModel item) {
         //TODO handle case where isFirst, isLast. Typically, this allows the item to display as a header or footer.
         setViewItem(item);
     }
 
     @Override
-    public void setViewItem(final ViewItem item) {
+    public void setViewItem(final ViewModel item) {
         //Set attrs specific to a View
         ViewUtils.setBackgroundColor(this, item);
 
-        if (item instanceof ImageViewItem) {
+        if (item instanceof ImageViewModel) {
             //Set the attrs specific to ImageView
-            ViewUtils.setImageResourceId(this, (ImageViewItem) item);
+            ViewUtils.setImageResourceId(this, (ImageViewModel) item);
         }
     }
 }

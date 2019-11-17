@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.gridviews.viewitem;
+package com.hoverdroids.gridviews.viewmodel;
 
 /**
- * A generic item that holds attrs for one TextView and one ImageView. This is useful given the number of situations where it is used
- * in almost every app - e.g. spinners, dropdowns, profiles, etc.
+ * Model for updating a ViewGroup containing one TextView and one ImageView.
+ * This is useful given the number of instances used in most apps.
+ * e.g. spinners, dropdowns, profiles, etc.
  */
-public class ImageTextItemImp extends ViewGroupItemImp
+public class ImageTextModelImp extends ViewGroupModelImp
 {
     /**
      * Constructor - with minimum arguments.
      * @param layoutResourceId The layout resource ID
      * @param id The view ID corresponding to this item
      */
-    public ImageTextItemImp(final int layoutResourceId, final int id) {
+    public ImageTextModelImp(final int layoutResourceId, final int id) {
         super(layoutResourceId, id);
     }
 
@@ -40,11 +41,11 @@ public class ImageTextItemImp extends ViewGroupItemImp
      * @param imageViewId The imageViewId
      * @param imageResourceId The imageResourceId
      */
-    public ImageTextItemImp(final int layoutResourceId, final int id, final int textViewId, final String text,
-                            final int imageViewId, final int imageResourceId){
+    public ImageTextModelImp(final int layoutResourceId, final int id, final int textViewId, final String text,
+                             final int imageViewId, final int imageResourceId){
         super(layoutResourceId, id);
-        setChildViewItem(new TextViewItemImp(textViewId, text));
-        setChildViewItem(new ImageViewItemImp(imageViewId, imageResourceId));
+        setChildViewItem(new TextViewModelImp(textViewId, text));
+        setChildViewItem(new ImageViewModelImp(imageViewId, imageResourceId));
     }
 
     /**
@@ -54,9 +55,9 @@ public class ImageTextItemImp extends ViewGroupItemImp
      * @param textViewId The textViewId
      * @param text The text
      */
-    public ImageTextItemImp(final int layoutResourceId, final int id, final int textViewId, final String text){
+    public ImageTextModelImp(final int layoutResourceId, final int id, final int textViewId, final String text){
         super(layoutResourceId, id);
-        setChildViewItem(new TextViewItemImp(textViewId, text));
+        setChildViewItem(new TextViewModelImp(textViewId, text));
     }
 
     /**
@@ -66,8 +67,8 @@ public class ImageTextItemImp extends ViewGroupItemImp
      * @param imageViewId The imageViewId
      * @param imageResourceId The imageResourceId
      */
-    public ImageTextItemImp(final int layoutResourceId, final int id, final int imageViewId, final int imageResourceId){
+    public ImageTextModelImp(final int layoutResourceId, final int id, final int imageViewId, final int imageResourceId){
         super(layoutResourceId, id);
-        setChildViewItem(new ImageViewItemImp(imageViewId, imageResourceId));
+        setChildViewItem(new ImageViewModelImp(imageViewId, imageResourceId));
     }
 }
