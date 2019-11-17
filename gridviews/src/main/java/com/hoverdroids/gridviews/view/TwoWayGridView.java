@@ -39,6 +39,7 @@ import com.hoverdroids.gridviews.R;
  */
 public class TwoWayGridView extends TwoWayAbsListView
 {
+	//TODO CHRIS - add width = match_parent options and height = match_parent options to attrs
 	//Chris added
 	private static final boolean CHRIS_DEBUG = true;
 	
