@@ -29,7 +29,6 @@ import com.hoverdroids.gridviews.view.ViewModelAdapter;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
 import com.hoverdroids.gridviews.viewmodel.AdapterViewModelImp;
 import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
-import com.hoverdroids.gridviews.viewmodel.ViewGroupModel;
 import com.hoverdroids.gridviews.viewmodel.ViewGroupModelImp;
 import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
 
@@ -39,6 +38,7 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import static com.hoverdroids.gridviews.viewmodel.AdapterModel.INVALID_RESOURCE_ID;
 
@@ -55,6 +55,9 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
         setContentView(R.layout.synchronized_gridviews_in_listview);
 
         ButterKnife.bind(this);
+
+        Timber.plant(new Timber.DebugTree());
+        Timber.d("CHRIS planted");
 
         listViewAdapter = new ViewModelAdapter(getApplicationContext(), getGridViewModels());
         listView.setAdapter(listViewAdapter);
@@ -76,7 +79,7 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
             viewGroupModel.setBackgroundColor(i%2 ==0 ? Color.BLACK : Color.WHITE);
 
             //Create the ViewModel - no need to set layoutResourceId since it's provided by viewGroupModel
-            final AdapterViewModelImp adapterViewModel = new AdapterViewModelImp(INVALID_RESOURCE_ID, R.id.gridview, getImageTextItems());
+            final AdapterViewModelImp adapterViewModel = new AdapterViewModelImp(INVALID_RESOURCE_ID, R.id.gridview, getImageTextItems(i));
             adapterViewModel.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
 
             //Add the AdapterViewModel to the ViewGroupModel - the ViewGroup will pass it to the AdapterView
@@ -92,7 +95,7 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
      * Get an example list of items with ImageView and TextView data.
      * @return The items
      */
-    private List<AdapterModel> getImageTextItems() {
+    private List<AdapterModel> getImageTextItems(int row) {
         final int[] layouts = {R.layout.image_text_item_view, R.layout.text_image_item_view};
 
         final List<AdapterModel> items = new ArrayList<>();
@@ -100,7 +103,7 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
             final int layout = layouts[i%2];
             final ImageTextModelImp item
                     = new ImageTextModelImp(layout, R.id.container,
-                    R.id.text_view_1, "My name is " + i,
+                    R.id.text_view_1, "Row:" + row + " Col:" + i,
                     R.id.image_view_1, R.drawable.ic_launcher_background);
 
             items.add(item);

@@ -39,6 +39,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import timber.log.Timber;
+
 import static android.view.View.NO_ID;
 
 public class ViewUtils {
@@ -200,7 +202,7 @@ public class ViewUtils {
             saveViewStateToViewModel((LinearLayout) view, viewModel);
 
         } else if (view instanceof TextView) {
-                saveViewStateToViewModel((TextView) view, viewModel);
+            saveViewStateToViewModel((TextView) view, viewModel);
 
         } else if (view instanceof ImageView) {
             saveViewStateToViewModel((ImageView) view, viewModel);
@@ -218,6 +220,7 @@ public class ViewUtils {
             final AdapterViewModel adapterViewModel = (AdapterViewModel) viewModel;
             adapterViewModel.setFirstPosition(twoWayGridView.getFirstVisiblePosition());
             adapterViewModel.setFirstPositionOffset(twoWayGridView.getScrollByDistance());
+            Timber.d("CHRIS pos:" + adapterViewModel.getPosition() + " save 1st:" + twoWayGridView.getFirstVisiblePosition() + " Off:" + twoWayGridView.getScrollByDistance());
         }
     }
 

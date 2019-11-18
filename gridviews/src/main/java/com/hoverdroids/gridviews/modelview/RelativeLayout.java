@@ -29,6 +29,8 @@ import com.hoverdroids.gridviews.viewmodel.ViewModel;
 import java.util.HashMap;
 import java.util.Map;
 
+import timber.log.Timber;
+
 public class RelativeLayout extends android.widget.RelativeLayout implements ModelView {
 
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
@@ -96,6 +98,7 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Mod
      */
     @Override
     public void onStartTemporaryDetach(){
+        Timber.d("CHRIS onStartTempDet");
         //Save own state
         ViewUtils.saveViewStateToViewModel(this, viewModel);
 
@@ -111,6 +114,7 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Mod
      */
     @Override
     public void onFinishTemporaryDetach(){
+        Timber.d("CHRIS onFinishTempDet");
         //TODO Something useful when view is attached to the window.
 
         //Let the superclass do whatever it does

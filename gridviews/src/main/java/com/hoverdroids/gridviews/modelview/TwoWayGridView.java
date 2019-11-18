@@ -31,6 +31,8 @@ import com.hoverdroids.gridviews.viewmodel.ViewModel;
 import java.util.HashMap;
 import java.util.Map;
 
+import timber.log.Timber;
+
 public class TwoWayGridView extends com.hoverdroids.gridviews.view.TwoWayGridView implements ModelView {
 
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
@@ -94,9 +96,13 @@ public class TwoWayGridView extends com.hoverdroids.gridviews.view.TwoWayGridVie
             final AdapterViewModel avModel = (AdapterViewModel) viewModel;
 
             //Set the gv's position BEFORE updating the adapter - need to be using TRANSCRIPT_MODE_RELATIVE (default)
+            setTranscriptMode(TRANSCRIPT_MODE_RELATIVE);
             setRelativePosition(avModel.getFirstPosition(), avModel.getFirstPositionOffset());
+            Timber.d("CHRIS pos:" + avModel.getPosition() + " set 1st:" + avModel.getFirstPosition() + " Off:" + avModel.getFirstPositionOffset());
+
 
             adapter.setItems(avModel.getItems());
+            setRelativePosition(avModel.getFirstPosition(), avModel.getFirstPositionOffset());
         }
 
         //Update child attrs
