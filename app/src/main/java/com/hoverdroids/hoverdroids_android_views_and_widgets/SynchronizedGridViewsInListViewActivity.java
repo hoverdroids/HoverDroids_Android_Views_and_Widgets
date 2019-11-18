@@ -29,6 +29,8 @@ import com.hoverdroids.gridviews.view.ViewModelAdapter;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
 import com.hoverdroids.gridviews.viewmodel.AdapterViewModelImp;
 import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
+import com.hoverdroids.gridviews.viewmodel.ViewGroupModel;
+import com.hoverdroids.gridviews.viewmodel.ViewGroupModelImp;
 import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
 
 import java.util.ArrayList;
@@ -37,6 +39,8 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.hoverdroids.gridviews.viewmodel.AdapterModel.INVALID_RESOURCE_ID;
 
 public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity implements OnSourceTouchEventListener
 {
@@ -67,10 +71,18 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
         final Random rnd = new Random();
 
         for (int i = 0; i < 300; i++) {
-            final List<AdapterModel> gridViewChildModels = getImageTextItems();
-            final AdapterViewModelImp model = new AdapterViewModelImp(R.layout.gridview_item_view, R.id.gridview, gridViewChildModels);
-            model.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
-            gridViewModels.add(model);
+            //Oddities with TWGV.onMeasure in an AdapterView require a ViewGroup container - and hence the ViewModel requires a ViewGroupModel
+            final ViewGroupModelImp viewGroupModel = new ViewGroupModelImp(R.layout.gridview_item_view, R.id.container);
+            viewGroupModel.setBackgroundColor(i%2 ==0 ? Color.BLACK : Color.WHITE);
+
+            //Create the ViewModel - no need to set layoutResourceId since it's provided by viewGroupModel
+            final AdapterViewModelImp adapterViewModel = new AdapterViewModelImp(INVALID_RESOURCE_ID, R.id.gridview, getImageTextItems());
+            adapterViewModel.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+
+            //Add the AdapterViewModel to the ViewGroupModel - the ViewGroup will pass it to the AdapterView
+            viewGroupModel.setChildViewModel(adapterViewModel);
+
+            gridViewModels.add(viewGroupModel);
         }
 
         return gridViewModels;

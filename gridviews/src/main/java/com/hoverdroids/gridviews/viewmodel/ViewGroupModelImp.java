@@ -26,12 +26,29 @@ public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
     private Map<Integer, ViewModel> viewModels = new HashMap<>();
 
     /**
-     * Constructor.
+     * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
      * @param id The view ID corresponding to this model
      */
     public ViewGroupModelImp(final int layoutResourceId, final int id) {
         super(layoutResourceId, id);
+    }
+
+    /**
+     * Constructor. Use this when the viewModel's view is the top-level parent.
+     * @param viewClass The view class
+     * @param id The view ID corresponding to this viewModel
+     */
+    public ViewGroupModelImp(final String viewClass, final int viewId) {
+        super(viewClass, viewId);
+    }
+
+    /**
+     * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
+     * @param id The view ID corresponding to this viewModel
+     */
+    public ViewGroupModelImp(final int viewId) {
+        super(viewId);
     }
 
     /**

@@ -124,7 +124,7 @@ public class ViewUtils {
      * @param viewModel The viewModel
      */
     public static void setBackgroundColor(final View view, final ViewModel viewModel) {
-        final int color = viewModel.getBackgroundColor();
+        final int color = viewModel == null ? Integer.MIN_VALUE : viewModel.getBackgroundColor();
         if (color != Integer.MIN_VALUE) {
             view.setBackgroundColor(color);
         }
@@ -136,7 +136,7 @@ public class ViewUtils {
      * @param textViewModel The TextViewModel
      */
     public static void setText(final TextView view, final TextViewModel textViewModel) {
-        final String text = textViewModel.getText();
+        final String text = textViewModel == null ? null : textViewModel.getText();
         if (text != null) {
             view.setText(text);
         }
@@ -148,7 +148,7 @@ public class ViewUtils {
      * @param textViewModel The TextViewModel
      */
     public static void setTextColor(final TextView view, final TextViewModel textViewModel) {
-        final int color = textViewModel.getTextColor();
+        final int color = textViewModel == null ? Integer.MIN_VALUE : textViewModel.getTextColor();
         if (color != Integer.MIN_VALUE) {
             view.setTextColor(color);
         }
@@ -160,7 +160,7 @@ public class ViewUtils {
      * @param imageViewModel The ImageViewModel
      */
     public static void setImageResourceId(final ImageView view, final ImageViewModel imageViewModel) {
-        final int resId = imageViewModel.getImageResourceId();
+        final int resId = imageViewModel == null ? Integer.MIN_VALUE : imageViewModel.getImageResourceId();
         if (resId != Integer.MIN_VALUE) {
             view.setImageResource(resId);
         }
