@@ -96,11 +96,11 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
      * @return The items
      */
     private List<AdapterModel> getImageTextItems(int row) {
-        final int[] layouts = {R.layout.image_text_item_view, R.layout.text_image_item_view};
+        //final int[] layouts = {R.layout.horizontal_image_text_item_view, R.layout.horizontal_text_image_item_view};
 
         final List<AdapterModel> items = new ArrayList<>();
         for (int i = 0; i < 30; i++){
-            final int layout = layouts[i%2];
+            final int layout = R.layout.horizontal_image_text_item_view;//layouts[i%2];
             final ImageTextModelImp item
                     = new ImageTextModelImp(layout, R.id.container,
                     R.id.text_view_1, "Row:" + row + " Col:" + i,
@@ -108,22 +108,6 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
 
             items.add(item);
         }
-        return items;
-    }
-
-    private List<AdapterModel> getColorItems() {
-        final Random rnd = new Random();
-
-        final List<AdapterModel> items = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            final int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-
-            //ID does not have to be set for the top-most parent since it's assumed
-            final ViewModelImp item = new ViewModelImp("com.hoverdroids.gridviews.itemview.ImageView", -1);
-            item.setBackgroundColor(color);
-            items.add(item);
-        }
-
         return items;
     }
 }
