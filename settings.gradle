@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':app', ':dialogs', ':imageviews', ':listviews', ':gridviews', ':viewpagers', ':textviews', ':adapterviews'
+include ':app', ':gridviews'

@@ -93,9 +93,9 @@ public class TwoWayGridView extends com.hoverdroids.gridviews.view.TwoWayGridVie
         if (viewModel instanceof AdapterViewModel) {
             final AdapterViewModel avModel = (AdapterViewModel) viewModel;
 
-            //Set the gv's position BEFORE updating the adapter - need to be using TRANSCRIPT_MODE_RELATIVE
+            //Set the gv's position BEFORE updating the adapter - need to be using TRANSCRIPT_MODE_RELATIVE (default)
             setRelativePosition(avModel.getFirstPosition(), avModel.getFirstPositionOffset());
-            
+
             adapter.setItems(avModel.getItems());
         }
 

@@ -19,11 +19,16 @@ package com.hoverdroids.gridviews.viewmodel;
 /** Model for updating a View. */
 public interface ViewModel {
 
+    /** An invalid view ID. Use it when the value is not set. */
+    int INVALID_VIEW_ID = 0;
+
     /**
      * Get the ID for the view that corresponds to this viewModel.
      * @return The ID
      */
-    int getViewId();
+    default int getViewId() {
+        return INVALID_VIEW_ID;
+    }
 
     /**
      * Set the ID for the view that corresponds to this viewModel.

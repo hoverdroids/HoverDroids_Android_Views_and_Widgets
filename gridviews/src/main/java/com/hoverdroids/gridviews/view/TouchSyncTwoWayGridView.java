@@ -23,32 +23,32 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.hoverdroids.gridviews.R;
-import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
+import com.hoverdroids.gridviews.util.OnSourceTouchEventListener;
 import com.hoverdroids.gridviews.util.SourceMode;
 import com.hoverdroids.gridviews.util.SyncMode;
-import com.hoverdroids.gridviews.util.SyncTouchView;
+import com.hoverdroids.gridviews.util.TouchSyncView;
 
 import static com.hoverdroids.gridviews.util.SourceMode.NOT_SOURCE;
 
-public class SyncListView extends TwoWayGridView implements SyncTouchView {
+public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSyncView {
 
     private SourceMode sourceMode = SourceMode.XY;
     private SyncMode syncMode = SyncMode.XY;
 
-    private OnSyncTouchEventListener onSyncTouchEventListener;
+    private OnSourceTouchEventListener onSourceTouchEventListener;
 
     private boolean isSyncTouchEvent;
 
-    public SyncListView(final Context context) {
+    public TouchSyncTwoWayGridView(final Context context) {
         super(context);
     }
 
-    public SyncListView(final Context context, final AttributeSet attrs) {
+    public TouchSyncTwoWayGridView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         readCustomAttrs(attrs,0, 0);
     }
 
-    public SyncListView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
+    public TouchSyncTwoWayGridView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         readCustomAttrs(attrs, defStyleAttr, 0);
     }
@@ -59,12 +59,12 @@ public class SyncListView extends TwoWayGridView implements SyncTouchView {
         }
 
         final Context context = getContext();
-        final TypedArray ary = context.obtainStyledAttributes(attrs, R.styleable.SyncListView, defStyleAttr, defStyleRes);
+        final TypedArray ary = context.obtainStyledAttributes(attrs, R.styleable.TouchSyncTwoWayGridView, defStyleAttr, defStyleRes);
 
-        int mode = ary.getInt(R.styleable.SyncListView_sourceMode, SourceMode.XY.ordinal());
+        int mode = ary.getInt(R.styleable.TouchSyncTwoWayGridView_sourceMode, SourceMode.XY.ordinal());
         sourceMode = SourceMode.values()[mode];
 
-        mode = ary.getInt(R.styleable.SyncListView_syncMode, SyncMode.XY.ordinal());
+        mode = ary.getInt(R.styleable.TouchSyncTwoWayGridView_syncMode, SyncMode.XY.ordinal());
         syncMode = SyncMode.values()[mode];
 
         ary.recycle();
@@ -74,7 +74,7 @@ public class SyncListView extends TwoWayGridView implements SyncTouchView {
     public boolean onTouchEvent(final MotionEvent ev) {
         //Only relay touch events that are actually on this view. Avoid sending touch events
         //coming from a source because that will create an infinite loop of MotionEvents
-        if (onSyncTouchEventListener != null && !sourceMode.equals(NOT_SOURCE) && !isSyncTouchEvent){
+        if (onSourceTouchEventListener != null && !sourceMode.equals(NOT_SOURCE) && !isSyncTouchEvent){
 
             //Send touch event data in X, Y, or both. This allows the output to easily be filtered
             //in a single direction - ie avoids the need to determine how much movement in an axis
@@ -91,7 +91,7 @@ public class SyncListView extends TwoWayGridView implements SyncTouchView {
                 clonedEvent.setLocation(x, y);
             }
 
-            onSyncTouchEventListener.onSyncTouchEvent(this, ev);
+            onSourceTouchEventListener.onSourceTouchEvent(this, ev);
             clonedEvent.recycle();
         }
 
@@ -132,19 +132,19 @@ public class SyncListView extends TwoWayGridView implements SyncTouchView {
     }
 
     /**
-     * Gets onSyncTouchEventListener.
-     * @return The onSyncTouchEventListener.
+     * Gets onSourceTouchEventListener.
+     * @return The onSourceTouchEventListener.
      */
-    public OnSyncTouchEventListener getOnSyncTouchEventListener() {
-        return onSyncTouchEventListener;
+    public OnSourceTouchEventListener getOnSourceTouchEventListener() {
+        return onSourceTouchEventListener;
     }
 
     /**
-     * Sets onSyncTouchEventListener.
-     * @param onSyncTouchEventListener The onSyncTouchEventListener.
+     * Sets onSourceTouchEventListener.
+     * @param onSourceTouchEventListener The onSourceTouchEventListener.
      */
-    public void setOnSyncTouchEventListener(final OnSyncTouchEventListener onSyncTouchEventListener) {
-        this.onSyncTouchEventListener = onSyncTouchEventListener;
+    public void setOnSourceTouchEventListener(final OnSourceTouchEventListener onSourceTouchEventListener) {
+        this.onSourceTouchEventListener = onSourceTouchEventListener;
     }
 
     public SourceMode getSourceMode() {

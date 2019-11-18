@@ -157,7 +157,7 @@
         <attr name ="initialPositionOffset" format = "integer"/>
     </declare-styleable>
 
-    <declare-styleable name="SyncListView">
+    <declare-styleable name="TouchSyncTwoWayGridView">
         <attr name="sourceMode"/>
         <attr name="syncMode"/>
     </declare-styleable>

@@ -18,7 +18,7 @@ package com.hoverdroids.gridviews.util;
 import android.view.MotionEvent;
 import android.view.View;
 
-public interface OnSyncTouchEventListener {
+public interface OnSourceTouchEventListener {
 
-    void onSyncTouchEvent(View sourceView, MotionEvent ev);
+    void onSourceTouchEvent(View sourceView, MotionEvent ev);
 }

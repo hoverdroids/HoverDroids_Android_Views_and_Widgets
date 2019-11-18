@@ -23,8 +23,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
-import com.hoverdroids.gridviews.view.SyncListView;
+import com.hoverdroids.gridviews.util.OnSourceTouchEventListener;
+import com.hoverdroids.gridviews.view.TouchSyncTwoWayGridView;
 import com.hoverdroids.gridviews.view.ViewModelAdapter;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
 import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
@@ -37,16 +37,16 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SynchronizedGridViewsActivity extends AppCompatActivity implements OnSyncTouchEventListener
+public class SynchronizedGridViewsActivity extends AppCompatActivity implements OnSourceTouchEventListener
 {
     @BindView(R.id.topGridView)
-    SyncListView topGridView;
+    TouchSyncTwoWayGridView topGridView;
 
     @BindView(R.id.centerGridView)
-    SyncListView centerGridView;
+    TouchSyncTwoWayGridView centerGridView;
 
     @BindView(R.id.bottomGridView)
-    SyncListView bottomGridView;
+    TouchSyncTwoWayGridView bottomGridView;
 
     private ViewModelAdapter topAdapter;
     private ViewModelAdapter centerAdapter;
@@ -61,22 +61,22 @@ public class SynchronizedGridViewsActivity extends AppCompatActivity implements 
         
         topAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         topGridView.setAdapter(topAdapter);
-        topGridView.setOnSyncTouchEventListener(this);
+        topGridView.setOnSourceTouchEventListener(this);
         topGridView.setRelativePosition(5,-30);
 
         centerAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         centerGridView.setAdapter(centerAdapter);
-        centerGridView.setOnSyncTouchEventListener(this);
+        centerGridView.setOnSourceTouchEventListener(this);
         centerGridView.setRelativePosition(5,-30);
 
         bottomAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         bottomGridView.setAdapter(bottomAdapter);
-        bottomGridView.setOnSyncTouchEventListener(this);
+        bottomGridView.setOnSourceTouchEventListener(this);
         bottomGridView.setRelativePosition(5,-30);
     }
 
     @Override
-    public void onSyncTouchEvent(View sourceView, MotionEvent ev) {
+    public void onSourceTouchEvent(View sourceView, MotionEvent ev) {
         topGridView.onTouchEvent(sourceView, ev);
         centerGridView.onTouchEvent(sourceView, ev);
         bottomGridView.onTouchEvent(sourceView, ev);

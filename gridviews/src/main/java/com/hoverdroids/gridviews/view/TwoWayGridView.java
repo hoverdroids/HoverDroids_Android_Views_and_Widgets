@@ -145,7 +145,7 @@ public class TwoWayGridView extends TwoWayAbsListView
 	}
 
 	//TODO CHRIS
-	/*public SyncListView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
+	/*public TwoWayGridView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
 
 	}*/
 

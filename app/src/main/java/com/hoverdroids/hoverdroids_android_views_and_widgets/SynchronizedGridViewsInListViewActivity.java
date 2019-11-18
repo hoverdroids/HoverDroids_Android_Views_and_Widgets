@@ -23,14 +23,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
-import com.hoverdroids.gridviews.view.SyncListView;
+import com.hoverdroids.gridviews.util.OnSourceTouchEventListener;
+import com.hoverdroids.gridviews.view.TwoWayGridView;
 import com.hoverdroids.gridviews.view.ViewModelAdapter;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
-import com.hoverdroids.gridviews.viewmodel.AdapterViewModel;
 import com.hoverdroids.gridviews.viewmodel.AdapterViewModelImp;
 import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
-import com.hoverdroids.gridviews.viewmodel.ViewModel;
 import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
 
 import java.util.ArrayList;
@@ -40,10 +38,10 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity implements OnSyncTouchEventListener
+public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity implements OnSourceTouchEventListener
 {
     @BindView(R.id.listView)
-    SyncListView listView;
+    TwoWayGridView listView;
 
     private ViewModelAdapter listViewAdapter;
 
@@ -54,29 +52,28 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
 
         ButterKnife.bind(this);
 
-        listViewAdapter = new ViewModelAdapter(getApplicationContext(), getGridViewItems());
+        listViewAdapter = new ViewModelAdapter(getApplicationContext(), getGridViewModels());
         listView.setAdapter(listViewAdapter);
-        listView.setOnSyncTouchEventListener(this);
     }
 
     @Override
-    public void onSyncTouchEvent(View sourceView, MotionEvent ev) {
+    public void onSourceTouchEvent(View sourceView, MotionEvent ev) {
         //TODO
     }
 
-    private List<AdapterModel> getGridViewItems() {
-        final List<AdapterModel> gridViewItems = new ArrayList<>();
+    private List<AdapterModel> getGridViewModels() {
+        final List<AdapterModel> gridViewModels = new ArrayList<>();
 
-        /*for (int i = 0; i < 30; i++) {
-            final List<AdapterModel> gridViewChildrenItems = new ArrayList<>();
+        final Random rnd = new Random();
 
-            final AdapterViewModel item = new AdapterViewModelImp(gridViewChildrenItems, );
+        for (int i = 0; i < 300; i++) {
+            final List<AdapterModel> gridViewChildModels = getImageTextItems();
+            final AdapterViewModelImp model = new AdapterViewModelImp(R.layout.gridview_item_view, R.id.gridview, gridViewChildModels);
+            model.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+            gridViewModels.add(model);
+        }
 
-
-            gridViewItems.add(item);
-        }*/
-
-        return gridViewItems;
+        return gridViewModels;
     }
 
     /**

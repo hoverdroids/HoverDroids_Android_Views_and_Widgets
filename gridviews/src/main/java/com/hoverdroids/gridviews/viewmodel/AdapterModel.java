@@ -19,14 +19,19 @@ package com.hoverdroids.gridviews.viewmodel;
 /** The base model for instantiating or inflating views in an AdapterView with the ViewModelAdapter. */
 public interface AdapterModel
 {
-    /** The following is an invalid resource ID. Use it when the value is not set. */
+    /** An invalid resource ID. Use it when the value is not set. */
     int INVALID_RESOURCE_ID = 0;
+
+    /** An invalid item ID. Use it when the value is not set. */
+    int UNKNOWN_ITEM_ID = Integer.MIN_VALUE;
 
     /**
      *  The layout Id of the layout to inflate.
      * @return The layout resource id.
      */
-    int getLayoutResourceId();
+    default int getLayoutResourceId() {
+        return INVALID_RESOURCE_ID;
+    }
 
     /**
      * The layout resourceId that is used to view the model.
@@ -50,7 +55,9 @@ public interface AdapterModel
      * Unique IDs based on project-specific requirements.
      * @return The item id.
      */
-    int getItemId();
+    default int getItemId() {
+        return UNKNOWN_ITEM_ID;
+    }
 
     /**
      * Set a unique id that is based on project-specific requirements.

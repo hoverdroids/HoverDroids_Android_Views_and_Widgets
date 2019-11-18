@@ -19,17 +19,20 @@ package com.hoverdroids.gridviews.viewmodel;
 /** Implementation of the ViewModel. */
 public class ViewModelImp extends AdapterModelImp implements ViewModel {
 
-    private int id;
-    private int color = Integer.MIN_VALUE;
+    /** The layout resource ID to inflate to visualize this model. */
+    private int viewId = INVALID_RESOURCE_ID;
+
+    /** The background color. */
+    private int backgroudColor = INVALID_RESOURCE_ID;
 
     /**
      * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The viewID corresponding to this viewModel
      */
-    public ViewModelImp(final int layoutResourceId, final int id) {
+    public ViewModelImp(final int layoutResourceId, final int viewId) {
         super(layoutResourceId);
-        this.id = id;
+        this.viewId = viewId;
     }
 
     /**
@@ -37,18 +40,18 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
      * @param viewClass The view class
      * @param id The view ID corresponding to this viewModel
      */
-    public ViewModelImp(final String viewClass, final int id) {
+    public ViewModelImp(final String viewClass, final int viewId) {
         super(viewClass);
-        this.id = id;
+        this.viewId = viewId;
     }
 
     /**
      * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
      * @param id The view ID corresponding to this viewModel
      */
-    public ViewModelImp(final int id) {
+    public ViewModelImp(final int viewId) {
         super(-1);
-        this.id = id;
+        this.viewId = viewId;
     }
 
     /**
@@ -57,7 +60,7 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
      */
     @Override
     public int getViewId() {
-        return id;
+        return viewId;
     }
 
     /**
@@ -66,7 +69,7 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
      */
     @Override
     public void setViewId(final int id) {
-        this.id = id;
+        this.viewId = id;
     }
 
     /**
@@ -75,7 +78,7 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
      */
     @Override
     public int getBackgroundColor() {
-        return color;
+        return backgroudColor;
     }
 
     /**
@@ -84,6 +87,6 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
      */
     @Override
     public void setBackgroundColor(final int color) {
-        this.color = color;
+        this.backgroudColor = color;
     }
 }

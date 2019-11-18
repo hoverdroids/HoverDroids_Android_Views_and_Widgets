@@ -48,26 +48,34 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
     private int firstPositionOffset;
 
     /**
-     * Constructor for the model.
-     * @param items Items used to populate a TwoWayAdapterView.
-     * @param layoutResourceId The layout.xml used for inflating the TwoWayAdapterView.
-     * @param onScrollListener A scroll listener for the TwoWayAdapterView.
+     * Constructor. Use this when the viewModel's view is the top-level parent.
+     * @param layoutResourceId The layout resource ID
+     * @param viewId The viewID corresponding to this viewModel
+     * @param items Items used in an ViewModelAdapter to populate a AdapterView.
      */
-    public AdapterViewModelImp(final List<AdapterModel> items, final int layoutResourceId,
-                               final OnScrollListener onScrollListener)
-    {
-        this(items, layoutResourceId);
-        this.onScrollListener = onScrollListener;
+    public AdapterViewModelImp(final int layoutResourceId, final int viewId, final List<AdapterModel> items) {
+        super(layoutResourceId, viewId);
+        this.items = items;
     }
 
     /**
-     * Constructor for the model.
-     * @param items Items used to populate a TwoWayAdapterView.
-     * @param layoutResourceId The layout.xml used for inflating the TwoWayAdapterView.
+     * Constructor. Use this when the viewModel's view is the top-level parent.
+     * @param viewClass The view class
+     * @param id The view ID corresponding to this viewModel
+     * @param items Items used in an ViewModelAdapter to populate a AdapterView.
      */
-    public AdapterViewModelImp(final List<AdapterModel> items, final int layoutResourceId)
-    {
-        super(layoutResourceId);
+    public AdapterViewModelImp(final String viewClass, final int viewId, final List<AdapterModel> items) {
+        super(viewClass, viewId);
+        this.items = items;
+    }
+
+    /**
+     * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
+     * @param id The view ID corresponding to this viewModel
+     * @param items Items used in an ViewModelAdapter to populate a AdapterView.
+     */
+    public AdapterViewModelImp(final int viewId, final List<AdapterModel> items) {
+        super(viewId);
         this.items = items;
     }
 

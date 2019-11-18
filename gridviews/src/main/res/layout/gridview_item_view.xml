@@ -14,22 +14,22 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<com.easy.twgv.TwgvRelativeLayout
+<com.hoverdroids.gridviews.modelview.RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/black"
-    android:id="@+id/listview_child_container">
+    android:id="@+id/container">
 
-    <com.easy.twgv.EasyTwoWayGridView
+    <com.hoverdroids.gridviews.modelview.TwoWayGridView
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/twgv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/gridview"
         app:numRows="1"
         app:numColumns="8"
         app:scrollDirectionPortrait="horizontal"
         app:scrollDirectionLandscape="horizontal"/>
 
-</com.easy.twgv.TwgvRelativeLayout>
+</com.hoverdroids.gridviews.modelview.RelativeLayout>

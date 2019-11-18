@@ -23,9 +23,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.util.OnSyncTouchEventListener;
+import com.hoverdroids.gridviews.util.OnSourceTouchEventListener;
 import com.hoverdroids.gridviews.view.ViewModelAdapter;
-import com.hoverdroids.gridviews.view.SyncListView;
+import com.hoverdroids.gridviews.view.TouchSyncTwoWayGridView;
 import com.hoverdroids.gridviews.viewmodel.AdapterModel;
 import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
 import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
@@ -37,16 +37,16 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SynchronizedListViewsActivity extends AppCompatActivity implements OnSyncTouchEventListener
+public class SynchronizedListViewsActivity extends AppCompatActivity implements OnSourceTouchEventListener
 {
     @BindView(R.id.leftListView)
-    SyncListView leftListView;
+    TouchSyncTwoWayGridView leftListView;
 
     @BindView(R.id.centerListView)
-    SyncListView centerListView;
+    TouchSyncTwoWayGridView centerListView;
 
     @BindView(R.id.rightListView)
-    SyncListView rightListView;
+    TouchSyncTwoWayGridView rightListView;
 
     private ViewModelAdapter leftAdapter;
     private ViewModelAdapter centerAdapter;
@@ -61,15 +61,15 @@ public class SynchronizedListViewsActivity extends AppCompatActivity implements 
         
         leftAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         leftListView.setAdapter(leftAdapter);
-        leftListView.setOnSyncTouchEventListener(this);
+        leftListView.setOnSourceTouchEventListener(this);
 
         centerAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         centerListView.setAdapter(centerAdapter);
-        centerListView.setOnSyncTouchEventListener(this);
+        centerListView.setOnSourceTouchEventListener(this);
 
         rightAdapter = new ViewModelAdapter(getApplicationContext(), getImageTextItems());
         rightListView.setAdapter(rightAdapter);
-        rightListView.setOnSyncTouchEventListener(this);
+        rightListView.setOnSourceTouchEventListener(this);
         
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -108,7 +108,7 @@ public class SynchronizedListViewsActivity extends AppCompatActivity implements 
     }*/
 
     @Override
-    public void onSyncTouchEvent(View sourceView, MotionEvent ev) {
+    public void onSourceTouchEvent(View sourceView, MotionEvent ev) {
         leftListView.onTouchEvent(sourceView, ev);
         centerListView.onTouchEvent(sourceView, ev);
         rightListView.onTouchEvent(sourceView, ev);
