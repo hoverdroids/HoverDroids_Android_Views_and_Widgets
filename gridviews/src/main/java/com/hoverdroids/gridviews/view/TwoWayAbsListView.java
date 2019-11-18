@@ -563,7 +563,7 @@ ViewTreeObserver.OnTouchModeChangeListener {
 		//setTextFilterEnabled(useTextFilter);
 
 		int transcriptMode = a.getInt(R.styleable.TwoWayAbsListView_transcriptMode,
-				TRANSCRIPT_MODE_DISABLED);
+				TRANSCRIPT_MODE_RELATIVE);
 		setTranscriptMode(transcriptMode);
 
 		int color = a.getColor(R.styleable.TwoWayAbsListView_cacheColorHint, 0);

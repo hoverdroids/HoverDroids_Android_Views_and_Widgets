@@ -89,4 +89,31 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Mod
         //Update child attrs
         ViewUtils.setChildrenViewModels(viewIds, viewModel);
     }
+
+    /**
+     * This is called when the view is first detached from the window. If the view is used in an AdapterVeiw, this
+     * is called when the row moves out of view when scrolling. It is a good time to save the state to the model.
+     */
+    @Override
+    public void onStartTemporaryDetach(){
+        //Save own state
+        ViewUtils.saveViewStateToViewModel(this, viewModel);
+
+        //Save children states
+        ViewUtils.saveChildrenViewStatesToViewModels(viewIds, viewModel);
+
+        super.onStartTemporaryDetach();
+    }
+
+    /**
+     * This is called when the view is first attached to the window. If the view is used in an AdapterView, this
+     * is called when the row first moves into view when scrolling.
+     */
+    @Override
+    public void onFinishTemporaryDetach(){
+        //TODO Something useful when view is attached to the window.
+
+        //Let the superclass do whatever it does
+        super.onFinishTemporaryDetach();
+    }
 }

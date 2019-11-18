@@ -19,10 +19,15 @@ package com.hoverdroids.gridviews.util;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hoverdroids.gridviews.modelview.ModelView;
+import com.hoverdroids.gridviews.view.TwoWayGridView;
+import com.hoverdroids.gridviews.viewmodel.AdapterViewModel;
 import com.hoverdroids.gridviews.viewmodel.ImageViewModel;
 import com.hoverdroids.gridviews.viewmodel.TextViewModel;
 import com.hoverdroids.gridviews.viewmodel.ViewGroupModel;
@@ -159,5 +164,80 @@ public class ViewUtils {
         if (resId != Integer.MIN_VALUE) {
             view.setImageResource(resId);
         }
+    }
+
+    public static void saveChildrenViewStatesToViewModels(final Map<Integer, View> childViewIds, final ViewModel parentViewModel) {
+
+        //Nothing to do since no child attr info is available
+        if (!(parentViewModel instanceof ViewGroupModel)) {
+            return;
+        }
+
+        final ViewGroupModel viewGroupModel = (ViewGroupModel) parentViewModel;
+        final Iterator<Integer> it = childViewIds.keySet().iterator();
+        while (it.hasNext()) {
+            final Integer id = it.next();
+            final View view = childViewIds.get(id);
+
+            final ViewModel childViewModel = viewGroupModel.getChildViewModel(id);
+
+            saveViewStateToViewModel(view, childViewModel);
+        }
+    }
+
+    public static void saveViewStateToViewModel(final View view, final ViewModel viewModel) {
+
+        if (view instanceof TwoWayGridView) {
+            saveViewStateToViewModel((TwoWayGridView) view, viewModel);
+
+        } else if (view instanceof FrameLayout) {
+            saveViewStateToViewModel((FrameLayout) view, viewModel);
+
+        } else if (view instanceof RelativeLayout) {
+            saveViewStateToViewModel((RelativeLayout) view, viewModel);
+
+        } else if (view instanceof LinearLayout) {
+            saveViewStateToViewModel((LinearLayout) view, viewModel);
+
+        } else if (view instanceof TextView) {
+                saveViewStateToViewModel((TextView) view, viewModel);
+
+        } else if (view instanceof ImageView) {
+            saveViewStateToViewModel((ImageView) view, viewModel);
+
+        }
+        //TODO Add additional views that need their state saved to the model
+    }
+
+    public static void saveViewStateToViewModel(final TwoWayGridView twoWayGridView, final ViewModel viewModel) {
+        //Stop fling and other scrolling to ensure the state is recorded correctly
+        twoWayGridView.endFling();
+
+        if (viewModel instanceof AdapterViewModel) {
+            //Save the state so the gridView can be resurrected in the same position the next time it's displayed
+            final AdapterViewModel adapterViewModel = (AdapterViewModel) viewModel;
+            adapterViewModel.setFirstPosition(twoWayGridView.getFirstVisiblePosition());
+            adapterViewModel.setFirstPositionOffset(twoWayGridView.getScrollByDistance());
+        }
+    }
+
+    public static void saveViewStateToViewModel(final FrameLayout frameLayout, final ViewModel viewModel) {
+        //Nothing to save at the moment
+    }
+
+    public static void saveViewStateToViewModel(final RelativeLayout linearLayout, final ViewModel viewModel) {
+        //Nothing to save at the moment
+    }
+
+    public static void saveViewStateToViewModel(final LinearLayout linearLayout, final ViewModel viewModel) {
+        //Nothing to save at the moment
+    }
+
+    public static void saveViewStateToViewModel(final ImageView imageView, final ViewModel viewModel) {
+        //Nothing to save at the moment
+    }
+
+    public static void saveViewStateToViewModel(final TextView textView, final ViewModel viewModel) {
+        //Nothing to save at the moment
     }
 }

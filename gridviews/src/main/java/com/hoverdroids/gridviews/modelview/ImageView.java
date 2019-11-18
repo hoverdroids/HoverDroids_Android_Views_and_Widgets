@@ -27,6 +27,8 @@ import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
 public class ImageView extends AppCompatImageView implements ModelView {
 
+    private ImageViewModel viewModel;
+
     public ImageView(final Context context) {
         super(context);
     }
@@ -52,8 +54,34 @@ public class ImageView extends AppCompatImageView implements ModelView {
         ViewUtils.setBackgroundColor(this, viewModel);
 
         if (viewModel instanceof ImageViewModel) {
+            this.viewModel = (ImageViewModel) viewModel;
+
             //Set the attrs specific to ImageView
             ViewUtils.setImageResourceId(this, (ImageViewModel) viewModel);
         }
+    }
+
+    /**
+     * This is called when the view is first detached from the window. If the view is used in an AdapterVeiw, this
+     * is called when the row moves out of view when scrolling. It is a good time to save the state to the model.
+     */
+    @Override
+    public void onStartTemporaryDetach(){
+        //Save own state
+        ViewUtils.saveViewStateToViewModel(this, viewModel);
+
+        super.onStartTemporaryDetach();
+    }
+
+    /**
+     * This is called when the view is first attached to the window. If the view is used in an AdapterView, this
+     * is called when the row first moves into view when scrolling.
+     */
+    @Override
+    public void onFinishTemporaryDetach(){
+        //TODO Something useful when view is attached to the window.
+
+        //Let the superclass do whatever it does
+        super.onFinishTemporaryDetach();
     }
 }

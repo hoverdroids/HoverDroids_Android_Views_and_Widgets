@@ -18,6 +18,7 @@ package com.hoverdroids.gridviews.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -138,7 +139,7 @@ public class TwoWayGridView extends TwoWayAbsListView
 		if (index >= 0) {
 			setGravity(index);
 		}
-			
+
 		a.recycle();
 		setupGridType();
 	}
@@ -3587,7 +3588,7 @@ public class TwoWayGridView extends TwoWayAbsListView
 	}
 		
 	//TODO chris added this
-	public void setRelativePosition(int position,int offsetFromPosition){
+	public void setRelativePosition(int position, int offsetFromPosition){
 		Log.d("TWGV","TWGV setRelResurrectPos("+position +","+offsetFromPosition+",gvPos:"+this.position);
 		
 		//Exactly the same as setSelection in TWGV
@@ -3605,10 +3606,36 @@ public class TwoWayGridView extends TwoWayAbsListView
 		notifyDataSetChangedOffset = offsetFromPosition;
 		
 	}
-	
+
+	//TODO chris added this
 	public void setNotifyDataSetChangedOffset(int offset){
 		notifyDataSetChangedOffset = offset;
 	}
 
+	//TODO chris added this
+	//Get the offset distance of the firstVisiblePosition
+	public int getScrollByDistance(){
+
+		int scrollByDistance = 0;
+
+		//No scrollbydistance if no children
+		if(getChildCount()>0){
+			int displayOrientation = getContext().getResources().getConfiguration().orientation;
+
+			if((displayOrientation == Configuration.ORIENTATION_PORTRAIT && getScrollDirectionPortrait() == SCROLL_HORIZONTAL) ||
+					(displayOrientation == Configuration.ORIENTATION_LANDSCAPE && getScrollDirectionLandscape() == SCROLL_HORIZONTAL)){
+
+				//Since the scrolling is horizontal, the delX matters
+				scrollByDistance = -getChildAt(0).getLeft()+getPaddingLeft();
+
+			}else{
+
+				//Since the scrolling is vertical, the delY matters
+				scrollByDistance = -getChildAt(0).getTop()+getPaddingTop();
+			}
+		}
+
+		return scrollByDistance;
+	}
 }
 

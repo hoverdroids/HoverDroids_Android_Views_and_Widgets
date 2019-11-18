@@ -75,25 +75,50 @@ public interface AdapterViewModel extends AdapterModel
      * Gets current scroll distance x.
      * @return the current scroll distance x
      */
-    int getCurrentScrollDistanceX();
+    int getCurrentScrollDistanceX();//TODO necessary?
 
     /**
      * Sets current scroll distance x.
      * @param distance the distance
      */
-    void setCurrentScrollDistanceX(final int distance);
+    void setCurrentScrollDistanceX(final int distance);//TODO necessary?
 
     /**
      * Gets current scroll distance y.
      * @return the current scroll distance y
      */
-    int getCurrentScrollDistanceY();
+    int getCurrentScrollDistanceY();//TODO necessary?
 
     /**
      * Sets current scroll distance y.
      * @param distance the distance
      */
-    void setCurrentScrollDistanceY(final int distance);
+    void setCurrentScrollDistanceY(final int distance);//TODO necessary?
 
     //TODO disableScroll(boolean)
+
+
+    /**
+     * Get the first visible position.
+     * @return The position
+     */
+    int getFirstPosition();
+
+    /**
+     * Set the first visible position.
+     * @param position The position
+     */
+    void setFirstPosition(final int position);
+
+    /**
+     * Get the first position offset.
+     * @return The offset
+     */
+    int getFirstPositionOffset();
+
+    /**
+     * Set the first position offset.
+     * @param offset The offset
+     */
+    void setFirstPositionOffset(final int offset);
 }

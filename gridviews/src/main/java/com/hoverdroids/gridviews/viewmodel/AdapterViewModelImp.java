@@ -41,6 +41,12 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
     /** The current scroll position in Y. Essential for realigning the associated view in an adapter view. */
     private int currentScrollDistanceY;
 
+    /** The first visible position. */
+    private int firstPosition;
+
+    /** The offset of the first visible position. */
+    private int firstPositionOffset;
+
     /**
      * Constructor for the model.
      * @param items Items used to populate a TwoWayAdapterView.
@@ -191,5 +197,41 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
     public void setCurrentScrollDistanceY(final int distance)
     {
         currentScrollDistanceY = distance;
+    }
+
+    /**
+     * Get the first visible position.
+     * @return The position
+     */
+    @Override
+    public int getFirstPosition() {
+        return firstPosition;
+    }
+
+    /**
+     * Set the first visible position.
+     * @param position The position
+     */
+    @Override
+    public void setFirstPosition(int position) {
+        firstPosition = position;
+    }
+
+    /**
+     * Get the first position offset.
+     * @return The offset
+     */
+    @Override
+    public int getFirstPositionOffset() {
+        return firstPositionOffset;
+    }
+
+    /**
+     * Set the first position offset.
+     * @param offset The offset
+     */
+    @Override
+    public void setFirstPositionOffset(int offset) {
+        firstPositionOffset = offset;
     }
 }

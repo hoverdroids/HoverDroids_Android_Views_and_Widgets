@@ -24,35 +24,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hoverdroids.gridviews.util.ViewUtils;
+import com.hoverdroids.gridviews.view.ViewModelAdapter;
+import com.hoverdroids.gridviews.viewmodel.AdapterViewModel;
 import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LinearLayout extends android.widget.LinearLayout implements ModelView
-{
+public class TwoWayGridView extends com.hoverdroids.gridviews.view.TwoWayGridView implements ModelView {
+
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
     private ViewModel viewModel;
 
-    public LinearLayout(final @NonNull Context context) {
+    private ViewModelAdapter adapter;
+
+    public TwoWayGridView(final @NonNull Context context) {
         super(context);
         init();
         initViews();
     }
 
-    public LinearLayout(final @NonNull Context context, final @Nullable AttributeSet attrs) {
+    public TwoWayGridView(final @NonNull Context context, final @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public LinearLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr) {
+    public TwoWayGridView(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    public LinearLayout(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
 
@@ -70,6 +69,10 @@ public class LinearLayout extends android.widget.LinearLayout implements ModelVi
     protected void initViews() {
         //Map all views with IDs for quicker reference - especially in AdapterViews.
         viewIds = ViewUtils.getViewIdMapping(this);
+
+        //Only set adapter once. Null items list will generate an empty ArrayList
+        adapter = new ViewModelAdapter(getContext(), null);
+        setAdapter(adapter);
     }
 
     /**
@@ -80,11 +83,21 @@ public class LinearLayout extends android.widget.LinearLayout implements ModelVi
      * @param viewModel The viewModel
      */
     @Override
-    public void setViewModel(final ViewModel viewModel) {
+    public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
 
-        //Update own attrs
+        //Update own View attrs
         ViewUtils.setBackgroundColor(this, viewModel);
+
+        //Update own AdapterView attrs
+        if (viewModel instanceof AdapterViewModel) {
+            final AdapterViewModel avModel = (AdapterViewModel) viewModel;
+
+            //Set the gv's position BEFORE updating the adapter - need to be using TRANSCRIPT_MODE_RELATIVE
+            setRelativePosition(avModel.getFirstPosition(), avModel.getFirstPositionOffset());
+            
+            adapter.setItems(avModel.getItems());
+        }
 
         //Update child attrs
         ViewUtils.setChildrenViewModels(viewIds, viewModel);

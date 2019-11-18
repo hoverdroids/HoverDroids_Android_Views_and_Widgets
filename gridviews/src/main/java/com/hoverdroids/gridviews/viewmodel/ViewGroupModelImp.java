@@ -63,7 +63,7 @@ public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
     }
 
     @Override
-    public void setIsFirst(boolean isFirst) {
+    public void setIsFirst(final boolean isFirst) {
         super.setIsFirst(isFirst);
 
         //The children views might also want to know their relative placement in an adapter. If so, they need to implement AdapterModel too.
@@ -77,7 +77,7 @@ public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
     }
 
     @Override
-    public void setIsLast(boolean isLast) {
+    public void setIsLast(final boolean isLast) {
         super.setIsLast(isLast);
 
         //The children views might also want to know their relative placement in an adapter. If so, they need to implement AdapterModel too.
@@ -91,7 +91,7 @@ public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
     }
 
     @Override
-    public void setPosition(int position) {
+    public void setPosition(final int position) {
         super.setPosition(position);
 
         //The children views might also want to know their relative placement in an adapter. If so, they need to implement AdapterModel too.

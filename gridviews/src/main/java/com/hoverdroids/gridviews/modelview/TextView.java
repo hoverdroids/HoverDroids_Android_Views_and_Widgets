@@ -27,6 +27,8 @@ import com.hoverdroids.gridviews.viewmodel.ViewModel;
 
 public class TextView extends AppCompatTextView implements ModelView {
 
+    private TextViewModel viewModel;
+
     public TextView(final Context context) {
         super(context);
     }
@@ -52,9 +54,35 @@ public class TextView extends AppCompatTextView implements ModelView {
         ViewUtils.setBackgroundColor(this, viewModel);
 
         if (viewModel instanceof TextViewModel) {
+            this.viewModel = (TextViewModel) viewModel;
+
             //Set the attrs specific to ImageView
             final TextViewModel tvItem = (TextViewModel) viewModel;
             ViewUtils.setText(this, tvItem);
         }
+    }
+
+    /**
+     * This is called when the view is first detached from the window. If the view is used in an AdapterVeiw, this
+     * is called when the row moves out of view when scrolling. It is a good time to save the state to the model.
+     */
+    @Override
+    public void onStartTemporaryDetach(){
+        //Save own state
+        ViewUtils.saveViewStateToViewModel(this, viewModel);
+
+        super.onStartTemporaryDetach();
+    }
+
+    /**
+     * This is called when the view is first attached to the window. If the view is used in an AdapterView, this
+     * is called when the row first moves into view when scrolling.
+     */
+    @Override
+    public void onFinishTemporaryDetach(){
+        //TODO Something useful when view is attached to the window.
+
+        //Let the superclass do whatever it does
+        super.onFinishTemporaryDetach();
     }
 }
