@@ -17,10 +17,13 @@
 package com.hoverdroids.adapterview.viewmodel;
 
 import com.hoverdroids.adapterview.view.TwoWayAbsListView.OnScrollListener;
+import com.hoverdroids.adapterview.view.TwoWayAdapterView.OnItemClickListener;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 import com.hoverdroids.viewmodel.model.ViewModelImp;
 
 import java.util.List;
+
+import static com.hoverdroids.adapterview.view.TwoWayAbsListView.TRANSCRIPT_MODE_RELATIVE;
 
 /** Implementation of AdapterViewModel.*/
 public class AdapterViewModelImp extends ViewModelImp implements AdapterViewModel
@@ -30,6 +33,13 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
 
     /** Handler for scroll events.*/
     private OnScrollListener onScrollListener;
+
+    /** Handler for clicks on child items. */
+    private OnItemClickListener onItemClickListener;
+
+    /** Transcript mode. Needs to be using TRANSCRIPT_MODE_RELATIVE (default) for AdapterViews to resurrect
+     * correctly when using an AdapterViewModel. */
+    private int transcriptMode = TRANSCRIPT_MODE_RELATIVE;
 
     /** Indicates if the associated view should allow the use to fling contents.*/
     private boolean flingEnabled;
@@ -243,5 +253,25 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
     @Override
     public void setFirstPositionOffset(int offset) {
         firstPositionOffset = offset;
+    }
+
+    @Override
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    @Override
+    public void setOnItemClickListener(final OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    @Override
+    public void setTranscriptMode(int mode) {
+        transcriptMode = mode;
+    }
+
+    @Override
+    public int getTranscriptMode() {
+        return transcriptMode;
     }
 }

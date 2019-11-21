@@ -17,13 +17,19 @@
 package com.hoverdroids.adapterview.viewmodel;
 
 import com.hoverdroids.adapterview.view.TwoWayAbsListView.OnScrollListener;
+import com.hoverdroids.adapterview.view.TwoWayAdapterView.OnItemClickListener;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 
 import java.util.List;
 
+import static com.hoverdroids.adapterview.view.TwoWayAbsListView.TRANSCRIPT_MODE_RELATIVE;
+
 /** Model for updating an AdapterView - e.g. TWGV, ListView, GridView, etc. */
 public interface AdapterViewModel extends AdapterModel
 {
+    /** Invalid transcript mode. */
+    public static int INVALID_TRANSCRIPT_MODE = -1;
+
     /**
      * Gets items.
      * @return the items
@@ -47,6 +53,18 @@ public interface AdapterViewModel extends AdapterModel
      * @param onScrollListener the on scroll listener
      */
     void setOnScrollListener(final OnScrollListener onScrollListener);
+
+    /**
+     * Get the onItemClickListener.
+     * @return The onItemClickListener or null if one has not been set
+     */
+    OnItemClickListener getOnItemClickListener();
+
+    /**
+     * Set the onItemClickListener.
+     * @param onItemClickListener The onItemClickListener
+     */
+    void setOnItemClickListener(final OnItemClickListener onItemClickListener);
 
     /**
      * Is fling enabled boolean.
@@ -122,4 +140,19 @@ public interface AdapterViewModel extends AdapterModel
      * @param offset The offset
      */
     void setFirstPositionOffset(final int offset);
+
+    /**
+     * Set the TranscriptMode - see TwoWayAbsListView for all modes.
+     * @param mode The mode
+     */
+    void setTranscriptMode(final int mode);
+
+    /**
+     * Get the transcript mode. Needs to be using TRANSCRIPT_MODE_RELATIVE (default) for AdapterViews to resurrect
+     * correctly when using an AdapterViewModel.
+     * @return The TranscriptMode
+     */
+    default int getTranscriptMode() {
+        return TRANSCRIPT_MODE_RELATIVE;
+    }
 }

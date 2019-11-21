@@ -22,10 +22,11 @@ import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hoverdroids.adapterview.view.TwoWayAbsListView;
 import com.hoverdroids.adapterview.viewmodel.AdapterViewModel;
 import com.hoverdroids.viewmodel.model.ViewModel;
 import com.hoverdroids.viewmodel.view.ModelView;
+
+import static com.hoverdroids.adapterview.viewmodel.AdapterViewModel.INVALID_TRANSCRIPT_MODE;
 
 
 /**
@@ -92,11 +93,12 @@ public class TwoWayGridView extends com.hoverdroids.adapterview.view.TwoWayGridV
             final AdapterViewModel avModel = (AdapterViewModel) viewModel;
 
             //Set the gv's position BEFORE updating the adapter - need to be using TRANSCRIPT_MODE_RELATIVE (default)
-            setTranscriptMode(TwoWayAbsListView.TRANSCRIPT_MODE_RELATIVE);
-            setRelativePosition(avModel.getFirstPosition(), avModel.getFirstPositionOffset());
+            setTranscriptMode(avModel);
+            setRelativePosition(avModel);
+            setOnItemClickListener(avModel);
+            setOnScrollListener(avModel);
 
             adapter.setItems(avModel.getItems());
-            setRelativePosition(avModel.getFirstPosition(), avModel.getFirstPositionOffset());
         }
 
         //NOTE: ViewGroups that are not AdapterViews would call setViewModel on child views. AdapterViews must do this through an Adapter like ViewModelAdapter.
@@ -105,6 +107,44 @@ public class TwoWayGridView extends com.hoverdroids.adapterview.view.TwoWayGridV
     @Override
     public ViewModel getViewModel() {
         return viewModel;
+    }
+
+    /**
+     * Set the transcript mode.
+     * @param viewModel The viewModel
+     */
+    private void setTranscriptMode(final AdapterViewModel viewModel) {
+        if (viewModel.getTranscriptMode() != INVALID_TRANSCRIPT_MODE) {
+            setTranscriptMode(viewModel.getTranscriptMode());
+        }
+    }
+
+    /**
+     * Set the relative position from the model.
+     * @param viewModel The viewModel
+     */
+    private void setRelativePosition(final AdapterViewModel viewModel) {
+        setRelativePosition(viewModel.getFirstPosition(), viewModel.getFirstPositionOffset());
+    }
+
+    /**
+     * Set the onItemClickListener from the model, but only if it is non-null.
+     * @param viewModel The viewModel
+     */
+    private void setOnItemClickListener(final AdapterViewModel viewModel) {
+        if (viewModel.getOnItemClickListener() != null) {
+            setOnItemClickListener(viewModel.getOnItemClickListener());
+        }
+    }
+
+    /**
+     * Set the onScrollListener from the model, but only if it is non-null.
+     * @param viewModel The viewModel
+     */
+    private void setOnScrollListener(final AdapterViewModel viewModel) {
+        if (viewModel.getOnScrollListener() != null) {
+            setOnScrollListener(viewModel.getOnScrollListener());
+        }
     }
 
     @Override
