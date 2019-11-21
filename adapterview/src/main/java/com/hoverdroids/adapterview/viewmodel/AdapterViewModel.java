@@ -19,7 +19,6 @@ package com.hoverdroids.adapterview.viewmodel;
 import com.hoverdroids.adapterview.view.TwoWayAbsListView.OnScrollListener;
 import com.hoverdroids.adapterview.view.TwoWayAdapterView.OnItemClickListener;
 import com.hoverdroids.viewmodel.model.AdapterModel;
-import com.hoverdroids.viewmodel.model.ViewModel;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ import static com.hoverdroids.adapterview.view.TwoWayAbsListView.TRANSCRIPT_MODE
 public interface AdapterViewModel extends AdapterModel
 {
     /** Invalid transcript mode. */
-    public static int INVALID_TRANSCRIPT_MODE = -1;
+    int INVALID_TRANSCRIPT_MODE = -1;
 
     /**
      * Gets items.
@@ -73,8 +72,49 @@ public interface AdapterViewModel extends AdapterModel
      * @param viewModel The viewModel
      * @return The position
      */
-    default int getItemPosition(final ViewModel viewModel) {
-        return getItems() == null ? -1 : getItems().indexOf(viewModel);
+    default int getItemPosition(final AdapterModel adapterModel) {
+        return getItems() == null ? -1 : getItems().indexOf(adapterModel);
+    }
+
+    /**
+     * Add the item at the given position in the list.
+     * @param position The position
+     * @param adapterModel The adapterModel to add
+     */
+    default void addItem(final int position, final AdapterModel adapterModel) {
+        if (getItems() != null) {
+            getItems().add(position, adapterModel);
+        }
+    }
+
+    /**
+     * Add the item at the given position in the list.
+     * @param adapterModel The adapterModel to add
+     */
+    default void addItem(final AdapterModel adapterModel) {
+        if (getItems() != null) {
+            getItems().add(adapterModel);
+        }
+    }
+
+    /**
+     * Remove the given item from the list.
+     * @param adapterModel The adapterModel to remove
+     */
+    default void removeItem(final AdapterModel adapterModel) {
+        if (getItems() != null) {
+            getItems().remove(adapterModel);
+        }
+    }
+
+    /**
+     * Remove the item at the given position from the list.
+     * @param position The position
+     */
+    default void removeItem(final int position) {
+        if (getItems() != null) {
+            getItems().remove(position);
+        }
     }
 
     /**
