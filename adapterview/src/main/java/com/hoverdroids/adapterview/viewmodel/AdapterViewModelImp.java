@@ -21,8 +21,10 @@ import com.hoverdroids.adapterview.view.TwoWayAdapterView.OnItemClickListener;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 import com.hoverdroids.viewmodel.model.ViewModelImp;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.NO_ID;
 import static com.hoverdroids.adapterview.view.TwoWayAbsListView.TRANSCRIPT_MODE_RELATIVE;
 
 /** Implementation of AdapterViewModel.*/
@@ -58,6 +60,25 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
 
     /** The offset of the first visible position. */
     private int firstPositionOffset;
+
+    /**
+     * Constructor. Use this when the viewModel's view is the top-level parent.
+     * @param layoutResourceId The layout resource ID
+     * @param viewId The viewID corresponding to this viewModel
+     * @param items Items used in an ViewModelAdapter to populate a AdapterView.
+     */
+    public AdapterViewModelImp(final int layoutResourceId) {
+        this(layoutResourceId, NO_ID);
+    }
+
+    /**
+     * Constructor. Use this when the viewModel's view is the top-level parent.
+     * @param layoutResourceId The layout resource ID
+     * @param viewId The viewID corresponding to this viewModel
+     */
+    public AdapterViewModelImp(final int layoutResourceId, final int viewId) {
+        this(layoutResourceId, viewId, new ArrayList<>());
+    }
 
     /**
      * Constructor. Use this when the viewModel's view is the top-level parent.

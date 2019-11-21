@@ -31,6 +31,14 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
     private int backgroundResourceId = INVALID_RESOURCE_ID;
 
     /**
+     * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
+     * @param id The view ID corresponding to this viewModel
+     */
+    public ViewModelImp(final int viewId) {
+        this(INVALID_RESOURCE_ID, viewId);
+    }
+
+    /**
      * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
      * @param viewId The viewID corresponding to this viewModel
@@ -41,21 +49,20 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
     }
 
     /**
+     * Constructor. Use this when the the viewModel's view is the a child since only the top-level parent's layoutResId is used
+     * @param viewClass
+     */
+    public ViewModelImp(String viewClass) {
+        this(viewClass, NO_ID);
+    }
+
+    /**
      * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param viewClass The view class
      * @param viewId The view ID corresponding to this viewModel
      */
     public ViewModelImp(final String viewClass, final int viewId) {
         super(viewClass);
-        this.viewId = viewId;
-    }
-
-    /**
-     * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
-     * @param id The view ID corresponding to this viewModel
-     */
-    public ViewModelImp(final int viewId) {
-        super(-1);
         this.viewId = viewId;
     }
 

@@ -19,6 +19,7 @@ package com.hoverdroids.adapterview.viewmodel;
 import com.hoverdroids.adapterview.view.TwoWayAbsListView.OnScrollListener;
 import com.hoverdroids.adapterview.view.TwoWayAdapterView.OnItemClickListener;
 import com.hoverdroids.viewmodel.model.AdapterModel;
+import com.hoverdroids.viewmodel.model.ViewModel;
 
 import java.util.List;
 
@@ -41,6 +42,40 @@ public interface AdapterViewModel extends AdapterModel
      * @param items the items
      */
     void setItems(final List<AdapterModel> items);
+
+    /**
+     * Get the item at the given position.
+     * @param position The position
+     * @return The item
+     */
+    default AdapterModel getItem(final int position) {
+        return getItems() == null ? null : getItems().get(position);
+    }
+
+    /**
+     * Get the item by it's item name.
+     * @param name The item name
+     * @return The item
+     */
+    default AdapterModel getItem(final String name) {
+        if (getItems() != null) {
+            for (final AdapterModel model: getItems()) {
+                if (name.equals(model.getItemName())) {
+                    return model;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get the position of the given item.
+     * @param viewModel The viewModel
+     * @return The position
+     */
+    default int getItemPosition(final ViewModel viewModel) {
+        return getItems() == null ? -1 : getItems().indexOf(viewModel);
+    }
 
     /**
      * Gets on scroll listener.
