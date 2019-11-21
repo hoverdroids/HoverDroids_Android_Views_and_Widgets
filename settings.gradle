@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':app', ':gridviews'
+include ':app', ':adapterview', ':viewmodel', ':touchsync', ':viewgroup', ':view'

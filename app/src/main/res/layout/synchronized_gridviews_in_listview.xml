@@ -39,7 +39,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>-->
 
-    <com.hoverdroids.gridviews.view.TwoWayGridView
+    <com.hoverdroids.adapterview.view.TwoWayGridView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,7 +50,7 @@
         app:scrollDirectionLandscape="vertical"
         app:scrollDirectionPortrait="vertical">
 
-    </com.hoverdroids.gridviews.view.TwoWayGridView>
+    </com.hoverdroids.adapterview.view.TwoWayGridView>
 
     <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

@@ -44,7 +44,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.hoverdroids.gridviews.view.TouchSyncTwoWayGridView
+        <com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView
             android:id="@+id/topGridView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -57,7 +57,7 @@
             app:scrollDirectionPortrait="horizontal"
             app:sourceMode="xy" />
 
-        <com.hoverdroids.gridviews.view.TouchSyncTwoWayGridView
+        <com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView
             android:id="@+id/centerGridView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -70,7 +70,7 @@
             app:scrollDirectionLandscape="horizontal"
             app:sourceMode="notSource"/>
 
-        <com.hoverdroids.gridviews.view.TouchSyncTwoWayGridView
+        <com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView
             android:id="@+id/bottomGridView"
             android:layout_width="match_parent"
             android:layout_height="0dp"

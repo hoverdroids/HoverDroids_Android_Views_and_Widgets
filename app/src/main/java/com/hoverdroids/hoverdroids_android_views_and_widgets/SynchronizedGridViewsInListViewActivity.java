@@ -23,14 +23,13 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.util.OnSourceTouchEventListener;
-import com.hoverdroids.gridviews.view.TwoWayGridView;
-import com.hoverdroids.gridviews.view.ViewModelAdapter;
-import com.hoverdroids.gridviews.viewmodel.AdapterModel;
-import com.hoverdroids.gridviews.viewmodel.AdapterViewModelImp;
-import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
-import com.hoverdroids.gridviews.viewmodel.ViewGroupModelImp;
-import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
+import com.hoverdroids.adapterview.modelview.ViewModelAdapter;
+import com.hoverdroids.adapterview.view.TwoWayGridView;
+import com.hoverdroids.adapterview.viewmodel.AdapterViewModelImp;
+import com.hoverdroids.touchsync.OnSourceTouchEventListener;
+import com.hoverdroids.view.viewmodel.ImageTextModelImp;
+import com.hoverdroids.viewmodel.model.AdapterModel;
+import com.hoverdroids.viewmodel.model.ViewGroupModelImp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-import static com.hoverdroids.gridviews.viewmodel.AdapterModel.INVALID_RESOURCE_ID;
+import static com.hoverdroids.viewmodel.model.ViewModel.INVALID_RESOURCE_ID;
 
 public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity implements OnSourceTouchEventListener
 {

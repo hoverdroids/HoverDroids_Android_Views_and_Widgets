@@ -23,12 +23,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoverdroids.gridviews.util.OnSourceTouchEventListener;
-import com.hoverdroids.gridviews.view.ViewModelAdapter;
-import com.hoverdroids.gridviews.view.TouchSyncTwoWayGridView;
-import com.hoverdroids.gridviews.viewmodel.AdapterModel;
-import com.hoverdroids.gridviews.viewmodel.ImageTextModelImp;
-import com.hoverdroids.gridviews.viewmodel.ViewModelImp;
+import com.hoverdroids.adapterview.modelview.ViewModelAdapter;
+import com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView;
+import com.hoverdroids.touchsync.OnSourceTouchEventListener;
+import com.hoverdroids.view.viewmodel.ImageTextModelImp;
+import com.hoverdroids.viewmodel.model.AdapterModel;
+import com.hoverdroids.viewmodel.model.ViewModelImp;
 
 import java.util.ArrayList;
 import java.util.List;
