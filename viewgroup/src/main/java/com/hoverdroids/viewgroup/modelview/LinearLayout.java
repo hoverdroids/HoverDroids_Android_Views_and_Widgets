@@ -85,6 +85,7 @@ public class LinearLayout extends android.widget.LinearLayout implements ModelVi
 
         //Update own attrs
         setBackgroundColor(viewModel);
+        setBackgroundResource(viewModel);
 
         //Update child attrs
         setChildrenViewModels(viewIds, viewModel);

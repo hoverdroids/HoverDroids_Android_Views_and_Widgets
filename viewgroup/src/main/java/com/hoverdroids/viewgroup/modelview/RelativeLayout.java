@@ -86,6 +86,7 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Mod
 
         //Update own attrs
         setBackgroundColor(viewModel);
+        setBackgroundResource(viewModel);
 
         //Update child attrs
         setChildrenViewModels(viewIds, viewModel);
