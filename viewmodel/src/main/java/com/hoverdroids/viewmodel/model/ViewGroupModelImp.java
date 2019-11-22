@@ -28,10 +28,10 @@ public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
     /**
      * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this model
+     * @param viewId The view ID corresponding to this model
      */
-    public ViewGroupModelImp(final int layoutResourceId, final int id) {
-        super(layoutResourceId, id);
+    public ViewGroupModelImp(final int layoutResourceId, final int viewId) {
+        super(layoutResourceId, viewId);
     }
 
     /**
@@ -53,11 +53,11 @@ public class ViewGroupModelImp extends ViewModelImp implements ViewGroupModel {
 
     /**
      * Get the viewModel for the view with the given ID.
-     * @param id The view's ID
+     * @param viewId The view's ID
      */
     @Override
-    public ViewModel getChildViewModel(final int id) {
-        return viewModels.get(id);
+    public ViewModel getChildViewModel(final int viewId) {
+        return viewModels.get(viewId);
     }
 
     /**

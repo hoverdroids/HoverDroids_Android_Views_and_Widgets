@@ -37,9 +37,9 @@ public interface ViewModel {
 
     /**
      * Set the ID for the view that corresponds to this viewModel.
-     * @param id The ID
+     * @param viewId The ID
      */
-    void setViewId(int id);
+    void setViewId(int viewId);
 
     /**
      * Get the background color.

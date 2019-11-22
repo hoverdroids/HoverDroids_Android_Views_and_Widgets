@@ -56,4 +56,5 @@ dependencies {
 
     //Modules
     implementation project(path: ':viewmodel')
+    implementation project(path: ':view')
 }

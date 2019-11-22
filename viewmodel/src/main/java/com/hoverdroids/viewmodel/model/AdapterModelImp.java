@@ -22,7 +22,7 @@ import static com.hoverdroids.viewmodel.model.ViewModel.INVALID_RESOURCE_ID;
 public class AdapterModelImp implements AdapterModel
 {
     /** The model id used by adapters in getModelById (optional). */
-    private int id = INVALID_RESOURCE_ID;
+    private int itemId = INVALID_RESOURCE_ID;
 
     /** The layout resource ID to inflate to visualize this model. */
     private int layoutResourceId = INVALID_RESOURCE_ID;
@@ -65,7 +65,7 @@ public class AdapterModelImp implements AdapterModel
     @Override
     public int getItemId()
     {
-        return id;
+        return itemId;
     }
 
     /**
@@ -73,9 +73,9 @@ public class AdapterModelImp implements AdapterModel
      * @param id The unique Id.
      */
     @Override
-    public void setItemId(final int id)
+    public void setItemId(final int itemId)
     {
-        this.id = id;
+        this.itemId = itemId;
     }
 
     /**

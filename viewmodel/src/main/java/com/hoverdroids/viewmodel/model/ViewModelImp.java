@@ -80,8 +80,8 @@ public class ViewModelImp extends AdapterModelImp implements ViewModel {
      * @param id The ID
      */
     @Override
-    public void setViewId(final int id) {
-        this.viewId = id;
+    public void setViewId(final int viewId) {
+        this.viewId = viewId;
     }
 
     /**

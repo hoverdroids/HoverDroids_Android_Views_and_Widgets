@@ -27,21 +27,21 @@ public class TextViewModelImp extends ViewModelImp implements TextViewModel {
     /**
      * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      * @param text The text
      */
-    public TextViewModelImp(final int layoutResourceId, final int id, final String text) {
-        super(layoutResourceId, id);
+    public TextViewModelImp(final int layoutResourceId, final int viewId, final String text) {
+        super(layoutResourceId, viewId);
         this.text = text;
     }
 
     /**
      * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      * @param text The text
      */
-    public TextViewModelImp(final int id, final String text) {
-        super(id);
+    public TextViewModelImp(final int viewId, final String text) {
+        super(viewId);
         this.text = text;
     }
 

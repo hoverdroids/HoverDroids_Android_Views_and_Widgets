@@ -44,8 +44,8 @@ public interface ModelViewGroup extends ModelView {
 
         for (int i = 0; i < ((ViewGroup)this).getChildCount(); i++) {
             final View view = ((ViewGroup)this).getChildAt(i);
-            final int id = view.getId();
-            if (id != NO_ID) {
+            final int viewId = view.getId();
+            if (viewId != NO_ID) {
                 viewIds.put(view.getId(), view);
             }
         }

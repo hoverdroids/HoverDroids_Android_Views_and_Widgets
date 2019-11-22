@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.view.viewmodel;
+package com.hoverdroids.viewgroup.viewmodel;
 
+import com.hoverdroids.view.viewmodel.ImageViewModelImp;
+import com.hoverdroids.view.viewmodel.TextViewModelImp;
 import com.hoverdroids.viewmodel.model.ViewGroupModelImp;
 
 /**
@@ -28,24 +30,24 @@ public class ImageTextModelImp extends ViewGroupModelImp
     /**
      * Constructor - with minimum arguments.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      */
-    public ImageTextModelImp(final int layoutResourceId, final int id) {
-        super(layoutResourceId, id);
+    public ImageTextModelImp(final int layoutResourceId, final int viewId) {
+        super(layoutResourceId, viewId);
     }
 
     /**
      * Constructor for quickly creating a viewModel when only one ImageView and TextView are used in the layout.
      * @param layoutResourceId The layoutResourceId
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      * @param textViewId The textViewId
      * @param text The text
      * @param imageViewId The imageViewId
      * @param imageResourceId The imageResourceId
      */
-    public ImageTextModelImp(final int layoutResourceId, final int id, final int textViewId, final String text,
+    public ImageTextModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text,
                              final int imageViewId, final int imageResourceId){
-        super(layoutResourceId, id);
+        super(layoutResourceId, viewId);
         setChildViewModel(new TextViewModelImp(textViewId, text));
         setChildViewModel(new ImageViewModelImp(imageViewId, imageResourceId));
     }
@@ -53,24 +55,24 @@ public class ImageTextModelImp extends ViewGroupModelImp
     /**
      * Constructor for quickly creating a viewModel when only one TextView is used in the layout.
      * @param layoutResourceId The layoutResourceId
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      * @param textViewId The textViewId
      * @param text The text
      */
-    public ImageTextModelImp(final int layoutResourceId, final int id, final int textViewId, final String text){
-        super(layoutResourceId, id);
+    public ImageTextModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text){
+        super(layoutResourceId, viewId);
         setChildViewModel(new TextViewModelImp(textViewId, text));
     }
 
     /**
      * Constructor for quickly creating an viewModel when only one ImageView is used in the layout.
      * @param layoutResourceId The layoutResourceId
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      * @param imageViewId The imageViewId
      * @param imageResourceId The imageResourceId
      */
-    public ImageTextModelImp(final int layoutResourceId, final int id, final int imageViewId, final int imageResourceId){
-        super(layoutResourceId, id);
+    public ImageTextModelImp(final int layoutResourceId, final int viewId, final int imageViewId, final int imageResourceId){
+        super(layoutResourceId, viewId);
         setChildViewModel(new ImageViewModelImp(imageViewId, imageResourceId));
     }
 }

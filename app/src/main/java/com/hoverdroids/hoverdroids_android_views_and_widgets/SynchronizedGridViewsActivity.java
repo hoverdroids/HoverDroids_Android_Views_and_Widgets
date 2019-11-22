@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hoverdroids.adapterview.modelview.ViewModelAdapter;
 import com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView;
 import com.hoverdroids.touchsync.OnSourceTouchEventListener;
-import com.hoverdroids.view.viewmodel.ImageTextModelImp;
+import com.hoverdroids.viewgroup.viewmodel.ImageTextModelImp;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 import com.hoverdroids.viewmodel.model.ViewModelImp;
 

@@ -334,6 +334,24 @@ public class ViewModelAdapter<T> extends BaseAdapter
     }
 
     /**
+     * Get the item by its item ID.
+     * @param itemId The item ID
+     * @return The item
+     */
+    public T getItemById(final int itemId) {
+        if (items == null ) {
+            return null;
+        }
+
+        for (final T item : items) {
+            if (item instanceof AdapterModel && itemId == ((AdapterModel)item).getItemId()) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Get an item based on a UniqueId that is applied to each item and is project-specific.
      * @param position The position
      * @return The item ID

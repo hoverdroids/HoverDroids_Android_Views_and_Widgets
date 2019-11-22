@@ -62,7 +62,7 @@ public interface AdapterModel
      * Set a unique id that is based on project-specific requirements.
      * @param id The unique Id.
      */
-    void setItemId(int id);
+    void setItemId(int itemId);
 
     /**
      * Set the item name.

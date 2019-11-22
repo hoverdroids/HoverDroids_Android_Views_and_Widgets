@@ -27,11 +27,11 @@ public interface ViewGroupModel extends ViewModel {
 
     /**
      * Get the child viewModel by its view ID.
-     * @param id The view's ID
+     * @param viewId The view's ID
      * @return The view's viewModel
      */
-    default ViewModel getChildViewModel(final int id) {
-        return getChildViewModels() == null ? null : getChildViewModels().get(id);
+    default ViewModel getChildViewModel(final int viewId) {
+        return getChildViewModels() == null ? null : getChildViewModels().get(viewId);
     }
 
     /**

@@ -26,21 +26,21 @@ public class ImageViewModelImp extends ViewModelImp implements ImageViewModel {
     /**
      * Constructor. Use this when the viewModel's view is the top-level parent.
      * @param layoutResourceId The layout resource ID
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      * @param imageResourceId The image resource ID
      */
-    public ImageViewModelImp(final int layoutResourceId, final int id, final int imageResourceId) {
-        super(layoutResourceId, id);
+    public ImageViewModelImp(final int layoutResourceId, final int viewId, final int imageResourceId) {
+        super(layoutResourceId, viewId);
         this.imageResourceId = imageResourceId;
     }
 
     /**
      * Constructor. Use this when the viewModel's view is a child since only the top-level parent's layoutResId is used.
-     * @param id The view ID corresponding to this viewModel
+     * @param viewId The view ID corresponding to this viewModel
      * @param imageResourceId The image resource ID
      */
-    public ImageViewModelImp(final int id, final int imageResourceId) {
-        super(id);
+    public ImageViewModelImp(final int viewId, final int imageResourceId) {
+        super(viewId);
         this.imageResourceId = imageResourceId;
     }
 
