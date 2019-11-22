@@ -78,7 +78,7 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
 
             final int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
             viewGroupModel.getChildViewModel(R.id.gridview).setBackgroundColor(color);
-            
+
             gridViewModels.add(viewGroupModel);
         }
 
