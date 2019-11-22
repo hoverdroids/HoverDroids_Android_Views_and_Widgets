@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hoverdroids.viewgroup.viewmodel;
+package com.hoverdroids.modelviewgroup.viewmodel;
 
 import com.hoverdroids.view.viewmodel.ImageViewModelImp;
 import com.hoverdroids.view.viewmodel.TextViewModelImp;

@@ -66,4 +66,5 @@ dependencies {
     implementation project(path: ':viewmodel')
     implementation project(path: ':view')
     implementation project(path: ':viewgroup')
+    implementation project(path: ':viewgroupmodel')
 }

@@ -36,11 +36,6 @@ android {
         }
     }
 
-    // Butterknife requires Java 8.
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
@@ -55,5 +50,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //Modules
+    implementation project(path: ':view')
     implementation project(path: ':viewmodel')
+    implementation project(path: ':adapterview')
 }
