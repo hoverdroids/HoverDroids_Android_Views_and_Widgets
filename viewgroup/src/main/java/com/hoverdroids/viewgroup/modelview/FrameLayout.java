@@ -33,7 +33,7 @@ public class FrameLayout extends android.widget.FrameLayout implements ModelView
 
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
-    private ViewModel viewModel;
+    protected ViewModel viewModel;
 
     public FrameLayout(final @NonNull Context context) {
         super(context);

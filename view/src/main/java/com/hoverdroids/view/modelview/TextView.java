@@ -30,7 +30,7 @@ import static com.hoverdroids.viewmodel.model.ViewModel.INVALID_COLOR;
 
 public class TextView extends AppCompatTextView implements ModelView {
 
-    private ViewModel viewModel;
+    protected ViewModel viewModel;
 
     public TextView(final Context context) {
         super(context);

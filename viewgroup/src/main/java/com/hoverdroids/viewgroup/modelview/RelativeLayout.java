@@ -34,7 +34,7 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Mod
 
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
-    private ViewModel viewModel;
+    protected ViewModel viewModel;
 
     public RelativeLayout(final @NonNull Context context) {
         super(context);

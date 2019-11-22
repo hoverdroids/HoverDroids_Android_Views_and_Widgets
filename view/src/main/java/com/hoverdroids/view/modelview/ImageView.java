@@ -21,16 +21,15 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.hoverdroids.view.viewmodel.ImageViewModel;
 import com.hoverdroids.viewmodel.model.ViewModel;
 import com.hoverdroids.viewmodel.view.ModelView;
-
-import com.hoverdroids.view.viewmodel.ImageViewModel;
 
 import static com.hoverdroids.viewmodel.model.ViewModel.INVALID_RESOURCE_ID;
 
 public class ImageView extends AppCompatImageView implements ModelView {
 
-    private ViewModel viewModel;
+    protected ViewModel viewModel;
 
     public ImageView(final Context context) {
         super(context);

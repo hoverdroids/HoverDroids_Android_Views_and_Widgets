@@ -38,7 +38,7 @@ public class TwoWayGridView extends com.hoverdroids.adapterview.view.TwoWayGridV
 
     private ViewModel viewModel;
 
-    private ViewModelAdapter adapter;
+    protected ViewModelAdapter adapter;
 
     public TwoWayGridView(final @NonNull Context context) {
         super(context);
@@ -69,7 +69,7 @@ public class TwoWayGridView extends com.hoverdroids.adapterview.view.TwoWayGridV
 
     protected void initViews() {
         //Only set adapter once. Null items list will generate an empty ArrayList
-        adapter = new ViewModelAdapter(getContext(), null);
+        adapter = new ViewModelAdapter(getContext());
         setAdapter(adapter);
     }
 

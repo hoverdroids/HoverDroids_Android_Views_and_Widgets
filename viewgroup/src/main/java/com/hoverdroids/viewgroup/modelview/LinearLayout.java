@@ -33,7 +33,7 @@ public class LinearLayout extends android.widget.LinearLayout implements ModelVi
 {
     private Map<Integer, View> viewIds = new HashMap<Integer, View>();
 
-    private ViewModel viewModel;
+    protected ViewModel viewModel;
 
     public LinearLayout(final @NonNull Context context) {
         super(context);
