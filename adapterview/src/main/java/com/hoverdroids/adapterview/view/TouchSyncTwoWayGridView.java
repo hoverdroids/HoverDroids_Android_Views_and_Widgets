@@ -83,7 +83,7 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
 
             if (ev.getHistorySize() > 1) {
                 final float origX = ev.getHistoricalX(0, 0);
-                final float origY = ev.getHistoricalX(0, 0);
+                final float origY = ev.getHistoricalY(0, 0);
 
                 float x = SourceMode.X.equals(sourceMode) || SourceMode.XY.equals(sourceMode) ? ev.getX() : origX;
                 float y = SourceMode.Y.equals(sourceMode) || SourceMode.XY.equals(sourceMode) ? ev.getY() : origY;
@@ -126,7 +126,7 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
         }
 
         isSyncTouchEvent = true;
-        onTouchEvent(ev);
+        onTouchEvent(clonedEvent);
         clonedEvent.recycle();
         isSyncTouchEvent = false;
     }
