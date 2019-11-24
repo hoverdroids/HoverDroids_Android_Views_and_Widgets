@@ -24,14 +24,14 @@ import com.hoverdroids.viewmodel.model.ViewGroupModelImp;
  * This is useful given the number of instances used in most apps.
  * e.g. spinners, dropdowns, profiles, etc.
  */
-public class TextModelImp extends ViewGroupModelImp
+public class TextViewGroupModelImp extends ViewGroupModelImp
 {
     /**
      * Constructor - with minimum arguments.
      * @param layoutResourceId The layout resource ID
      * @param viewId The view ID corresponding to this viewModel
      */
-    public TextModelImp(final int layoutResourceId, final int viewId) {
+    public TextViewGroupModelImp(final int layoutResourceId, final int viewId) {
         super(layoutResourceId, viewId);
     }
 
@@ -42,7 +42,7 @@ public class TextModelImp extends ViewGroupModelImp
      * @param textViewId The textViewId
      * @param text The text
      */
-    public TextModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text){
+    public TextViewGroupModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text){
         super(layoutResourceId, viewId);
         setChildViewModel(new TextViewModelImp(textViewId, text));
     }

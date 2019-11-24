@@ -25,8 +25,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hoverdroids.adapterview.modelview.ViewModelAdapter;
 import com.hoverdroids.adapterview.view.TwoWayGridView;
-import com.hoverdroids.modelviewgroup.viewmodel.ImageTextModelImp;
-import com.hoverdroids.modelviewgroup.viewmodel.TwgvModelImp;
+import com.hoverdroids.modelviewgroup.viewmodel.AdapterViewGroupModelImp;
+import com.hoverdroids.modelviewgroup.viewmodel.ImageTextViewGroupModelImp;
 import com.hoverdroids.touchsync.OnSourceTouchEventListener;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 
@@ -73,7 +73,7 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
 
         for (int i = 0; i < 300; i++) {
             //Oddities with TWGV.onMeasure in an AdapterView require a ViewGroup container - and hence the ViewModel requires a ViewGroupModel
-            final TwgvModelImp viewGroupModel = new TwgvModelImp(R.layout.gridview_item_view, NO_ID, R.id.gridview, getImageTextItems(i));
+            final AdapterViewGroupModelImp viewGroupModel = new AdapterViewGroupModelImp(R.layout.gridview_item_view, NO_ID, R.id.gridview, getImageTextItems(i));
             viewGroupModel.setBackgroundColor(i%2 ==0 ? Color.BLACK : Color.WHITE);
 
             final int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
@@ -95,8 +95,8 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
         final List<AdapterModel> items = new ArrayList<>();
         for (int i = 0; i < 30; i++){
             final int layout = R.layout.horizontal_image_text_item_view;//layouts[i%2];
-            final ImageTextModelImp item
-                    = new ImageTextModelImp(layout, R.id.container,
+            final ImageTextViewGroupModelImp item
+                    = new ImageTextViewGroupModelImp(layout, R.id.container,
                     R.id.text_view_1, "Row:" + row + " Col:" + i,
                     R.id.image_view_1, R.drawable.ic_launcher_background);
 

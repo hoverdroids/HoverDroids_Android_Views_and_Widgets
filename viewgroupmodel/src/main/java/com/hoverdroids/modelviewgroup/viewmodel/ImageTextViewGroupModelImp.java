@@ -25,14 +25,14 @@ import com.hoverdroids.viewmodel.model.ViewGroupModelImp;
  * This is useful given the number of instances used in most apps.
  * e.g. spinners, dropdowns, profiles, etc.
  */
-public class ImageTextModelImp extends ViewGroupModelImp
+public class ImageTextViewGroupModelImp extends ViewGroupModelImp
 {
     /**
      * Constructor - with minimum arguments.
      * @param layoutResourceId The layout resource ID
      * @param viewId The view ID corresponding to this viewModel
      */
-    public ImageTextModelImp(final int layoutResourceId, final int viewId) {
+    public ImageTextViewGroupModelImp(final int layoutResourceId, final int viewId) {
         super(layoutResourceId, viewId);
     }
 
@@ -45,8 +45,8 @@ public class ImageTextModelImp extends ViewGroupModelImp
      * @param imageViewId The imageViewId
      * @param imageResourceId The imageResourceId
      */
-    public ImageTextModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text,
-                             final int imageViewId, final int imageResourceId){
+    public ImageTextViewGroupModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text,
+                                      final int imageViewId, final int imageResourceId){
         super(layoutResourceId, viewId);
         setChildViewModel(new TextViewModelImp(textViewId, text));
         setChildViewModel(new ImageViewModelImp(imageViewId, imageResourceId));
@@ -59,7 +59,7 @@ public class ImageTextModelImp extends ViewGroupModelImp
      * @param textViewId The textViewId
      * @param text The text
      */
-    public ImageTextModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text){
+    public ImageTextViewGroupModelImp(final int layoutResourceId, final int viewId, final int textViewId, final String text){
         super(layoutResourceId, viewId);
         setChildViewModel(new TextViewModelImp(textViewId, text));
     }
@@ -71,7 +71,7 @@ public class ImageTextModelImp extends ViewGroupModelImp
      * @param imageViewId The imageViewId
      * @param imageResourceId The imageResourceId
      */
-    public ImageTextModelImp(final int layoutResourceId, final int viewId, final int imageViewId, final int imageResourceId){
+    public ImageTextViewGroupModelImp(final int layoutResourceId, final int viewId, final int imageViewId, final int imageResourceId){
         super(layoutResourceId, viewId);
         setChildViewModel(new ImageViewModelImp(imageViewId, imageResourceId));
     }

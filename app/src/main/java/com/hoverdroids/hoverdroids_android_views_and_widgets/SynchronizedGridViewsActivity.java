@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hoverdroids.adapterview.modelview.ViewModelAdapter;
 import com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView;
 import com.hoverdroids.touchsync.OnSourceTouchEventListener;
-import com.hoverdroids.modelviewgroup.viewmodel.ImageTextModelImp;
+import com.hoverdroids.modelviewgroup.viewmodel.ImageTextViewGroupModelImp;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 import com.hoverdroids.viewmodel.model.ViewModelImp;
 
@@ -92,8 +92,8 @@ public class SynchronizedGridViewsActivity extends AppCompatActivity implements 
         final List<AdapterModel> items = new ArrayList<>();
         for (int i = 0; i < 30; i++){
             final int layout = layouts[i%2];
-            final ImageTextModelImp item
-                    = new ImageTextModelImp(layout, R.id.container,
+            final ImageTextViewGroupModelImp item
+                    = new ImageTextViewGroupModelImp(layout, R.id.container,
                     R.id.text_view_1, "My name is " + i,
                     R.id.image_view_1, R.drawable.ic_launcher_background);
 

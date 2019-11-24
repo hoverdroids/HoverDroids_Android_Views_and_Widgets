@@ -46,15 +46,6 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
     /** Indicates if the associated view should allow the use to fling contents.*/
     private boolean flingEnabled;
 
-    /** Indicates if the associated view should be enabled/disabled. */
-    private boolean enabled;
-
-    /** The current scroll position in X. Essential for realigning the associated view in an adapter view. */
-    private int currentScrollDistanceX;
-
-    /** The current scroll position in Y. Essential for realigning the associated view in an adapter view. */
-    private int currentScrollDistanceY;
-
     /** The first visible position. */
     private int firstPosition;
 
@@ -170,74 +161,6 @@ public class AdapterViewModelImp extends ViewModelImp implements AdapterViewMode
     public void setFlingEnabled(final boolean enabled)
     {
         flingEnabled = enabled;
-    }
-
-    /**
-     * Determine if TwoWayAdapterView is enabled/disabled.
-     * @return True if it should be enbled. False otherwise.
-     */
-    @Override
-    public boolean isEnabled()
-    {
-        return enabled;
-    }
-
-    /**
-     * Enable/Disable the TwoWayAdapterView.
-     * @param isEnabled True if it should be enbled. False otherwise.
-     */
-    @Override
-    public void setEnabled(final boolean isEnabled)
-    {
-        this.enabled = isEnabled;
-    }
-
-    /**
-     * Get the current scroll distance. This is meant for resetting the TwoWayGridView to a desired
-     * position when it is displayed after going off screen. It is not guarenteed to be the the
-     * current view's actual location. In fact, it most likely won't be.
-     * @return The current scroll distance in X.
-     */
-    @Override
-    public int getCurrentScrollDistanceX()
-    {
-        return currentScrollDistanceX;
-    }
-
-    /**
-     * Set the current scroll distance. This is meant for resetting the TwoWayGridView to a desired
-     * position when it is displayed after going off screen. It is not guarenteed to be the the
-     * current view's actual location. In fact, it most likely won't be.
-     * @param distance The current scroll distance in X.
-     */
-    @Override
-    public void setCurrentScrollDistanceX(final int distance)
-    {
-        currentScrollDistanceX = distance;
-    }
-
-    /**
-     * Get the current scroll distance. This is meant for resetting the TwoWayGridView to a desired
-     * position when it is displayed after going off screen. It is not guarenteed to be the the
-     * current view's actual location. In fact, it most likely won't be.
-     * @return The current scroll distance in Y.
-     */
-    @Override
-    public int getCurrentScrollDistanceY()
-    {
-        return currentScrollDistanceY;
-    }
-
-    /**
-     * Set the current scroll distance. This is meant for resetting the TwoWayGridView to a desired
-     * position when it is displayed after going off screen. It is not guarenteed to be the the
-     * current view's actual location. In fact, it most likely won't be.
-     * @param distance The current scroll distance in Y.
-     */
-    @Override
-    public void setCurrentScrollDistanceY(final int distance)
-    {
-        currentScrollDistanceY = distance;
     }
 
     /**

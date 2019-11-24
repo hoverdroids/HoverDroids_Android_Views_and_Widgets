@@ -154,45 +154,6 @@ public interface AdapterViewModel extends AdapterModel
     void setFlingEnabled(final boolean enabled);
 
     /**
-     * Is enabled boolean.
-     * @return the boolean
-     */
-    boolean isEnabled();
-
-    /**
-     * Sets enabled.
-     * @param isEnabled the is enabled
-     */
-    void setEnabled(final boolean isEnabled);
-
-    /**
-     * Gets current scroll distance x.
-     * @return the current scroll distance x
-     */
-    int getCurrentScrollDistanceX();//TODO necessary?
-
-    /**
-     * Sets current scroll distance x.
-     * @param distance the distance
-     */
-    void setCurrentScrollDistanceX(final int distance);//TODO necessary?
-
-    /**
-     * Gets current scroll distance y.
-     * @return the current scroll distance y
-     */
-    int getCurrentScrollDistanceY();//TODO necessary?
-
-    /**
-     * Sets current scroll distance y.
-     * @param distance the distance
-     */
-    void setCurrentScrollDistanceY(final int distance);//TODO necessary?
-
-    //TODO disableScroll(boolean)
-
-
-    /**
      * Get the first visible position.
      * @return The position
      */

@@ -16,23 +16,21 @@
 
 package com.hoverdroids.modelviewgroup.viewmodel;
 
-import com.hoverdroids.adapterview.viewmodel.AdapterViewModelImp;
+import com.hoverdroids.adapterview.viewmodel.TouchSyncAdapterViewModelImp;
 import com.hoverdroids.touchsync.OnSourceTouchEventListener;
 import com.hoverdroids.touchsync.TouchSyncModel;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 
 import java.util.List;
 
-public class TouchSyncTwgvModelImp extends TwgvModelImp implements TouchSyncModel
+public class TouchSyncAdapterViewGroupModelImp extends AdapterViewGroupModelImp implements TouchSyncModel
 {
-    private OnSourceTouchEventListener onSourceTouchEventListener;
-
     /**
      * Constructor - with minimum arguments.
      * @param layoutResourceId The layout resource ID
      * @param viewId The view ID corresponding to this viewModel
      */
-    public TouchSyncTwgvModelImp(final int layoutResourceId, final int viewId) {
+    public TouchSyncAdapterViewGroupModelImp(final int layoutResourceId, final int viewId) {
         super(layoutResourceId, viewId);
     }
 
@@ -43,23 +41,24 @@ public class TouchSyncTwgvModelImp extends TwgvModelImp implements TouchSyncMode
      * @param adapterViewId The adapterView ID
      * @param text The text
      */
-    public TouchSyncTwgvModelImp(final int layoutResourceId, final int viewId, final int adapterViewId, final List<AdapterModel> models){
+    public TouchSyncAdapterViewGroupModelImp(final int layoutResourceId, final int viewId, final int adapterViewId, final List<AdapterModel> models){
         super(layoutResourceId, viewId);
 
         //Create the ViewModel - no need to set layoutResourceId since it's provided by viewGroupModel
-        final AdapterViewModelImp adapterViewModel = new AdapterViewModelImp(INVALID_RESOURCE_ID, adapterViewId, models);
+        final TouchSyncAdapterViewModelImp adapterViewModel = new TouchSyncAdapterViewModelImp(INVALID_RESOURCE_ID, adapterViewId, models);
 
         //Add the AdapterViewModel to the ViewGroupModel - the ViewGroup will pass it to the AdapterView
+        //This also replaces the AdapterViewModel created by Super
         setChildViewModel(adapterViewModel);
     }
 
     @Override
     public void setOnSourceTouchEventListener(OnSourceTouchEventListener listener) {
-        onSourceTouchEventListener = listener;
+        ((TouchSyncAdapterViewModelImp) getChildViewModel(adapterViewId)).setOnSourceTouchEventListener(listener);
     }
 
     @Override
     public OnSourceTouchEventListener getOnSourceTouchEventListener() {
-        return onSourceTouchEventListener;
+        return ((TouchSyncAdapterViewModelImp) getChildViewModel(adapterViewId)).getOnSourceTouchEventListener();
     }
 }

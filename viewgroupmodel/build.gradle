@@ -54,4 +54,5 @@ dependencies {
     implementation project(path: ':viewmodel')
     implementation project(path: ':adapterview')
     implementation project(path: ':touchsync')
+    implementation project(path: ':viewgroup')
 }
