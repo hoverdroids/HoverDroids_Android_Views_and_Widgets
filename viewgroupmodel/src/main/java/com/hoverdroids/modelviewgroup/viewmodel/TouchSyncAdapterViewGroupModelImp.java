@@ -42,7 +42,7 @@ public class TouchSyncAdapterViewGroupModelImp extends AdapterViewGroupModelImp 
      * @param text The text
      */
     public TouchSyncAdapterViewGroupModelImp(final int layoutResourceId, final int viewId, final int adapterViewId, final List<AdapterModel> models){
-        super(layoutResourceId, viewId);
+        super(layoutResourceId, viewId, adapterViewId, models);
 
         //Create the ViewModel - no need to set layoutResourceId since it's provided by viewGroupModel
         final TouchSyncAdapterViewModelImp adapterViewModel = new TouchSyncAdapterViewModelImp(INVALID_RESOURCE_ID, adapterViewId, models);
