@@ -76,65 +76,22 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
     public boolean onTouchEvent(final MotionEvent ev) {
         //Only relay touch events that are actually on this view. Avoid sending touch events
         //coming from a source because that will create an infinite loop of MotionEvents
-        if (onSourceTouchEventListener != null && !sourceMode.equals(NOT_SOURCE) && !isTouchSyncEvent){
-
-            //Send touch event data in X, Y, or both. This allows the output to easily be filtered
-            //in a single direction - ie avoids the need to determine how much movement in an axis
-            //we don't care to sync.
-            final MotionEvent clonedEvent = MotionEvent.obtain(ev);
-
-            if (ev.getHistorySize() > 1) {
-                final float origX = ev.getHistoricalX(0, 0);
-                final float origY = ev.getHistoricalY(0, 0);
-
-                float x = SourceMode.X.equals(sourceMode) || SourceMode.XY.equals(sourceMode) ? ev.getX() : origX;
-                float y = SourceMode.Y.equals(sourceMode) || SourceMode.XY.equals(sourceMode) ? ev.getY() : origY;
-
-                clonedEvent.setLocation(x, y);
-                Timber.d("CHRIS onTouchEvent history > 1 : "  + ev.getHistorySize() + " x:" + x + " y:" + y);
-            } else {
-                Timber.d("CHRIS onTouchEvent history <= 1 : "   + ev.getHistorySize() + " x:" + ev.getX() + " y:" + ev.getY());
-            }
-
-
-
+        if (onSourceTouchEventListener != null && !isTouchSyncEvent){
             onSourceTouchEventListener.onSourceTouchEvent(this, ev);
-            clonedEvent.recycle();
         }
 
-        //Handle the touch event as though the user made it on this view
-        final boolean consumed = super.onTouchEvent(ev);
-
-        //If sync touch event then always return false and allow the initial view to handle
-        //everything as usual.
-        return !isTouchSyncEvent && consumed;
+        return super.onTouchEvent(ev);
     }
 
     @Override
     public void onTouchEvent(final View sourceView, final MotionEvent ev) {
-        if (sourceView.equals(this) || SyncMode.NOT_SYNC.equals(syncMode))
+        if (sourceView.equals(this))
         {
             return;
         }
 
-        //Accept touch event data in X, Y, or both. This allows the input to easily be filtered
-        //in a single direction - ie avoids the need to determine how much movement in an axis
-        //we don't care to sync.
-        final MotionEvent clonedEvent = MotionEvent.obtain(ev);
-
-        if (ev.getHistorySize() > 1) {
-            final float origX = ev.getHistoricalX(0, 0);
-            final float origY = ev.getHistoricalX(0, 0);
-
-            float x = SyncMode.X.equals(syncMode) || SyncMode.XY.equals(syncMode) ? ev.getX() : origX;
-            float y = SyncMode.Y.equals(syncMode) || SyncMode.XY.equals(syncMode) ? ev.getY() : origY;
-
-            clonedEvent.setLocation(x, y);
-        }
-
         isTouchSyncEvent = true;
-        onTouchEvent(clonedEvent);
-        clonedEvent.recycle();
+        onTouchEvent(ev);
         isTouchSyncEvent = false;
     }
 
