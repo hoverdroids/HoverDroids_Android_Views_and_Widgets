@@ -1857,13 +1857,16 @@ ViewTreeObserver.OnTouchModeChangeListener {
 		public void run() {
 			// The data has changed since we posted this action in the event queue,
 			// bail out before bad things happen
-			if (mDataChanged) return;
+			//CHRIS SPRAGUE - added sync check to disallow clicks on items that aren't actually touched due to event being from touchSync
+			if (mDataChanged || isTouchSyncEvent) return;
 
 			final ListAdapter adapter = mAdapter;
 			final int motionPosition = mClickMotionPosition;
 			if (adapter != null && mItemCount > 0 &&
 					motionPosition != INVALID_POSITION &&
-					motionPosition < adapter.getCount() && sameWindow()) {
+					motionPosition < adapter.getCount() && sameWindow()
+					&& !isTouchSyncEvent //Chris Sprague added`
+				) {
 				performItemClick(mChild, motionPosition, adapter.getItemId(motionPosition));
 			}
 		}
@@ -1981,7 +1984,9 @@ ViewTreeObserver.OnTouchModeChangeListener {
 
 				final View view = getChildAt(mSelectedPosition - mFirstPosition);
 				if (view != null) {
-					performItemClick(view, mSelectedPosition, mSelectedRowId);
+					if (!isTouchSyncEvent) {//Chris Sprague added
+						performItemClick(view, mSelectedPosition, mSelectedRowId);
+					}
 					view.setPressed(false);
 				}
 				setPressed(false);
@@ -3904,11 +3909,15 @@ ViewTreeObserver.OnTouchModeChangeListener {
 						// User clicked on an actual view (and was not stopping a fling). It might be a
 						// click or a scroll. Assume it is a click until proven otherwise
 						mTouchMode = TOUCH_MODE_DOWN;
-						// FIXME Debounce
-						if (mPendingCheckForTap == null) {
-							mPendingCheckForTap = new CheckForTap();
+
+						//Chris Sprague added to ensure clicks and item highlights are ignored when event is from touchSync (ie another view)
+						if (!isTouchSyncEvent) {
+							// FIXME Debounce
+							if (mPendingCheckForTap == null) {
+								mPendingCheckForTap = new CheckForTap();
+							}
+							postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());
 						}
-						postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());
 					} else {
 						if (ev.getEdgeFlags() != 0 && motionPosition < 0) {
 							// If we couldn't find a view to click on, but the down event was touching
@@ -4848,11 +4857,15 @@ ViewTreeObserver.OnTouchModeChangeListener {
 							// User clicked on an actual view (and was not stopping a fling). It might be a
 							// click or a scroll. Assume it is a click until proven otherwise
 							mTouchMode = TOUCH_MODE_DOWN;
-							// FIXME Debounce
-							if (mPendingCheckForTap == null) {
-								mPendingCheckForTap = new CheckForTap();
+
+							//Chris Sprague added to ensure clicks and item highlights are ignored when event is from touchSync (ie another view)
+							if (!isTouchSyncEvent) {
+								// FIXME Debounce
+								if (mPendingCheckForTap == null) {
+									mPendingCheckForTap = new CheckForTap();
+								}
+								postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());
 							}
-							postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());
 						} else {
 							if (ev.getEdgeFlags() != 0 && motionPosition < 0) {
 								// If we couldn't find a view to click on, but the down event was touching
@@ -4945,7 +4958,7 @@ ViewTreeObserver.OnTouchModeChangeListener {
 					case TOUCH_MODE_DONE_WAITING:
 						final int motionPosition = mMotionPosition;
 						final View child = getChildAt(motionPosition - mFirstPosition);
-						if (child != null && !child.hasFocusable()) {
+						if (child != null && !child.hasFocusable() && !isTouchSyncEvent) {//Chris Sprague added
 							if (mTouchMode != TOUCH_MODE_DOWN) {
 								child.setPressed(false);
 							}
@@ -5572,6 +5585,16 @@ ViewTreeObserver.OnTouchModeChangeListener {
 		if(mTouchHandler != null && mTouchHandler.getFlingRunnable() != null){
 				mTouchHandler.endFling();
 		}
+	}
+
+
+	private boolean isTouchSyncEvent;
+	public void setIsTouchSyncEvent(final boolean isTouchSyncEvent) {
+		this.isTouchSyncEvent = isTouchSyncEvent;
+	}
+
+	public boolean isTouchSyncEvent() {
+		return isTouchSyncEvent;
 	}
 }
 

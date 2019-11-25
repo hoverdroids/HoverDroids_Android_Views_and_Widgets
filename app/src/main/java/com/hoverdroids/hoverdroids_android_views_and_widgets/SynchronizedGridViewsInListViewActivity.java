@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hoverdroids.adapterview.modelview.ViewModelAdapter;
 import com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView;
+import com.hoverdroids.adapterview.view.TwoWayAdapterView;
 import com.hoverdroids.adapterview.view.TwoWayGridView;
 import com.hoverdroids.adapterview.viewmodel.TouchSyncAdapterViewModelImp;
 import com.hoverdroids.modelviewgroup.viewmodel.AdapterViewGroupModelImp;
@@ -45,7 +46,7 @@ import timber.log.Timber;
 
 import static android.view.View.NO_ID;
 
-public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity implements OnSourceTouchEventListener
+public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity implements OnSourceTouchEventListener, TwoWayAdapterView.OnItemClickListener
 {
     @BindView(R.id.listView)
     TwoWayGridView listView;
@@ -64,6 +65,7 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
 
         listViewAdapter = new ViewModelAdapter(getApplicationContext(), getGridViewModels());
         listView.setAdapter(listViewAdapter);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -127,5 +129,10 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
             items.add(item);
         }
         return items;
+    }
+
+    @Override
+    public void onItemClick(TwoWayAdapterView<?> parent, View view, int position, long id) {
+        Timber.d("Chris onItemClick viewId:" + view.getId() + " position:" + position);
     }
 }

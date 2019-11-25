@@ -28,10 +28,6 @@ import com.hoverdroids.touchsync.SourceMode;
 import com.hoverdroids.touchsync.SyncMode;
 import com.hoverdroids.touchsync.TouchSyncView;
 
-import timber.log.Timber;
-
-import static com.hoverdroids.touchsync.SourceMode.NOT_SOURCE;
-
 public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSyncView {
 
     private SourceMode sourceMode = SourceMode.XY;
@@ -40,8 +36,6 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
     private boolean onlyAllowTouchSync;
 
     private OnSourceTouchEventListener onSourceTouchEventListener;
-
-    private boolean isTouchSyncEvent;
 
     public TouchSyncTwoWayGridView(final Context context) {
         super(context);
@@ -78,11 +72,11 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
     public boolean onTouchEvent(final MotionEvent ev) {
         //Only relay touch events that are actually on this view. Avoid sending touch events
         //coming from a source because that will create an infinite loop of MotionEvents
-        if (onSourceTouchEventListener != null && !isTouchSyncEvent){
+        if (onSourceTouchEventListener != null && !isTouchSyncEvent()){
             onSourceTouchEventListener.onSourceTouchEvent(this, ev);
         }
 
-        if (!onlyAllowTouchSync || isTouchSyncEvent) {
+        if (!onlyAllowTouchSync || isTouchSyncEvent()) {
             return super.onTouchEvent(ev);
         } else {
             return false;
@@ -96,9 +90,9 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
             return;
         }
 
-        isTouchSyncEvent = true;
+        setIsTouchSyncEvent(true);
         onTouchEvent(ev);
-        isTouchSyncEvent = false;
+        setIsTouchSyncEvent(false);
     }
 
     /**
