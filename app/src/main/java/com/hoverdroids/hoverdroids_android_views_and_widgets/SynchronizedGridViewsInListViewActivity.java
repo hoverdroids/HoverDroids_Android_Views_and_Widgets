@@ -18,15 +18,20 @@ package com.hoverdroids.hoverdroids_android_views_and_widgets;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.Touch;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hoverdroids.adapterview.modelview.ViewModelAdapter;
+import com.hoverdroids.adapterview.view.TouchSyncTwoWayGridView;
 import com.hoverdroids.adapterview.view.TwoWayGridView;
+import com.hoverdroids.adapterview.viewmodel.TouchSyncAdapterViewModelImp;
 import com.hoverdroids.modelviewgroup.viewmodel.AdapterViewGroupModelImp;
 import com.hoverdroids.modelviewgroup.viewmodel.ImageTextViewGroupModelImp;
+import com.hoverdroids.modelviewgroup.viewmodel.TouchSyncAdapterViewGroupModelImp;
 import com.hoverdroids.touchsync.OnSourceTouchEventListener;
 import com.hoverdroids.viewmodel.model.AdapterModel;
 
@@ -55,7 +60,7 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
         ButterKnife.bind(this);
 
         Timber.plant(new Timber.DebugTree());
-        Timber.d("CHRIS planted");
+        Timber.d("CHRIS planteddd");
 
         listViewAdapter = new ViewModelAdapter(getApplicationContext(), getGridViewModels());
         listView.setAdapter(listViewAdapter);
@@ -63,7 +68,24 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
 
     @Override
     public void onSourceTouchEvent(View sourceView, MotionEvent ev) {
-        //TODO
+        Timber.d("CHRIS onSourceTouchEvent");
+        if (sourceView instanceof TouchSyncTwoWayGridView) {
+            final int position = ((TouchSyncTwoWayGridView)sourceView).getFirstVisiblePosition();
+            final int offset = ((TouchSyncTwoWayGridView)sourceView).getScrollByDistance();
+            for (int i = 0; i < listViewAdapter.getCount(); i++) {
+                final TouchSyncAdapterViewGroupModelImp model = (TouchSyncAdapterViewGroupModelImp) listViewAdapter.getItem(i);
+                model.setFirstPosition(position);
+                model.setFirstPositionOffset(offset);
+            }
+        }
+
+        for (int i = 0; i < listView.getChildCount(); i++) {
+            //Get the GridView - and don' forget it's wrapped in a FrameLayout
+            final TouchSyncTwoWayGridView gridView = listView.getChildAt(i).findViewById(R.id.gridview);
+            if (gridView != null) {
+                gridView.onTouchEvent(sourceView, ev);
+            }
+        }
     }
 
     private List<AdapterModel> getGridViewModels() {
@@ -73,11 +95,13 @@ public class SynchronizedGridViewsInListViewActivity extends AppCompatActivity i
 
         for (int i = 0; i < 300; i++) {
             //Oddities with TWGV.onMeasure in an AdapterView require a ViewGroup container - and hence the ViewModel requires a ViewGroupModel
-            final AdapterViewGroupModelImp viewGroupModel = new AdapterViewGroupModelImp(R.layout.gridview_item_view, NO_ID, R.id.gridview, getImageTextItems(i));
+            final TouchSyncAdapterViewGroupModelImp viewGroupModel = new TouchSyncAdapterViewGroupModelImp(R.layout.gridview_item_view, NO_ID, R.id.gridview, getImageTextItems(i));
             viewGroupModel.setBackgroundColor(i%2 ==0 ? Color.BLACK : Color.WHITE);
 
             final int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
             viewGroupModel.getChildViewModel(R.id.gridview).setBackgroundColor(color);
+
+            viewGroupModel.setOnSourceTouchEventListener(this);
 
             gridViewModels.add(viewGroupModel);
         }

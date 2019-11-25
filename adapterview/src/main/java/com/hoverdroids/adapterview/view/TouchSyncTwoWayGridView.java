@@ -28,6 +28,8 @@ import com.hoverdroids.touchsync.SourceMode;
 import com.hoverdroids.touchsync.SyncMode;
 import com.hoverdroids.touchsync.TouchSyncView;
 
+import timber.log.Timber;
+
 import static com.hoverdroids.touchsync.SourceMode.NOT_SOURCE;
 
 public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSyncView {
@@ -37,7 +39,7 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
 
     private OnSourceTouchEventListener onSourceTouchEventListener;
 
-    private boolean isSyncTouchEvent;
+    private boolean isTouchSyncEvent;
 
     public TouchSyncTwoWayGridView(final Context context) {
         super(context);
@@ -74,7 +76,7 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
     public boolean onTouchEvent(final MotionEvent ev) {
         //Only relay touch events that are actually on this view. Avoid sending touch events
         //coming from a source because that will create an infinite loop of MotionEvents
-        if (onSourceTouchEventListener != null && !sourceMode.equals(NOT_SOURCE) && !isSyncTouchEvent){
+        if (onSourceTouchEventListener != null && !sourceMode.equals(NOT_SOURCE) && !isTouchSyncEvent){
 
             //Send touch event data in X, Y, or both. This allows the output to easily be filtered
             //in a single direction - ie avoids the need to determine how much movement in an axis
@@ -89,7 +91,12 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
                 float y = SourceMode.Y.equals(sourceMode) || SourceMode.XY.equals(sourceMode) ? ev.getY() : origY;
 
                 clonedEvent.setLocation(x, y);
+                Timber.d("CHRIS onTouchEvent history > 1 : "  + ev.getHistorySize() + " x:" + x + " y:" + y);
+            } else {
+                Timber.d("CHRIS onTouchEvent history <= 1 : "   + ev.getHistorySize() + " x:" + ev.getX() + " y:" + ev.getY());
             }
+
+
 
             onSourceTouchEventListener.onSourceTouchEvent(this, ev);
             clonedEvent.recycle();
@@ -100,7 +107,7 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
 
         //If sync touch event then always return false and allow the initial view to handle
         //everything as usual.
-        return !isSyncTouchEvent && consumed;
+        return !isTouchSyncEvent && consumed;
     }
 
     @Override
@@ -125,10 +132,10 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
             clonedEvent.setLocation(x, y);
         }
 
-        isSyncTouchEvent = true;
+        isTouchSyncEvent = true;
         onTouchEvent(clonedEvent);
         clonedEvent.recycle();
-        isSyncTouchEvent = false;
+        isTouchSyncEvent = false;
     }
 
     /**

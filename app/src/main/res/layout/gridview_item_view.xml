@@ -22,11 +22,11 @@
     android:background="@android:color/black"
     android:id="@+id/container">
 
-    <com.hoverdroids.adapterview.modelview.TwoWayGridView
+    <com.hoverdroids.adapterview.modelview.TouchSyncTwoWayGridView
+        android:id="@+id/gridview"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/gridview"
         app:numRows="1"
         app:numColumns="8"
         app:scrollDirectionPortrait="horizontal"
