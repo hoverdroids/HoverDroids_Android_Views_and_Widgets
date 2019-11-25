@@ -37,6 +37,8 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
     private SourceMode sourceMode = SourceMode.XY;
     private SyncMode syncMode = SyncMode.XY;
 
+    private boolean onlyAllowTouchSync;
+
     private OnSourceTouchEventListener onSourceTouchEventListener;
 
     private boolean isTouchSyncEvent;
@@ -80,7 +82,11 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
             onSourceTouchEventListener.onSourceTouchEvent(this, ev);
         }
 
-        return super.onTouchEvent(ev);
+        if (!onlyAllowTouchSync || isTouchSyncEvent) {
+            return super.onTouchEvent(ev);
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -125,6 +131,14 @@ public class TouchSyncTwoWayGridView extends TwoWayGridView implements TouchSync
 
     public void setSyncMode(final SyncMode syncMode) {
         this.syncMode = syncMode;
+    }
+
+    public void setOnlyAllowTouchSync(final boolean onlyAllowTouchSync) {
+        this.onlyAllowTouchSync = onlyAllowTouchSync;
+    }
+
+    public boolean getOnlyAllowTouchSync() {
+        return onlyAllowTouchSync;
     }
 }
 
